@@ -27271,12 +27271,12 @@ body.rentals-wrapper .select2-container--default .select2-results__option[aria-s
 .floated-customizer-panel .fcp-content .fcp-group-contents .fcp-field .fcp-colors .color-selector.selected,
 .floated-customizer-panel .fcp-content .fcp-group-contents .fcp-field .fcp-colors .color-selector:hover {
     -webkit-box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px #88b8ff;
-    box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px #28A742
+    box-shadow: 0px 0px 0px 2px #fff, 0px 0px 0px 4px #88b8ff
 }
 
 .floated-customizer-panel .fcp-content .fcp-group-contents .fcp-field .fcp-colors .color-bright {
-    background-color: #28A742;
-    border: 1px solid #28A742;
+    background-color: #047bf8;
+    border: 1px solid #047bf8;
 }
 
 .floated-customizer-panel .fcp-content .fcp-group-contents .fcp-field .fcp-colors .color-dark {

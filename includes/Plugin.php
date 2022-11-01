@@ -27,7 +27,7 @@ START - Demo Customizer
                                         <div class="fcp-field with-image-selector-w"><label for="">With Image</label><select class="with-image-selector"><option value="yes">Yes</option><option value="no">No</option></select></div>
                                         <div class="fcp-field"><label for="">Menu Color</label>
                                             <div class="fcp-colors menu-color-selector">
-                                                <div class="color-selector menu-color-selector color-bright"></div>
+                                                <div class="color-selector menu-color-selector color-bright selected"></div>
                                                 <!-- <div class="color-selector menu-color-selector color-green "></div> -->
                                                 <div class="color-selector menu-color-selector color-dark"></div>
                                                 <div class="color-selector menu-color-selector color-light"></div>
@@ -43,7 +43,7 @@ START - Demo Customizer
                                         <div class="fcp-field"><label for="">Sub Menu Color</label>
                                             <div class="fcp-colors">
                                                 <div class="color-selector sub-menu-color-selector color-bright selected"></div>
-                                                <div class="color-selector sub-menu-color-selector color-green"></div>
+                                                <div class="color-selector sub-menu-color-selector color-dark"></div>
                                                 <div class="color-selector sub-menu-color-selector color-light"></div>
                                             </div>
                                         </div>
