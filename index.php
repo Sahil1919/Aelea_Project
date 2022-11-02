@@ -64,7 +64,7 @@ if (isset($_POST['login'])) {
         <div class="form-inner">
           <form action="#" class="login" method="post">
             <div class="field">
-              <input name = "User_nm" type="text" placeholder="Email Address" type="text" required>
+              <input name = "User_nm" type="text" placeholder="User ID" type="text" required>
             </div>
             <div class="field">
               <input name = "Paswd" type="password" placeholder="Password" type="password" required>
