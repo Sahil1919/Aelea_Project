@@ -222,12 +222,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="menu-actions">
-                   
-                    </div>
-                    <div class="element-search autosuggest-search-activator">
-<!--                        <input placeholder="Start typing to search..." type="text">-->
-                    </div>
+                    
                     <h1 class="menu-page-header">Page Header</h1>
                     <?php if ($_SESSION['User_type']=="admin")
                     {
@@ -241,7 +236,7 @@
                                 </div><span>Dashboard</span></a>
 
                         </li>
-                        <li class="sub-header"><span>Settings</span></li>
+                        <!-- <li class="sub-header"><span>Settings</span></li>
                         <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
@@ -258,7 +253,7 @@
                                     </ul>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
                         <li class="sub-header"><span>User Manager</span></li>
                         <li class=" has-sub-menu">
                             <a href="#">
@@ -332,7 +327,7 @@
                                     <div class="os-icon os-icon-layout"></div>
                                 </div><span>Dashboard</span></a>
 
-                        </li>
+                        <!-- </li>
                            <li class="sub-header"><span>Settings</span></li>
                         <li class=" has-sub-menu">
                             <a href="#">
@@ -346,11 +341,11 @@
                                     <ul class="sub-menu">
                                         <li><a href="bank_details.php">Bank Details</a></li>
                                         <li><a href="download.php">Document Upload</a></li>
-                                        <!--<li><a href="add_alert.php">Alert</a></li>-->
+                                        <li><a href="add_alert.php">Alert</a></li>
                                     </ul>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
 <!--                        <li class="sub-header"><span>Settings</span></li>
                         <li class=" has-sub-menu">
                             <a href="#">
