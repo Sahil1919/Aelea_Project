@@ -1,4 +1,5 @@
-   <div class="element-box">
+
+<div class="element-box">
               <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
         <thead>
                     <tr>
@@ -8,12 +9,13 @@
                          <th>Mobile No</th>
                           <th>Email ID</th>
                            <th>User ID</th>
-                            <th>PSWD</th>
+                            <!-- <th>PSWD</th> -->
                              <th>Profile</th>
                               <th>Date</th>
                               <th>Status</th>
                                <th>Edit</th>
                           <th>Delete</th>
+                          <th>View</th>
                     </tr>
         </thead>   <tbody>
                                                                <?php
@@ -51,7 +53,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $email_id;?></td> 
   
     <td><?php echo $user_id;?></td> 
-  <td><?php echo $pswd;?></td> 
+  <!-- <td><?php echo $pswd;?></td>  -->
 
     <!--<td><?php echo $emp_pro;?></td>--> 
     <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
@@ -59,6 +61,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><a href="employee.php?id=<?php echo $row['id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>
                               <td><a class="btn btn-danger" href="employee.php?delete=<?php echo $id;?>">Delete</a></td>
+                              <td><a class="btn btn-info" href="view_task.php?id=<?php echo $id;?>">View</a></td>
                     </tr>
 <?php }?>
         </tbody>     </table>

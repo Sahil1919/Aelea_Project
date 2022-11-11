@@ -2,7 +2,7 @@
                 START - Mobile Menu
                 -------------------->
                 <div class="menu-mobile menu-activated-on-click color-scheme-dark">
-                    <div class="mm-logo-buttons-w"><a class="mm-logo" href="#"><span>Task Management</span></a>
+                    <div class="mm-logo-buttons-w"><a class="mm-logo" href="#"><span>Concern Management</span></a>
                         <div class="mm-buttons">
                             <div class="content-panel-open">
                                 <div class="os-icon os-icon-grid-circles"></div>
@@ -77,18 +77,18 @@
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Task Management</span></a>
+                                </div><span>Concern Management</span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Task Management</div>
+                                <div class="sub-menu-header">Concern Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="assign_task.php">Assign Task</a></li>
-                                        <li><a href="assign_task_list.php">Task List</a></li>  
-                                        <li><a href="assign_task_open_list.php">Open Task</a></li>  
-                                        <li><a href="assign_task_list_close.php">Close Task</a></li>  
-                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Task</a></li>  
-                                        <li><a href="assign_task_list_cancel.php">Cancel Task</a></li>  
+                                        <li><a href="assign_task.php">Assign Concern</a></li>
+                                        <li><a href="assign_task_list.php">Concern List</a></li>  
+                                        <li><a href="assign_task_open_list.php">Open Concern</a></li>  
+                                        <li><a href="assign_task_list_close.php">Close Concern</a></li>  
+                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="assign_task_list_cancel.php">Cancel Concern</a></li>  
                                     </ul>
                                 </div>
                             </div>
@@ -148,18 +148,18 @@
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Task Management</span></a>
+                                </div><span>Concern Management</span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Task Management</div>
+                                <div class="sub-menu-header">Concern Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="emp_assign_task.php">Assign Task</a></li>
-                                        <li><a href="emp_assign_task_list.php">Task List</a></li>  
-                                        <li><a href="emp_assign_task_list_open.php">Open Task</a></li>  
-                                        <li><a href="emp_assign_task_list_close.php">Close Task</a></li>  
-                                        <li><a href="emp_assign_task_list_wip.php">WIP(Work In Process) Task</a></li>  
-                                        <li><a href="emp_assign_task_list_cancel.php">Cancel Task</a></li>  
+                                        <li><a href="emp_assign_task.php">Assign Concern</a></li>
+                                        <li><a href="emp_assign_task_list.php">Concern List</a></li>  
+                                        <li><a href="emp_assign_task_list_open.php">Open Concern</a></li>  
+                                        <li><a href="emp_assign_task_list_close.php">Close Concern</a></li>  
+                                        <li><a href="emp_assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="emp_assign_task_list_cancel.php">Cancel Concern</a></li>  
                                     </ul>
                                 </div>
                             </div>
@@ -183,11 +183,12 @@
                 -------------------->
                 <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                     <div class="logo-w">
-                        <a class="logo" href="#">
+                        <a class="logo" href="https://www.aeleacommodities.com">
                         <div><img src="Login and Signup Form Design\logo.jpg" alt="" width="90" height="80"></div>
                             <div class="logo-label">Aelea Commodities</div>
                         </a>
-                    </div>
+                    </div>                    
+                    
 <!--                      <div class="logged-user-w">
                             <div class="avatar-w"><img alt="" src="user_profile/<?php echo $_SESSION['emp_pro'];?>"></div>
                             <div class="logged-user-info-w">
@@ -228,7 +229,8 @@
                     {
                         
                     ?>
-                           <ul class="main-menu" style="height: 840px;">
+                           <ul class="main-menu" style="height: 585px;">
+
                         <li class="">
                             <a href="Dashboard.php">
                                 <div class="icon-w">
@@ -236,6 +238,7 @@
                                 </div><span>Dashboard</span></a>
 
                         </li>
+                        
                         <!-- <li class="sub-header"><span>Settings</span></li>
                         <li class=" has-sub-menu">
                             <a href="#">
@@ -255,6 +258,7 @@
                             </div>
                         </li> -->
                         <li class="sub-header"><span>User Manager</span></li>
+                        <h1><div class="mt-4"></h1>
                         <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
@@ -273,28 +277,30 @@
                                 </div>
                             </div>
                         </li>
-                   
+                        <li>
+                        <div class="mt-4">
+                        </li>
                          <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Task Management</span></a>
+                                </div><span>Concern Management</span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Task Management</div>
+                                <div class="sub-menu-header">Concern Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="assign_task.php">Assign Task</a></li>
-                                        <li><a href="assign_task_list.php">Task List</a></li>  
-                                        <li><a href="assign_task_open_list.php">Open Task</a></li>  
-                                        <li><a href="assign_task_list_close.php">Close Task</a></li>  
-                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Task</a></li>  
-                                        <li><a href="assign_task_list_cancel.php">Cancel Task</a></li>  
+                                        <li><a href="assign_task.php">Assign Concern</a></li>
+                                        <li><a href="assign_task_list.php">Concern List</a></li>  
+                                        <li><a href="assign_task_open_list.php">Open Concern</a></li>  
+                                        <li><a href="assign_task_list_close.php">Close Concern</a></li>  
+                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="assign_task_list_cancel.php">Cancel Concern</a></li>  
                                     </ul>
                                 </div>
                             </div>
                         </li>
-                                   <li class=" has-sub-menu">
+                                   <!-- <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
@@ -313,14 +319,14 @@
                                     </ul>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
 
                     </ul>
                     
                         <?php 
                     }
  else {?>
-                           <ul class="main-menu" style="height: 840px;">
+                           <ul class="main-menu" style="height: 585px;">
                         <li class="">
                             <a href="Dashboard.php">
                                 <div class="icon-w">
@@ -399,23 +405,23 @@
                                 </div>
                             </div>
                         </li> -->
-
+                        <h1><div class="mt-4"></h1>
                          <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Task Management</span></a>
+                                </div><span>Concern Management</span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Task Management</div>
+                                <div class="sub-menu-header">Concern Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="emp_assign_task.php">Assign Task</a></li>
-                                        <li><a href="emp_assign_task_list.php">Task List</a></li>  
-                                        <li><a href="emp_assign_task_list_open.php">Open Task</a></li>  
-                                        <li><a href="emp_assign_task_list_close.php">Close Task</a></li>  
-                                        <li><a href="emp_assign_task_list_wip.php">WIP(Work In Process) Task</a></li>  
-                                        <li><a href="emp_assign_task_list_cancel.php">Cancel Task</a></li>  
+                                        <li><a href="emp_assign_task.php">Assign Concern</a></li>
+                                        <li><a href="emp_assign_task_list.php">Concern List</a></li>  
+                                        <li><a href="emp_assign_task_list_open.php">Open Concern</a></li>  
+                                        <li><a href="emp_assign_task_list_close.php">Close Concern</a></li>  
+                                        <li><a href="emp_assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="emp_assign_task_list_cancel.php">Cancel Concern</a></li>  
                                     </ul>
                                 </div>
                             </div>

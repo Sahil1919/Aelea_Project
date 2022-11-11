@@ -96,7 +96,7 @@ if (isset($_POST['login'])) {
       </div>
     </div>
 
-    <script>
+    <!-- <script>
       const loginText = document.querySelector(".title-text .login");
       const loginForm = document.querySelector("form.login");
       const loginBtn = document.querySelector("label.login");
@@ -114,7 +114,7 @@ if (isset($_POST['login'])) {
         signupBtn.click();
         return false;
       });
-    </script>
+    </script> -->
 
   </body>
 </html>

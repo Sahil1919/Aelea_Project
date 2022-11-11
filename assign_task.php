@@ -31,8 +31,8 @@ if (isset($_POST['submit'])) {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Task</span></li>
+    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
+    <li class="breadcrumb-item"><span>Assign Concern</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -45,7 +45,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Task</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern</h5>                                   
                                 </div>  
                             </div>
                                   <form class="container" action="#" method="post" enctype="multipart/form-data">
@@ -82,8 +82,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Task</label>
-                                        <input class="form-control" name="task" placeholder="Enter Task" type="text">
+                                    <div class="form-group"><label for="">Concern</label>
+                                        <input class="form-control" name="Concern" placeholder="Enter Concern" type="text">
                                     </div>
                                 </div>
   <div class="col-sm-3">
@@ -94,7 +94,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <br>
-                                         <input class="btn btn-primary" type="submit" value="Assign Task" name="submit">
+                                         <input class="btn btn-primary" type="submit" value="Assign Concern" name="submit">
                                         <!--<label for="">Conform Password</label>-->
                                         <!--<input class="form-control" name="CPSWD" placeholder="Conform Password" type="password">-->
                                     </div>

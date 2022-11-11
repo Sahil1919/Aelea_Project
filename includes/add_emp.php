@@ -1,4 +1,4 @@
-  <div class="element-box">
+   <div class="element-box">
 
                             <div class="row">
                                  <div class="col-md-12">
@@ -54,11 +54,19 @@
                                 </div>
 
 
-
-
-                                <div class="form-buttons-w text-right">
-                                    <input class="btn btn-primary" type="submit" value="Add Employee" name="submit">
+                                <div class="col-sm-3">
+                                    <div class="form-group"><label for="">Employee</label>
+                                        <select id="emp_id" name="usertype" class="form-control">
+                                            <option>--select Employee--</option>
+                                            <option value="Admin" >Admin</option>
+                                            <option value="Management" >Management</option>
+                                            <option value="Employee" >Employee</option>
+                                        </select> 
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                            </div>
+                            
+
+                                    <div class="form-buttons-w text-right">
+                                        <input class="btn btn-primary" type="submit" value="Add Employee" name="submit" >
+                                    </div>
+                                </div>

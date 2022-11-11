@@ -6,24 +6,13 @@
                 <div class="element-wrapper">
                     <div class="element-actions">
 <?php 
-$retailer_account = "SELECT id FROM emp_login where user_role='employee' ";
-$Total_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Total_emp = mysqli_num_rows($result);
+
+if (isset($_GET['id'])) 
+{ 
+    $emp_id = $_GET['id'];
 }
 
-$retailer_account = "SELECT id FROM emp_login where user_role='employee' and status='1' ";
-$Active_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Active_emp = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT id FROM emp_login where user_role='employee' and status='0' ";
-$Deactive_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Deactive_emp = mysqli_num_rows($result);
-}
-  $emp_id=  $_SESSION['user'];
+               
 $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
 $Total_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
@@ -80,32 +69,32 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                 </a>
                             </div>-->
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="emp_assign_task_list.php">
+                                <a class="element-box el-tablo" href="#">
                                     <div class="label">Total Task</div>
                                     <div class="value"><?php echo $Total_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="emp_assign_task_list_open.php">
+                                <a class="element-box el-tablo" href="#">
                                     <div class="label">Open Task</div>
                                     <div class="value"><?php echo $open_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="emp_assign_task_list_close.php">
+                                <a class="element-box el-tablo" href="#">
                                     <div class="label">Close Task</div>
                                     <div class="value"><?php echo $close_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="emp_assign_task_list_wip.php">
+                                <a class="element-box el-tablo" href="#">
                                     <div class="label">WIP Task</div>
                                     <div class="value"><?php echo $WIP_task; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="emp_assign_task_list_cancel.php">
+                                <a class="element-box el-tablo" href="#">
                                     <div class="label">Cancel Task</div>
                                     <div class="value"><?php echo $cancel_task; ?></div>
                                </a>

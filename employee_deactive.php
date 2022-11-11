@@ -119,7 +119,7 @@ function gen_image_code_unique() {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
     <li class="breadcrumb-item"><span>Employee</span></li>
 </ul>
 <!--------------------

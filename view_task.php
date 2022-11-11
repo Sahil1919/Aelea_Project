@@ -8,39 +8,39 @@ $AppCodeObj=new App_Code();
 
 // found work
 
-$msg = '';
-$Genrate = new App_Code();
-$appC0de = new databaseSave();
-if (isset($_GET['UserID']) && isset($_GET['Status'])) {
+// $msg = '';
+// $Genrate = new App_Code();
+// $appC0de = new databaseSave();
+// if (isset($_GET['UserID']) && isset($_GET['Status'])) {
 
-    $userID = $_GET['UserID'];
-    $Inactive = $_GET['Status'];
-    $msg = $Inactive;
-    if ($Inactive == '1') {
+//     $userID = $_GET['UserID'];
+//     $Inactive = $_GET['Status'];
+//     $msg = $Inactive;
+//     if ($Inactive == '1') {
 
-        $query = "UPDATE `user_details` SET `Inactive`='0' WHERE User_ID='$userID'";
-        $Active_User = mysqli_query($connection, $query);
-        if (!$Active_User) {
-            die('QUERY FAILD' . mysqli_error($connection));
-        }
-    } else if ($Inactive == '0') {
-        //   echo $Inactive;
-        $query = "UPDATE `user_details` SET `Inactive`='1' WHERE User_ID='$userID'";
-        $deactive_User = mysqli_query($connection, $query);
-        if (!$deactive_User) {
-            die('QUERY FAILD' . mysqli_error($connection));
-        }
-    }
-    //  header("location:./admin/retailer_account_list.php");
-}
+//         $query = "UPDATE `user_details` SET `Inactive`='0' WHERE User_ID='$userID'";
+//         $Active_User = mysqli_query($connection, $query);
+//         if (!$Active_User) {
+//             die('QUERY FAILD' . mysqli_error($connection));
+//         }
+//     } else if ($Inactive == '0') {
+//         //   echo $Inactive;
+//         $query = "UPDATE `user_details` SET `Inactive`='1' WHERE User_ID='$userID'";
+//         $deactive_User = mysqli_query($connection, $query);
+//         if (!$deactive_User) {
+//             die('QUERY FAILD' . mysqli_error($connection));
+//         }
+//     }
+//     //  header("location:./admin/retailer_account_list.php");
+// }
 
 ?>
 <!--------------------
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-    <li class="breadcrumb-item"><span>Dashboard</span></li>
+    <li class="breadcrumb-item"><a href="employee.php">Back</a></li>
+    <li class="breadcrumb-item"><span>Employee Dashboard</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -64,18 +64,7 @@ END - Breadcrumbs
          
                   </marquee> -->
         <?php         
-        if($_SESSION['User_type']=='admin')
-        {
-               include './includes/admin_dashboard.php';  
-        } 
-        elseif($_SESSION['User_type']=='management'){
-            include './includes/admin_dashboard.php';
-        }
- else {
-       include './includes/emp_dashboard.php';   
- }
-      
-        
+            include './includes/emp_dashboard_view.php';          
         ?>
       
     </div>

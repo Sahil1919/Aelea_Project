@@ -18,7 +18,8 @@ if (isset($_POST['submit'])) {
     //$profile = $_POST['profile'];
     $userid = $_POST['userid'];
     $pswd = $_POST['pswd'];
-    $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'employee','$post_image','$emailid','$mobile')";
+    $user_role = strtolower($_POST['usertype']);
+    $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'$user_role','$post_image','$emailid','$mobile')";
     //  $update_psqd = "UPDATE `user_details` SET Pswd='$NewPSWD' where  `User_ID`='$userID' and Pswd='$oldPSWD'  ";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -100,7 +101,7 @@ if(isset($_GET['delete']))
     $query="delete from emp_login where id='$id'";
      $delete_data = mysqli_query($connection, $query);
       if (!$delete_data) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
+        die('QUERY FAILD change password' . mysqli_error($connection));
     } else {
     }
     

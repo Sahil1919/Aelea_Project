@@ -62,7 +62,7 @@ END - Breadcrumbs
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Conform Password</label>
+                                    <div class="form-group"><label for="">Confirm Password</label>
                                         <input class="form-control" name="CPSWD" placeholder="Conform Password" type="password">
                                     </div>
                                 </div>
