@@ -28,13 +28,27 @@ if (isset($_POST['submit'])) {
        // return 'pass';
     }
 }
+
+if(isset($_GET['delete_task']))
+{
+    $task_id=$_GET['delete_task'];
+    // echo $task_id;
+    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
+    $query="DELETE FROM `assign_task` WHERE task_id=$task_id";
+    $delete_task = mysqli_query($connection, $query);
+      if (!$delete_task) {
+        die('QUERY FAILD change password' . mysqli_error($connection));
+    } else {
+    }
+    
+}
 ?>
 <!--------------------
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Concern List</span></li>
+    <li class="breadcrumb-item"><span>Assign Concern Open</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -47,7 +61,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern List</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern Open</h5>                                   
                                 </div>  
                             </div>
                                 <div class="element-box">
@@ -145,10 +159,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
                               <td>
-                                  <a style="width: 100%;" class="btn btn-danger" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
+                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-danger" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
                               </td>
                     </tr>
 <?php }?>

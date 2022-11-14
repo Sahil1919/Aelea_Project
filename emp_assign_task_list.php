@@ -28,6 +28,7 @@ if (isset($_POST['submit'])) {
        // return 'pass';
     }
 }
+
 ?>
 <!--------------------
 START - Breadcrumbs
@@ -67,7 +68,8 @@ END - Breadcrumbs
                               
 <!--                               <th>Edit</th>-->
                           <th>Change Status/Transfer Concern</th>
-                    </tr>
+                            <!-- <th>DELETE</th> -->
+                        </tr>
         </thead>
         <tbody>
                                      <?php
@@ -134,22 +136,35 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $work_com_date;?></td> 
   <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a> <br><?php echo $remark;?></td> 
 
-  <?php if($work_due_date >= $date): ?>
+  <?php if($work_com_date && $status!='WIP'): ?>
+
+<?php if($work_due_date >= $date): ?>
         <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-    <?php else: ?>    
+
+<?php elseif($work_com_date <= $work_due_date): ?>
+    <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+        <?php else: ?>    
         <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
     <?php endif; ?>
+
+<?php elseif($work_due_date >= $date): ?>
+<td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+<?php else: ?>    
+<td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
+
+<?php endif; ?>
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
                               <td>
-                                  <a style="width: 100%;" class="btn btn-danger" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
+                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-danger" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
                               </td>
+
                     </tr>
 <?php }?>
         </tbody> </table>

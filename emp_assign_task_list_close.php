@@ -124,10 +124,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
                         <td>
-                                 <a style="width: 100%;" class="btn btn-danger" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
+                                 <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-danger" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
                               </td>
                     </tr>
 <?php }?>

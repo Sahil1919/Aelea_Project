@@ -223,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                    <!-- Main code -->
                     <h1 class="menu-page-header">Page Header</h1>
                     <?php if ($_SESSION['User_type']=="admin")
                     {

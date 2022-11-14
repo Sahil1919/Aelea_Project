@@ -79,6 +79,8 @@ END - Breadcrumbs
                              <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
+                        <th>Change Status/Transfer Task</th>
+
                           <th>Delete</th>
                     </tr>
         </thead>
@@ -173,6 +175,12 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><?php echo $created;?></td> 
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
+    <td>
+                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
+                                  <br>
+                                  <br>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                              </td>
     <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
                     </tr>
 <?php }?>
