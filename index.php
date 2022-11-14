@@ -22,7 +22,7 @@ if (isset($_POST['login'])) {
 
         $chck_Active_User = $row['status'];
         if ($chck_Active_User == '0') {
-            echo "<script>alert('your account is currently deactivated. please contact customer care +918305453647');  window.location.href='../login.php';</script>";
+            echo "<script>alert('your account is currently deactivated. please contact customer care PHONE- +91 022 66340989                                                                     EMAIL -  marketing@aeleacommodities.com');  window.location.href='../login.php';</script>";
         } else {
             echo "<script>alert ('Login Successfull');
        window.location.href='dashboard.php';

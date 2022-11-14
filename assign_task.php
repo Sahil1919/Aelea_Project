@@ -1,4 +1,5 @@
 <?php
+
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -13,10 +14,11 @@ if (isset($_POST['submit'])) {
     move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
     
     $employee_id = $_POST['empid'];
-           $task  = $_POST['task'];
+           $task  = $_POST['Concern'];
+    $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
-    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','Admin','$task_doc',now(),'Open')";
+    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+     $query .= " VALUES ('$employee_id','$task','Admin','$task_doc',now(),'$due_date','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -86,11 +88,22 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                         <input class="form-control" name="Concern" placeholder="Enter Concern" type="text">
                                     </div>
                                 </div>
-  <div class="col-sm-3">
+
+                                <div class="col-sm-3">
+                                    <div class="form-group"><label for="">Due Date </label>  
+                                        <input class="form-control" id="from-datepicker" name="duedate" placeholder="" type="datetime-local" >                                      
+                                    </div>
+                                </div>
+                                    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+                                    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css"> -->
+                                    
+
+                                <div class="col-sm-3">
                                     <div class="form-group"><label for="">File Attachment</label>
                                         <input name="file_attachment" type="file">
                                     </div>
                                 </div>
+
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <br>
@@ -119,4 +132,4 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
-                                
+      

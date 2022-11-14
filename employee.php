@@ -106,6 +106,19 @@ if(isset($_GET['delete']))
     }
     
 }
+if(isset($_GET['delete_task']))
+{
+    $task_id=$_GET['delete_task'];
+    // echo $task_id;
+    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
+    $query="DELETE FROM `assign_task` WHERE task_id=$task_id";
+    $delete_task = mysqli_query($connection, $query);
+      if (!$delete_task) {
+        die('QUERY FAILD change password' . mysqli_error($connection));
+    } else {
+    }
+    
+}
 
 function gen_image_code_unique() {
 

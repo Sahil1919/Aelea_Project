@@ -60,8 +60,10 @@ END - Breadcrumbs
                          <th>Assign By</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
+                           <th>Work Due Date</th>
                             <th>Work Complete Date</th>
-                             <th>Status</th>
+                             <th>Work Status</th>
+                             <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
                           <th>Change Status/Transfer Concern</th>
@@ -72,6 +74,8 @@ END - Breadcrumbs
                                                             $emp_id=  $_SESSION['user'];
                  $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
+date_default_timezone_set('Asia/Kolkata');
+$date = date('d-m-y g:i:s A');
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
@@ -100,8 +104,17 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $task = $row['task'];
             $assignby = $row['assignby'];
             $task_doc = $row['task_doc'];
-            $work_assign_date = $row['work_assign_date'];
-            $work_com_date = $row['work_com_date'];
+            $work_assign_date = strtotime($row['work_assign_date']);
+            $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
+
+            $work_due_date = strtotime($row['work_due_date']);
+            $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
+
+            $work_com_date = strtotime($row['work_com_date']);
+            if ($work_com_date){
+                
+                $work_com_date = date( 'd-m-y g:i:s A', $work_com_date);
+            }
            $status  = $row['status'];
                $remark  = $row['remark'];
     ?>
@@ -116,10 +129,16 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <a href="task_doc/<?php echo $task_doc;?>" class="btn btn-primary">Download</a>  
       <?php }?>
   </td> 
-    <td><?php echo $work_assign_date;?></td> 
+  <td><?php echo $work_assign_date;?></td> 
+    <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a> <br><?php echo $remark;?></td> 
 
+  <?php if($work_due_date >= $date): ?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php else: ?>    
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
+    <?php endif; ?>
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 
