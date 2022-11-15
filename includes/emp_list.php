@@ -6,9 +6,10 @@
                         <th>S No.</th>
                         <th>Emp Code</th>
                         <th>Name</th>
+                        <th>Role Type</th>
                          <th>Mobile No</th>
                           <th>Email ID</th>
-                           <th>User ID</th>
+                          
                             <!-- <th>PSWD</th> -->
                              <th>Profile</th>
                               <th>Date</th>
@@ -31,7 +32,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $pswd = $row['pswd'];
             $status = $row['status'];
             $created = $row['created'];
-            $user_role = $row['user_role'];
+            $user_role = ucfirst($row['user_role']);
             $emp_pro = $row['emp_pro'];
             $email_id = $row['email_id'];
             $emp_mob = $row['emp_mob'];
@@ -49,10 +50,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $count;?></td>
   <td><?php echo $emp_code;?></td>
   <td><?php echo $emp_name;?></td>
+  <td><?php echo $user_role;?></td> 
   <td><?php echo $emp_mob;?></td> 
   <td><?php echo $email_id;?></td> 
   
-    <td><?php echo $user_id;?></td> 
   <!-- <td><?php echo $pswd;?></td>  -->
 
     <!--<td><?php echo $emp_pro;?></td>--> 

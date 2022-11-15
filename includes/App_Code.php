@@ -59,7 +59,24 @@ class App_Code {
             $emp_name = $row['emp_name'];
             $emp_code = $row['emp_code'];
          //  $User_type = $row['User_type'];   //    echo '<script>alert('.$UserMob.');</script>';
-            return $emp_code . '/' . $emp_name;//. '/' . $UserMob;
+            return $emp_name. ' (' . $emp_code .')';//. '/' . $UserMob;
+        }
+
+        
+    }
+    function get_User_role($ID) {
+        //    echo '<script>alert("Hello");</script>';
+       $con = mysqli_connect("localhost", "root", "", "task_management") or die(mysqli_connect_error());
+        $UserRGID = $ID;
+
+        $client = "select * from emp_login where id='$UserRGID'";
+        $getNameQuery = mysqli_query($con, $client) or die(mysqli_error());
+
+        while ($row = mysqli_fetch_assoc($getNameQuery)) {
+            $user_role = ucfirst($row['user_role']);
+            // $emp_code = $row['emp_code'];
+         //  $User_type = $row['User_type'];   //    echo '<script>alert('.$UserMob.');</script>';
+            return $user_role;//. '/' . $UserMob;
         }
     }
     function convert_date($created)

@@ -69,6 +69,7 @@ END - Breadcrumbs
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
+                        <th>Role Type</th>
                         <th>Concern</th>
                          <th>Assign By</th>
                           <th>Download File</th>
@@ -134,6 +135,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                     <tr>
   <td><?php echo $count;?></td>
   <td> <?php echo $app_code_obj->getName($emp_id);?></td>
+  <td> <?php echo $app_code_obj->get_User_role($emp_id);?></td>
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
   <td>
@@ -164,7 +166,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success54r" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
                               </td>
                               <td><a class="btn btn-danger" href="assign_task_list_cancel.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
 

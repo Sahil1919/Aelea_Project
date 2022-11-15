@@ -67,7 +67,7 @@ END - Breadcrumbs
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role='employee' and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management') and status='1'") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -75,8 +75,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
     $id = $row['id'];
             $emp_code = $row['emp_code'];
             $emp_name = $row['emp_name'];
-        
-            echo "<option value=".$id.">".$emp_code."/".$emp_name."</option>";
+            $user_role = ucfirst($row['user_role']);
+            echo "<option value=".$id.">".$emp_code."/".$emp_name.'/'.$user_role."</option>";
 }?>
                                               
                                             

@@ -69,6 +69,7 @@ END - Breadcrumbs
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
+                        <th>Role Type</th>
                         <th>Concern</th>
                          <th>Assign By</th>
                           <th>Download File</th>
@@ -115,6 +116,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
 //    }
     $task_id = $row['task_id'];
             $emp_id = $row['emp_id']; 
+            // $user_role = $row['user_role'];
             $task = $row['task'];
             $assignby = $row['assignby'];
             $task_doc = $row['task_doc'];
@@ -137,6 +139,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                     <tr>
   <td><?php echo $count;?></td>
   <td> <?php echo $app_code_obj->getName($emp_id);?></td>
+  <td><?php echo $app_code_obj->get_User_role($emp_id);?></td> 
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
   <td>
