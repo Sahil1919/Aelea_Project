@@ -2661,6 +2661,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2674,6 +2675,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2687,6 +2689,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2700,6 +2703,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2713,6 +2717,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2726,6 +2731,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2739,6 +2745,7 @@ pre code {
         display: block;
         width: 100%;
         overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar
     }
@@ -2751,6 +2758,8 @@ pre code {
     display: block;
     width: 100%;
     overflow-x: auto;
+    overflow-y: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar
 }
@@ -12843,6 +12852,7 @@ body {
     min-height: 100%;
     position: relative;
     padding: 50px;
+    overflow-y: hidden;
     overflow-x: hidden
 }
 
@@ -15356,6 +15366,7 @@ body.menu-side-right .layout-w {
     -ms-flex-pack: start;
     justify-content: flex-start;
     overflow-x: auto;
+    overflow-y: auto;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center
@@ -15529,6 +15540,7 @@ body.menu-side-right .layout-w {
     -ms-flex-pack: start;
     justify-content: flex-start;
     overflow-x: auto;
+    overflow-y: auto;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center

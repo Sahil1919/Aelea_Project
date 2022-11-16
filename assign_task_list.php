@@ -59,10 +59,11 @@ END - Breadcrumbs
             <div class="element-box">
 
                             <div class="row">
+                            <div class="scrollmenu">
                                  <div class="col-md-12">
                                     <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern List</h5>                                   
                                 </div>  
-                            </div>
+                            
                                 <div class="element-box">
        <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
         <thead>
@@ -196,7 +197,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
         </div>
     </div>
 </div>
-
+        </div>
                                 
                                 
 <?php include './includes/Plugin.php'; ?>

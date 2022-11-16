@@ -15,8 +15,8 @@ if (isset($_POST['update'])) {
     $emailid = $_POST['emailid'];
     $mobile = $_POST['mobile'];
     //$profile = $_POST['profile'];
-    $userid = $_POST['userid'];
-    $pswd = $_POST['pswd'];
+    // $userid = $_POST['userid'];
+    // $pswd = $_POST['pswd'];
        $query1 = "select * from emp_login where id=" . $emp_id . "";
         $select_userprofile_image1 = mysqli_query($connection, $query1);
         while ($row1 = mysqli_fetch_array($select_userprofile_image1)) {
@@ -26,15 +26,15 @@ if (isset($_POST['update'])) {
         }
    // $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'employee','$post_image','$emailid','$mobile')";
  $query="UPDATE `emp_login` SET ";
-        $query .= "`emp_code`='$emp_code',";
-         $query .="`emp_name`='$Name',";
+        // $query .= "`emp_code`='$emp_code',";
+        //  $query .="`emp_name`='$Name',";
       //  $query .= "`user_id`='$userid',";
       //  $query .="`pswd`='$pswd',";
         // $query .= "`status`='',";
       //  $query .= "`created`='',";
        //$query .= "`user_role`='',";
         $query .= "`emp_pro`='$post_image',";
-        $query .= "`email_id`='$emailid',";
+        // $query .= "`email_id`='$emailid',";
         $query .= "`emp_mob`='$mobile' WHERE `id`='$emp_id'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -123,17 +123,17 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee Code</label>
-                                        <input class="form-control" value="<?php echo $emp_code;?>" name="emp_code" placeholder="Employee Code" type="text">
+                                        <input class="form-control" value="<?php echo $emp_code;?>" name="emp_code" placeholder="Employee Code" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Name</label>
-                                        <input class="form-control" value="<?php echo $emp_name;?>" name="Name" placeholder="Name" type="text">
+                                        <input class="form-control" value="<?php echo $emp_name;?>" name="Name" placeholder="Name" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Email ID</label>
-                                        <input class="form-control" value="<?php echo $email_id;?>" name="emailid" placeholder="Email ID" type="email">
+                                        <input class="form-control" value="<?php echo $email_id;?>" name="emailid" placeholder="Email ID" type="email" readonly>
                                     </div>
                                 </div>
  <div class="col-sm-3">

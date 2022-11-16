@@ -1,3 +1,23 @@
+<script>
+    div.scrollmenu {
+    background-color: #333;
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+  div.scrollmenu a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+  
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+</script>
+<div class='scrollmenu'>
 <div class="row">
             <div class="col-sm-12">
                 <div class="row">
@@ -108,7 +128,7 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                     <div class="value"><?php echo $cancel_task; ?></div>
                                </a>
                             </div>
-
+</div>
 <!--                            <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">
                                     <div class="label">Approve</div>

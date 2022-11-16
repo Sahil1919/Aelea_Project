@@ -196,6 +196,7 @@
                                 <div class="logged-user-role"><?php echo $_SESSION['User_type'];?></div>
                             </div>
                         </div>-->
+                        
                     <div class="logged-user-w avatar-inline">
                         <div class="logged-user-i">
                             <div class="avatar-w"><img alt="" src="user_profile/<?php echo $_SESSION['emp_pro'];?>"></div>
