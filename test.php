@@ -1,45 +1,78 @@
-<?php
-include './includes/data_base_save_update.php';
-include './includes/db.php';
-$qry = mysqli_query($connection, "SELECT * FROM assign_task order by work_assign_date desc") or die("select query fail" . mysqli_error());
-$count = 0;
-date_default_timezone_set('Asia/Kolkata');
-$date = date('d-m-y g:i:s A');
-echo $date;
-echo "<br>"; 
-
-while ($row = mysqli_fetch_assoc($qry)) {
-    $count = $count + 1;
-    $work_due_date = strtotime($row['work_due_date']);
-            $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
 
 
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function() {
+    jQuery("#status").change(function() {
+        if (jQuery(this).val() === 'Close'){ 
+            jQuery('textarea[name=other_remark]').show();   
+        } else {
+            jQuery('textarea[name=remark]').hide(); 
+        }
+    });
+});
 
-    if ($work_due_date>=$date){
-        echo $date;
-echo "<br>"; 
-        echo $work_due_date;
-        echo '<br>';
-        echo "DUE";
-        echo "<br>";
-    }
-    else{
-        echo $date;
-        echo "<br>"; 
-        echo $work_due_date;
-        echo "<br>";
-        echo "Overdue";
-        echo "<br>";
-    }
-}
-?>
-<?php
 
-// echo "<br>";
-// $arrlength = count($work_assign_date);
+</script>
+</head>
+<form class="container" action="#" method="post" enctype="multipart/form-data">
 
-// for($x = 0; $x < $arrlength; $x++) {
-//   echo $work_assign_date[$x];
-//   echo "<br>";
-// }
-?>
+
+                    <div class="row">
+
+
+                        <div class="col-sm-3">
+                            <div class="form-group"><label for="">Change Status</label>
+                                <select id = 'status' name="status" class="form-control" >
+                                    <option>--Select--</option>
+                                    <option value="Open">Open</option>
+                                    <option value="WIP">WIP</option>
+                                    <option value="Close">Close</option>  
+                                    <option value="Cancel">Cancel</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group"><label for="">Remark</label>
+                                <textarea  name="remark" class="form-control" placeholder="Remark"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group"><label for="">Achievements</label>
+                                <textarea  name="other_remark" class="form-control" placeholder="Achievements"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group"><label for="">Benefits</label>
+                                <textarea  name="other_remark" class="form-control" placeholder="Benefits"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <br>
+                                <input class="btn btn-primary" type="submit" value="Change Status" name="submit">
+                                <!--<label for="">Conform Password</label>-->
+                                <!--<input class="form-control" name="CPSWD" placeholder="Conform Password" type="password">-->
+                            </div>
+                        </div>
+
+
+
+
+                        <!--                                <div class="form-buttons-w text-right">
+                                                            <input class="btn btn-primary" type="submit" value="Change Password" name="submit">
+                                                        </div>-->
+                    </div>
+                </form>
+                <select id="carm3" name="interest">
+    <option value="d">Dogs</option>
+    <option value="c">Cats</option>
+    <option value="r">Rabbits</option>
+    <option value="other">other</option>
+</select>
+<input type="text" name="other_interest" style="display:none" />
+</body>
+</html>

@@ -54,6 +54,13 @@ $retailer_account = "SELECT task_id FROM assign_task where status='Cancel'";
 $cancel_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $cancel_task = mysqli_num_rows($result);
+
+    $emp_id=  $_SESSION['user'];
+  $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
+  $Total_task_man = 0;
+  if ($result = mysqli_query($connection, $retailer_account)) {
+      $Total_task_man = mysqli_num_rows($result);
+  }
 }?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>
@@ -111,7 +118,12 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                </a>
                             </div>
 
-                            
+                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="man_view_portal.php">
+                                    <div class="label">My Concerns List</div>
+                                    <div class="value"><?php echo $Total_task_man; ?></div>
+                               </a>
+                            </div>
 </div>
 <!--                            <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">

@@ -45,6 +45,51 @@ START - Breadcrumbs
 <!--------------------
 END - Breadcrumbs
 -------------------->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+jQuery(document).ready(function() {
+
+    if ($( "#status option:selected" ).text()=='--Select--'){
+        jQuery('textarea[name=other_remark]').hide();  
+            jQuery('textarea[name=other_remark1]').hide();  
+            jQuery('div[name=other_remark]').hide(); 
+            jQuery('div[name=other_remark1]').hide();
+            jQuery('label[name=other_remark]').hide();
+            jQuery('label[name=other_remark1]').hide();    
+            jQuery('div[name=remark]').hide();  
+            jQuery('textarea[name=remark]').hide();  
+            jQuery('div[name=remark]').hide(); 
+    }
+    jQuery("#status").change(function() {
+        
+        if (jQuery(this).val() === 'Close'){ 
+            // jQuery('textarea[name=other_remark]').show();  
+            jQuery('textarea[name=other_remark]').show();  
+            jQuery('textarea[name=other_remark1]').show();  
+            jQuery('div[name=other_remark]').show(); 
+            jQuery('div[name=other_remark1]').show();
+            jQuery('label[name=other_remark]').show();
+            jQuery('label[name=other_remark1]').show();    
+            jQuery('div[name=remark]').hide();  
+            jQuery('textarea[name=remark]').hide();  
+            jQuery('div[name=remark]').hide(); 
+
+        } else {
+            // jQuery('textarea[name=other_remark]').hide();  
+            jQuery('textarea[name=other_remark]').hide();  
+            jQuery('textarea[name=other_remark1]').hide();  
+            jQuery('div[name=other_remark]').hide(); 
+            jQuery('div[name=other_remark1]').hide();
+            jQuery('label[name=other_remark]').hide();
+            jQuery('label[name=other_remark1]').hide();  
+            jQuery('div[name=remark]').show();  
+            jQuery('textarea[name=remark]').show();  
+            jQuery('div[name=remark]').show(); 
+        }
+    });
+});
+</script>
+
 <div class="content-panel-toggler"><i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span></div>
 <div class="content-i">
     <div class="content-box">
@@ -64,8 +109,8 @@ END - Breadcrumbs
 
                         <div class="col-sm-3">
                             <div class="form-group"><label for="">Change Status</label>
-                                <select name="status" class="form-control" >
-                                    <option>--Select--</option>
+                                <select id='status' name="status" class="form-control" >
+                                    <option value='select' selected >--Select--</option>
                                     <option value="Open">Open</option>
                                     <option value="WIP">WIP</option>
                                     <option value="Close">Close</option>  
@@ -73,9 +118,19 @@ END - Breadcrumbs
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group"><label for="">Remark</label>
-                                <input type="text" name="remark" class="form-control" placeholder="Remark">
+                        <div class="col-sm-3" name='remark'>
+                            <div class="form-group" name='remark'><label for="" name='remark'>Remark</label>
+                                <textarea  name="remark" class="form-control" placeholder="Remark"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" name ='other_remark'>
+                            <div class="form-group" name='other_remark'><label for="" name='other_remark'>Achievements</label>
+                                <textarea  name="other_remark" class="form-control" placeholder="Achievements"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-3" name='other_remark1'>
+                            <div class="form-group" name='other_remark1'><label for="" name='other_remark1'>Benefits</label>
+                                <textarea  name="other_remark1" class="form-control" placeholder="Benefits"></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -106,4 +161,5 @@ END - Breadcrumbs
 
 <?php include './includes/Plugin.php'; ?>
 <?php include './includes/admin_footer.php'; ?>
-                                
+
+ 5trgsfd v

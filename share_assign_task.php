@@ -1,30 +1,38 @@
 <?php
-
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
   //  $msg = $AppCodeObj->Insert_pan_data("pan_mst");
-//    $userID = $_SESSION['user'];
+   $userID = $_SESSION['user'];
+   $task_id=$_GET['task_id'];
+   $task_id = $task_id+1;
 //    $NewPSWD = $_POST['NewPSWD'];
 //    $oldPSWD = $_POST['oldPSWD'];
-    $task_doc = $_FILES['file_attachment']['name'];
-    $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
-    move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
+    // $task_doc = $_FILES['file_attachment']['name'];
+    // $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
+    // move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
     
     $employee_id = $_POST['empid'];
-           $task  = $_POST['Concern'];
-    $due_date = $_POST['duedate'];
+          // $task  = $_POST['task'];
            //  = $_POST['file_attachment'];
-    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','Admin','$task_doc',now(),'$due_date','Open')";
+   
+$query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+     $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
+    $update_password = mysqli_query($connection, $query);
+    if (!$update_password) {
+        die('QUERY FAILD change pashword' . mysqli_error($connection));
+    } 
+
+           $query="UPDATE assign_task AS tab1 , assign_task AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
+           WHERE tab1.emp_id=$userID AND  tab2.`emp_id` =$employee_id";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
     } else {
 
-        echo "<script>alert('Record Save Successfully');</script>";
+        echo "<script>alert('Record Update Successfully');</script>";
        // return 'pass';
     }
 }
@@ -34,8 +42,8 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Concern</span></li>
-</ul>
+    <li class="breadcrumb-item"><span>Share Concern</span></li>
+</ul>   
 <!--------------------
 END - Breadcrumbs
 -------------------->
@@ -47,7 +55,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Share Concern</h5>                                   
                                 </div>  
                             </div>
                                   <form class="container" action="#" method="post" enctype="multipart/form-data">
@@ -75,40 +83,19 @@ while ($row = mysqli_fetch_assoc($qry)) {
     $id = $row['id'];
             $emp_code = $row['emp_code'];
             $emp_name = $row['emp_name'];
-            $user_role =  ucfirst($row['user_role']);
-        
-            echo "<option value=".$id.">".$emp_code."/".$emp_name."/".$user_role."</option>";
+            $user_role = ucfirst($row['user_role']);
+            echo "<option value=".$id.">".$emp_code."/".$emp_name.'/'.$user_role."</option>";
 }?>
                                               
                                             
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Concern</label>
-                                        <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Concern" ></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Due Date </label>  
-                                        <input class="form-control" id="from-datepicker" name="duedate" placeholder="" type="datetime-local" >                                      
-                                    </div>
-                                </div>
-                                    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
-                                    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css"> -->
-                                    
-
-                                <div class="col-sm-3">
-                                    <div class="form-group"><label for="">File Attachment</label>
-                                        <input name="file_attachment" type="file">
-                                    </div>
-                                </div>
-
+                       
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <br>
-                                         <input class="btn btn-primary" type="submit" value="Assign Concern" name="submit">
+                                         <input class="btn btn-primary" type="submit" value="Share Concern" name="submit">
                                         <!--<label for="">Conform Password</label>-->
                                         <!--<input class="form-control" name="CPSWD" placeholder="Conform Password" type="password">-->
                                     </div>
@@ -133,4 +120,4 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
-      
+                                
