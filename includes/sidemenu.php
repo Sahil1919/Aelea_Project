@@ -154,7 +154,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="emp_assign_task.php">Assign Concern</a></li>
+                                        <!-- <li><a href="emp_assign_task.php">Assign Concern</a></li> -->
                                         <li><a href="emp_assign_task_list.php">Concern List</a></li>  
                                         <li><a href="emp_assign_task_list_open.php">Open Concern</a></li>  
                                         <li><a href="emp_assign_task_list_close.php">Close Concern</a></li>  
@@ -226,7 +226,7 @@
                     </div>
                     <!-- Main code -->
                     <h1 class="menu-page-header">Page Header</h1>
-                    <?php if ($_SESSION['User_type']=="admin")
+                    <?php if ($_SESSION['User_type']=="admin" || $_SESSION['User_type']=="management")
                     {
                         
                     ?>
@@ -417,7 +417,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="emp_assign_task.php">Assign Concern</a></li>
+                                        <!-- <li><a href="emp_assign_task.php">Assign Concern</a></li> -->
                                         <li><a href="emp_assign_task_list.php">Concern List</a></li>  
                                         <li><a href="emp_assign_task_list_open.php">Open Concern</a></li>  
                                         <li><a href="emp_assign_task_list_close.php">Close Concern</a></li>  

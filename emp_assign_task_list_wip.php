@@ -62,6 +62,7 @@ END - Breadcrumbs
                            <th>Assign Work Date</th>
                             <th>Work Complete Date</th>
                              <th>Status</th>
+                             <th>Remark</th>
                            <th>Change Status/Transfer Concern/Share Concern</th>
                     </tr>
         </thead>
@@ -115,7 +116,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
   </td> 
     <td><?php echo $work_assign_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> </td> 
+  <td><?php echo $remark;?></td>
 
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 

@@ -64,6 +64,7 @@ END - Breadcrumbs
                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                              <th>Work Status</th>
+                             <th>Remark</th>
                              <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
@@ -81,26 +82,6 @@ $date = date('d-m-y g:i:s A');
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
-   // $id = $row['id'];
-//            $emp_code = $row['emp_code'];
-//            $emp_name = $row['emp_name'];
-//            $user_id = $row['user_id'];
-//            $pswd = $row['pswd'];
-//            $status = $row['status'];
-//            $created = $row['created'];
-//            $user_role = $row['user_role'];
-//            $emp_pro = $row['emp_pro'];
-//            $email_id = $row['email_id'];
-//            $emp_mob = $row['emp_mob'];
-//                                                                             $status = '';
-//    $btnClass = '';
-//    if ($row['status'] == '1') {
-//        $btnClass = "btn  btn-success btn-sm";
-//        $status = "Active";
-//    } else {
-//        $status = "Deactive";
-//        $btnClass = "btn btn-danger btn-sm";
-//    }
     $task_id = $row['task_id'];
             $emp_id1 = $row['emp_id']; 
             $task = $row['task'];
@@ -128,14 +109,27 @@ while ($row = mysqli_fetch_assoc($qry)) {
    <td>
       <?php if($task_doc !='')
       {?>
-      <a href="task_doc/<?php echo $task_doc;?>" class="btn btn-primary">Download</a>  
+        <?php $docs = explode(",",$task_doc);?>
+      <?php foreach($docs as $value) 
+        {?>
+        <?php  $value =  ltrim($value);?>
+      <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
+      <br>
+      <br>
       <?php }?>
+       <?php }?>
   </td> 
   <td><?php echo $work_assign_date;?></td> 
     <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a> <br><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a></td> 
+  <td>
+    <?php if ($status=='Close')
+    {?>
+     <a style="width: 100%;" class="btn btn-info" href="achievement&benefits.php?task_id=<?php echo $task_id;?>">View A & B</a>
 
+     <?php } else { echo" $remark";}?>
+   </td>
   <?php if($work_com_date && $status!='WIP'): ?>
 
 <?php if($work_due_date >= $date): ?>

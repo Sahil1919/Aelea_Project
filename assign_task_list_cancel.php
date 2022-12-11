@@ -69,7 +69,7 @@ END - Breadcrumbs
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
-                        <th>Role Type</th>
+                        <!-- <th>Role Type</th> -->
                         <th>Concern</th>
                          <th>Assign By</th>
                           <th>Download File</th>
@@ -78,7 +78,7 @@ END - Breadcrumbs
                             <th>Work Complete Date</th>
                             <th>Work Status</th>
                              <th>Due Status</th>
-                              
+                             <th>Remark</th>
 <!--                               <th>Edit</th>-->
                     <th>Change Status/Transfer Concern/Share Concern</th>
                     <th>Delete</th>
@@ -135,7 +135,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                     <tr>
   <td><?php echo $count;?></td>
   <td> <?php echo $app_code_obj->getName($emp_id);?></td>
-  <td> <?php echo $app_code_obj->get_User_role($emp_id);?></td>
+  <!-- <td> <?php echo $app_code_obj->get_User_role($emp_id);?></td> -->
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
   <td>
@@ -147,7 +147,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
     <td><?php echo $work_assign_date;?></td> 
     <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a></td> 
+  <td><?php echo $remark;?></td>
 
   <?php if($work_due_date >= $date): ?>
         <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
@@ -166,7 +167,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success54r" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
                                   <br>
                                   <br>
                                   <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>

@@ -70,7 +70,7 @@ END - Breadcrumbs
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
-                        <th>Role Type</th>
+                        <!-- <th>Role Type</th> -->
                         <th>Concern</th>
                          <th>Assign By</th>
                           <th>Download File</th>
@@ -78,6 +78,7 @@ END - Breadcrumbs
                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                              <th>Work Status</th>
+                             <th>Remark</th>
                              <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
@@ -140,20 +141,36 @@ while ($row = mysqli_fetch_assoc($qry)) {
                     <tr>
   <td><?php echo $count;?></td>
   <td> <?php echo $app_code_obj->getName($emp_id);?></td>
-  <td><?php echo $app_code_obj->get_User_role($emp_id);?></td> 
+  <!-- <td><?php echo $app_code_obj->get_User_role($emp_id);?></td>  -->
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
   <td>
       <?php if($task_doc !='')
       {?>
-      <a href="task_doc/<?php echo $task_doc;?>" class="btn btn-primary">Download</a>  
+      <?php $docs = explode(",",$task_doc);?>
+      <?php foreach($docs as $value) 
+        {?>
+        <?php  $value =  ltrim($value);?>
+      <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
+      <br>
+      <br>
+      <?php }?>
       <?php }?>
   </td> 
   
     <td><?php echo $work_assign_date;?></td> 
     <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a> <br><?php echo $remark;?></td> 
+  <td>
+    <a href="#" class="btn btn-success"> <?php echo" $status";?></a>
+   </td> 
+   <td>
+    <?php if ($status=='Close')
+    {?>
+     <a style="width: 100%;" class="btn btn-info" href="achievement&benefits.php?task_id=<?php echo $task_id;?>">View A & B</a>
+
+     <?php } else { echo" $remark";}?>
+   </td>
     
   <?php if($work_com_date && $status!='WIP'): ?>
 

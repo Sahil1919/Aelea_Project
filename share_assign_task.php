@@ -4,19 +4,37 @@ include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-  //  $msg = $AppCodeObj->Insert_pan_data("pan_mst");
+
+    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
+        $userID = $_SESSION['user'];
+   $task_id=$_GET['task_id'];
+   $qry = mysqli_query($connection, "SELECT `emp_id` FROM assign_task where task_id=$task_id ") or die("select query fail" . mysqli_error());
+    $row = mysqli_fetch_assoc($qry);
+    $empid=$row['emp_id'];
+   $task_id = $task_id+1;
+    
+    $employee_id = $_POST['empid'];
+   
+$query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+     $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
+    $update_password = mysqli_query($connection, $query);
+    if (!$update_password) {
+        die('QUERY FAILD change pashword' . mysqli_error($connection));
+    } 
+
+           $query="UPDATE assign_task AS tab1 , assign_task AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
+           WHERE tab1.emp_id=$empid AND  tab2.`emp_id` =$employee_id";
+    $update_password = mysqli_query($connection, $query);
+    if (!$update_password) {
+        die('QUERY FAILD change pashword' . mysqli_error($connection));
+    }
+    }
+    else{
    $userID = $_SESSION['user'];
    $task_id=$_GET['task_id'];
    $task_id = $task_id+1;
-//    $NewPSWD = $_POST['NewPSWD'];
-//    $oldPSWD = $_POST['oldPSWD'];
-    // $task_doc = $_FILES['file_attachment']['name'];
-    // $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
-    // move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
     
     $employee_id = $_POST['empid'];
-          // $task  = $_POST['task'];
-           //  = $_POST['file_attachment'];
    
 $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
      $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
@@ -30,11 +48,7 @@ $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } else {
-
-        echo "<script>alert('Record Update Successfully');</script>";
-       // return 'pass';
-    }
+    } }
 }
 ?>
 <!--------------------

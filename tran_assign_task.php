@@ -4,29 +4,26 @@ include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-  //  $msg = $AppCodeObj->Insert_pan_data("pan_mst");
-   $userID = $_SESSION['user'];
-   $task_id=$_GET['task_id'];
-//    $NewPSWD = $_POST['NewPSWD'];
-//    $oldPSWD = $_POST['oldPSWD'];
-    // $task_doc = $_FILES['file_attachment']['name'];
-    // $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
-    // move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
-    
+
+    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
+        $task_id=$_GET['task_id'];    
     $employee_id = $_POST['empid'];
-          // $task  = $_POST['task'];
-           //  = $_POST['file_attachment'];
-//    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
-//     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'Open')";
+           $query="UPDATE `assign_task` SET `emp_id`='$employee_id' WHERE `task_id`='$task_id' ";
+    $update_password = mysqli_query($connection, $query);
+    if (!$update_password) {
+        die('QUERY FAILD change pashword' . mysqli_error($connection));
+    } 
+    }
+    else{
+   $userID = $_SESSION['user'];
+   $task_id=$_GET['task_id'];    
+    $employee_id = $_POST['empid'];
            $query="UPDATE `assign_task` SET `emp_id`='$employee_id' WHERE `task_id`='$task_id' and emp_id='$userID'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } else {
-
-        echo "<script>alert('Record Update Successfully');</script>";
-       // return 'pass';
     }
+}
 }
 ?>
 <!--------------------

@@ -58,8 +58,9 @@ class App_Code {
         while ($row = mysqli_fetch_assoc($getNameQuery)) {
             $emp_name = $row['emp_name'];
             $emp_code = $row['emp_code'];
+            $emp_role = ucfirst( $row['user_role']);
          //  $User_type = $row['User_type'];   //    echo '<script>alert('.$UserMob.');</script>';
-            return $emp_name. ' (' . $emp_code .')';//. '/' . $UserMob;
+            return $emp_name. ' (' . $emp_code .')'.' '. $emp_role;//. '/' . $UserMob;
         }
 
         

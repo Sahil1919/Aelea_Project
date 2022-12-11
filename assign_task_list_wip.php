@@ -77,6 +77,7 @@ END - Breadcrumbs
                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                             <th>Work Status</th>
+                            <th>Remark</th>
                              <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
@@ -147,7 +148,9 @@ while ($row = mysqli_fetch_assoc($qry)) {
     <td><?php echo $work_assign_date;?></td> 
     <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> </td> 
+  <td><?php echo $remark;?></td>
+
 
   <?php if($work_due_date >= $date): ?>
         <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>

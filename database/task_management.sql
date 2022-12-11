@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 04:40 PM
+-- Generation Time: Dec 11, 2022 at 03:04 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -81,15 +81,21 @@ CREATE TABLE `assign_task` (
   `work_due_date` datetime DEFAULT NULL,
   `work_com_date` datetime DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `remark` text CHARACTER SET utf8 DEFAULT NULL
+  `remark` text CHARACTER SET utf8 DEFAULT NULL,
+  `Achievements` text DEFAULT NULL,
+  `Benefits` text DEFAULT NULL,
+  `attachments` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `assign_task`
 --
 
-INSERT INTO `assign_task` (`task_id`, `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`) VALUES
-(40, 13, 'ugyugi', 'Admin', '', '2022-11-13 23:23:52', '2022-11-13 23:25:00', NULL, 'Open', NULL);
+INSERT INTO `assign_task` (`task_id`, `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `Achievements`, `Benefits`, `attachments`) VALUES
+(114, 33, 'testing 500 uints', 'Admin', 'ilovepdf_merged.pdf', '2022-12-11 18:50:39', '2022-12-11 18:54:00', NULL, 'Open', NULL, NULL, NULL, NULL),
+(115, 13, 'checking machines', 'Admin', '', '2022-12-11 18:53:38', '2022-12-12 18:53:00', NULL, 'Open', NULL, NULL, NULL, NULL),
+(116, 12, 'checking machines', 'Admin', '', '2022-12-11 18:54:35', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Close', '', 'klklk', '', ''),
+(117, 32, 'checking machines', 'Admin', '', '2022-12-11 19:07:43', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Close', '', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -48804,8 +48810,10 @@ CREATE TABLE `emp_login` (
 INSERT INTO `emp_login` (`id`, `emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES
 (1, 'emp_001', 'Aelea Commodities', 'admin', 'admin', 1, '0000-00-00 00:00:00', 'admin', 'aelea-logo.png', 'marketing@aeleacommodities.com', '1234567890'),
 (12, 'A001', 'Sahil Shaikh', 'A001', 'sahil', 1, '2022-11-10 10:51:45', 'employee', 'Photo.jpeg', 'sahilsk565678@gmail.com', '8169499969'),
-(13, 'A002', 'Rahil Shaikh ', 'A002', 'rahil', 1, '2022-11-10 12:17:19', 'employee', '', 'rahil.shaikh@gmail.com', '8356876779'),
-(26, 'A003', 'Saaniya Shaikh', 'A003', 'sano', 1, '2022-11-10 14:47:49', 'Management', '', 'saniya@Hutiya.com', '8291781425');
+(13, 'A002', 'Rahil Shaikh ', 'A002', 'rahil', 1, '2022-11-10 12:17:19', 'employee', 'avatar2.jpg', 'rahil.shaikh@gmail.com', '8356876776'),
+(32, 'A004', 'raeesa', 'A004', 'raeesa', 1, '2022-11-15 22:09:27', 'management', '', 'raeesa@gmail.com', '9773669749'),
+(33, 'A005', 'sultan Khan', 'A005', '005', 1, '2022-12-11 18:48:54', 'employee', '', 'sultan@gmail.com', '97736697202'),
+(34, 'emp_002', 'Ali', 'admin1', 'admin1', 1, '2022-12-11 19:31:49', 'admin', '', 'ali@gmail.com', '989742988995');
 
 -- --------------------------------------------------------
 
@@ -53107,7 +53115,7 @@ ALTER TABLE `asset_tb`
 -- AUTO_INCREMENT for table `assign_task`
 --
 ALTER TABLE `assign_task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
 
 --
 -- AUTO_INCREMENT for table `bank_details`
@@ -53143,7 +53151,7 @@ ALTER TABLE `emp_assets`
 -- AUTO_INCREMENT for table `emp_login`
 --
 ALTER TABLE `emp_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `news_and_update`

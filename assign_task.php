@@ -9,16 +9,24 @@ if (isset($_POST['submit'])) {
 //    $userID = $_SESSION['user'];
 //    $NewPSWD = $_POST['NewPSWD'];
 //    $oldPSWD = $_POST['oldPSWD'];
-    $task_doc = $_FILES['file_attachment']['name'];
-    $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
-    move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
+$total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
+    
+if ($total>0){
+for ($i=0; $i<$total; $i++) {
+    $source = $_FILES["file_attachment"]["tmp_name"][$i];
+    $destination = $_FILES["file_attachment"]["name"][$i];
+    $collector[] = $destination;
+    move_uploaded_file($source, "task_doc/$destination");
+  }
+}
+$docs =  implode(",",$collector);
     
     $employee_id = $_POST['empid'];
            $task  = $_POST['Concern'];
     $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','Admin','$task_doc',now(),'$due_date','Open')";
+     $query .= " VALUES ('$employee_id','$task','Admin','$docs',now(),'$due_date','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -101,7 +109,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">File Attachment</label>
-                                        <input name="file_attachment" type="file">
+                                        <input name="file_attachment[]" type="file" multiple>
                                     </div>
                                 </div>
 

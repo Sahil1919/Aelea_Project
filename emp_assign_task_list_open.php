@@ -77,6 +77,7 @@ END - Breadcrumbs
                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                              <th>Work Status</th>
+                             <th>Remark</th>
                              <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
@@ -86,7 +87,7 @@ END - Breadcrumbs
         <tbody>
                                      <?php
                                                             $emp_id=  $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where status='Open' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                    $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' and status='Open' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -146,7 +147,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $work_assign_date;?></td> 
     <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a> <br><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo" $status";?></a> </td> 
+  <td><?php echo $remark;?></td>
 
   <?php if($work_due_date >= $date): ?>
         <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
