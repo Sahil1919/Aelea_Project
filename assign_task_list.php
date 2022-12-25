@@ -42,6 +42,7 @@ if(isset($_GET['delete_task']))
     
 }
 ?>
+
 <!--------------------
 START - Breadcrumbs
 -------------------->
@@ -52,6 +53,7 @@ START - Breadcrumbs
 <!--------------------
 END - Breadcrumbs
 -------------------->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="content-panel-toggler"><i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span></div>
 <div class="content-i">
     <div class="content-box">
@@ -61,12 +63,18 @@ END - Breadcrumbs
                             <div class="row">
                             <div class="scrollmenu">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern List</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern List</h5>    
+                                                                   
                                 </div>  
-                            
+                                
                                 <div class="element-box">
+                                <div>
+                                <a  class="btn btn-danger float-right"  href="test.php"><i class="fa fa-download"></i> Download PDF</a>
+</div>
+<br><br>
        <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
-        <thead>
+       <!-- <a id='example' style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a> -->
+       <thead>
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
@@ -96,26 +104,6 @@ $date = date('d-m-y g:i:s A');
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
-   // $id = $row['id'];
-//            $emp_code = $row['emp_code'];
-//            $emp_name = $row['emp_name'];
-//            $user_id = $row['user_id'];
-//            $pswd = $row['pswd'];
-//            $status = $row['status'];
-//            $created = $row['created'];
-//            $user_role = $row['user_role'];
-//            $emp_pro = $row['emp_pro'];
-//            $email_id = $row['email_id'];
-//            $emp_mob = $row['emp_mob'];
-//                                                                             $status = '';
-//    $btnClass = '';
-//    if ($row['status'] == '1') {
-//        $btnClass = "btn  btn-success btn-sm";
-//        $status = "Active";
-//    } else {
-//        $status = "Deactive";
-//        $btnClass = "btn btn-danger btn-sm";
-//    }
     $task_id = $row['task_id'];
             $emp_id = $row['emp_id']; 
             // $user_role = $row['user_role'];
@@ -223,7 +211,14 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
-                         <script>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
+
+
+<script>
+// var table = $('#example').DataTable();
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
@@ -232,6 +227,25 @@ $(document).ready(function() {
         ]
     } );
 } );
+
+$('#example').on('search.dt', function() {
+    var search_value = $('.dataTables_filter input').val();
+    console.log(search_value)
+   
+    $.ajax({
+    processing: true,
+    serverSide: true,
+    type: "POST",
+    method:"POST",
+    url: "test.php",
+    data: function ( d ) {
+    d.search_value = value;
+   }
+    // success: function() {
+    //   alert(value);}
+ }); // <-- the value
+}); 
+
 $(document).ready(function() {
     $('.datepicker').datepicker({
   weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
