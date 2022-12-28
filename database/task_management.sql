@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2022 at 03:04 PM
+-- Generation Time: Dec 28, 2022 at 10:34 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -92,10 +92,12 @@ CREATE TABLE `assign_task` (
 --
 
 INSERT INTO `assign_task` (`task_id`, `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `Achievements`, `Benefits`, `attachments`) VALUES
-(114, 33, 'testing 500 uints', 'Admin', 'ilovepdf_merged.pdf', '2022-12-11 18:50:39', '2022-12-11 18:54:00', NULL, 'Open', NULL, NULL, NULL, NULL),
-(115, 13, 'checking machines', 'Admin', '', '2022-12-11 18:53:38', '2022-12-12 18:53:00', NULL, 'Open', NULL, NULL, NULL, NULL),
-(116, 12, 'checking machines', 'Admin', '', '2022-12-11 18:54:35', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Close', '', 'klklk', '', ''),
-(117, 32, 'checking machines', 'Admin', '', '2022-12-11 19:07:43', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Close', '', NULL, NULL, NULL);
+(114, 33, 'testing 500 uints', 'Admin', '', '2022-12-11 18:50:39', '2022-12-11 18:54:00', '2022-12-28 16:54:12', 'Open', '', '', '', 'example_001.pdf'),
+(115, 13, 'checking machines', 'Admin', '', '2022-12-11 18:53:38', '2022-12-12 18:53:00', '2022-12-25 14:30:39', 'Open', '', '', '', ''),
+(116, 12, 'checking machines', 'Admin', '', '2022-12-11 18:54:35', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Close', '', 'done all the month end work', 'achive the 100 units of stock', ''),
+(117, 32, 'checking machines', 'Admin', '', '2022-12-11 19:07:43', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Open', '', '', '', ','),
+(118, 33, 'uhdfgiuhfdguihfguhidfgjuib', 'Admin', '', '2022-12-28 17:03:23', '2022-12-28 23:03:00', '2022-12-28 22:39:59', 'WIP', 'esrseytrgsertyr aertarwetawr4', '', '', ''),
+(119, 13, 'Understanding when to use “Miss”, “Ms.” or “Mrs.” is an important skill. Many women have preferred titles that inform their identity and are important to their sense of self. Luckily, knowing when to use each title is fairly straightforward, as there are specific rules in place that dictate proper etiquette. We’ll explain everything you need to know about using formal titles, including which to write when addressing invitations for your wedding.', 'Admin', '', '2022-12-29 01:28:56', '2022-12-29 01:30:00', NULL, 'Open', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -48812,8 +48814,7 @@ INSERT INTO `emp_login` (`id`, `emp_code`, `emp_name`, `user_id`, `pswd`, `statu
 (12, 'A001', 'Sahil Shaikh', 'A001', 'sahil', 1, '2022-11-10 10:51:45', 'employee', 'Photo.jpeg', 'sahilsk565678@gmail.com', '8169499969'),
 (13, 'A002', 'Rahil Shaikh ', 'A002', 'rahil', 1, '2022-11-10 12:17:19', 'employee', 'avatar2.jpg', 'rahil.shaikh@gmail.com', '8356876776'),
 (32, 'A004', 'raeesa', 'A004', 'raeesa', 1, '2022-11-15 22:09:27', 'management', '', 'raeesa@gmail.com', '9773669749'),
-(33, 'A005', 'sultan Khan', 'A005', '005', 1, '2022-12-11 18:48:54', 'employee', '', 'sultan@gmail.com', '97736697202'),
-(34, 'emp_002', 'Ali', 'admin1', 'admin1', 1, '2022-12-11 19:31:49', 'admin', '', 'ali@gmail.com', '989742988995');
+(33, 'A005', 'sultan Khan', 'A005', '005', 1, '2022-12-11 18:48:54', 'employee', '', 'sultan@gmail.com', '97736697202');
 
 -- --------------------------------------------------------
 
@@ -48836,6 +48837,32 @@ CREATE TABLE `news_and_update` (
 INSERT INTO `news_and_update` (`news_id`, `news_title`, `remark`, `created`, `news_type`) VALUES
 (3, 'task management', '', '2022-07-08', 'alert'),
 (4, 'demo', '', '2022-07-08', 'alert');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `pdf_views`
+-- (See below for the actual view)
+--
+CREATE TABLE `pdf_views` (
+`emp_code` varchar(255)
+,`emp_name` varchar(255)
+,`user_id` varchar(255)
+,`user_role` varchar(255)
+,`email_id` varchar(255)
+,`emp_mob` varchar(255)
+,`emp_id` int(11)
+,`task` text
+,`assignby` varchar(255)
+,`work_assign_date` datetime
+,`work_due_date` datetime
+,`work_com_date` datetime
+,`status` varchar(255)
+,`remark` text
+,`Achievements` text
+,`Benefits` text
+,`attachments` varchar(255)
+);
 
 -- --------------------------------------------------------
 
@@ -53019,6 +53046,15 @@ INSERT INTO `states` (`id`, `name`, `country_id`) VALUES
 (4119, 'Matabeleland South', 246),
 (4120, 'Midlands', 246);
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pdf_views`
+--
+DROP TABLE IF EXISTS `pdf_views`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pdf_views`  AS SELECT `emp_login`.`emp_code` AS `emp_code`, `emp_login`.`emp_name` AS `emp_name`, `emp_login`.`user_id` AS `user_id`, `emp_login`.`user_role` AS `user_role`, `emp_login`.`email_id` AS `email_id`, `emp_login`.`emp_mob` AS `emp_mob`, `assign_task`.`emp_id` AS `emp_id`, `assign_task`.`task` AS `task`, `assign_task`.`assignby` AS `assignby`, `assign_task`.`work_assign_date` AS `work_assign_date`, `assign_task`.`work_due_date` AS `work_due_date`, `assign_task`.`work_com_date` AS `work_com_date`, `assign_task`.`status` AS `status`, `assign_task`.`remark` AS `remark`, `assign_task`.`Achievements` AS `Achievements`, `assign_task`.`Benefits` AS `Benefits`, `assign_task`.`attachments` AS `attachments` FROM (`assign_task` join `emp_login`) WHERE `assign_task`.`emp_id` = `emp_login`.`id``id`  ;
+
 --
 -- Indexes for dumped tables
 --
@@ -53115,7 +53151,7 @@ ALTER TABLE `asset_tb`
 -- AUTO_INCREMENT for table `assign_task`
 --
 ALTER TABLE `assign_task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `bank_details`

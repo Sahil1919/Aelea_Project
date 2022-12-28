@@ -69,9 +69,10 @@ END - Breadcrumbs
                                 
                                 <div class="element-box">
                                 <div>
-                                <a  class="btn btn-danger float-right"  href="test.php"><i class="fa fa-download"></i> Download PDF</a>
+                                <a id="download" href='#' class="btn btn-danger float-right"><i class="fa fa-download"></i> Download PDF</a>
 </div>
 <br><br>
+    <!-- <form action="GET" action='wrap.php'> -->
        <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
        <!-- <a id='example' style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a> -->
        <thead>
@@ -198,7 +199,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                     </tr>
 <?php }?>
         </tbody>
-       </table>
+       </table></form>
    </div>
                             </div>
            
@@ -212,39 +213,54 @@ while ($row = mysqli_fetch_assoc($qry)) {
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
 
-
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script> -->
-
-
 <script>
-// var table = $('#example').DataTable();
+
+
 $(document).ready(function() {
     $('#example').DataTable( {
-        dom: 'Bfrtip',
+        // dom: 'Blfrtip',
         buttons: [
             'pdfHtml5'
         ]
     } );
 } );
+$url = "generator.php?search=";
+$('#download').on('click', function() {
+    var value = $('.dataTables_filter input').val();
+    console.log(value);
+    if (value === undefined || value===""){
+        window.location.href = $url;
+    }
+    else{
+        // var value = $('.dataTables_filter input').val();
+        window.location.href = $url+ value;
+    }
+    })
 
-$('#example').on('search.dt', function() {
-    var search_value = $('.dataTables_filter input').val();
-    console.log(search_value)
-   
-    $.ajax({
-    processing: true,
-    serverSide: true,
-    type: "POST",
-    method:"POST",
-    url: "test.php",
-    data: function ( d ) {
-    d.search_value = value;
-   }
-    // success: function() {
-    //   alert(value);}
- }); // <-- the value
-}); 
+
+// 
+
+// var table = $('#example').DataTable({
+// }).on('search.dt', function() {
+//     $('#download').on('click', function() {
+//         $data = table.search();
+//       
+//         if ($data !== ""){
+         
+//          window.location.href = $url+ $data; ;
+//          }
+//         else{
+           
+//             window.location.href = $url;
+//         }
+//         // console.log($url)
+//         // console.log($data);
+//     // 
+// })
+// })
+// var table = $("#example").DataTable();
+
+    
 
 $(document).ready(function() {
     $('.datepicker').datepicker({
