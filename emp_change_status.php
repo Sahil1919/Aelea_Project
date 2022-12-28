@@ -6,6 +6,7 @@ $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
 
     if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
+        $assign_by = ucfirst($_SESSION['User_type']);
         $task_id = $_GET['task_id'];
         $status = $_POST['status'];
         $remark = $_POST['remark'];
@@ -13,7 +14,7 @@ if (isset($_POST['submit'])) {
         $benefit = $_POST['other_remark1'];
         $concern = $_POST['Concern'];
         $due_date = $_POST['duedate'];
-
+        // $work_assign_date = date( 'd-m-y g:i:s A' );
         $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
         
         if ($total>0){
@@ -39,13 +40,24 @@ if (isset($_POST['submit'])) {
     
         if ($status=='Close') {
             $query .= "`work_com_date`=now(),";
+            $query .= "`status`='$status',";
+            $query .= "`Achievements`='$achievement',";
+            $query .= "`Benefits`='$benefit',";
+            // $query .= "`task`='$concern',";
+            $query .= "`work_due_date`='$due_date',";
+            $query .= "`work_assign_date`='$work_assign_date',";
         }
     
-        $query .= "`status`='$status',";
-        $query .= "`Achievements`='$achievement',";
-        $query .= "`Benefits`='$benefit',";
         if ($status=='Open'){
             $query .= "`task_doc`='$docs',";
+            $query .= "`work_com_date`=null,";
+            $query .= "`status`='$status',";
+            $query .= "`Achievements`='$achievement',";
+            $query .= "`Benefits`='$benefit',";
+            $query .= "`task`='$concern',";
+            $query .= "`work_due_date`='$due_date',";
+            $query .= "`work_assign_date`=now(),";
+            $query .= "`assignby`='$assign_by',";
         }
         else{
             $query .= "`attachments`='$docs',";
@@ -56,6 +68,7 @@ if (isset($_POST['submit'])) {
             die('QUERY FAILD change pashword' . mysqli_error($connection));
         } 
     }
+    
     $emp_id = $_SESSION['user'];
     $task_id = $_GET['task_id'];
     $status = $_POST['status'];
@@ -63,7 +76,6 @@ if (isset($_POST['submit'])) {
     $achievement = $_POST['other_remark'];
     $benefit = $_POST['other_remark1'];
     $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
-    
     if ($total>0){
     for ($i=0; $i<$total; $i++) {
         $source = $_FILES["file_attachment"]["tmp_name"][$i];
