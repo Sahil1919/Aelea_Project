@@ -165,7 +165,12 @@ if ($params['search'] != null)
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
 		$work_com_date = strtotime($row['work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		if ($work_due_date != '' && $work_com_date != null){
+			$work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		}
+		else{
+			$work_com_date = '';
+		}
 
         $status = $row['status'];
 		date_default_timezone_set('Asia/Kolkata');
@@ -296,7 +301,12 @@ if ($params['search'] != null)
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
 		$work_com_date = strtotime($row['work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		if ($work_due_date != '' && $work_com_date != null){
+			$work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		}
+		else{
+			$work_com_date = '';
+		}
 
         $status = $row['status'];
 		date_default_timezone_set('Asia/Kolkata');
@@ -427,7 +437,12 @@ if ($params['search'] != null)
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
 		$work_com_date = strtotime($row['work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		if ($work_due_date != '' && $work_com_date != null){
+			$work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		}
+		else{
+			$work_com_date = '';
+		}
 
         $status = $row['status'];
 		date_default_timezone_set('Asia/Kolkata');
