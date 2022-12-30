@@ -148,7 +148,13 @@ while ($row = mysqli_fetch_assoc($qry)) {
     <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
   <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
+    <td>
+    <?php if ($status=='Close')
+    {?>
+     <a style="width: 100%;" class="btn btn-info" href="achievement&benefits.php?task_id=<?php echo $task_id;?>">View A & B</a>
 
+     <?php } else { echo" $remark";}?>
+   </td>
   <?php if($work_due_date >= $date): ?>
         <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
 

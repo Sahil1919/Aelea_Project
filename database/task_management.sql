@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2022 at 10:34 PM
+-- Generation Time: Dec 30, 2022 at 06:25 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -92,12 +92,11 @@ CREATE TABLE `assign_task` (
 --
 
 INSERT INTO `assign_task` (`task_id`, `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `Achievements`, `Benefits`, `attachments`) VALUES
-(114, 33, 'testing 500 uints', 'Admin', '', '2022-12-11 18:50:39', '2022-12-11 18:54:00', '2022-12-28 16:54:12', 'Open', '', '', '', 'example_001.pdf'),
-(115, 13, 'checking machines', 'Admin', '', '2022-12-11 18:53:38', '2022-12-12 18:53:00', '2022-12-25 14:30:39', 'Open', '', '', '', ''),
-(116, 12, 'checking machines', 'Admin', '', '2022-12-11 18:54:35', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Close', '', 'done all the month end work', 'achive the 100 units of stock', ''),
-(117, 32, 'checking machines', 'Admin', '', '2022-12-11 19:07:43', '2022-12-12 18:53:00', '2022-12-11 18:58:35', 'Open', '', '', '', ','),
-(118, 33, 'uhdfgiuhfdguihfguhidfgjuib', 'Admin', '', '2022-12-28 17:03:23', '2022-12-28 23:03:00', '2022-12-28 22:39:59', 'WIP', 'esrseytrgsertyr aertarwetawr4', '', '', ''),
-(119, 13, 'Understanding when to use “Miss”, “Ms.” or “Mrs.” is an important skill. Many women have preferred titles that inform their identity and are important to their sense of self. Luckily, knowing when to use each title is fairly straightforward, as there are specific rules in place that dictate proper etiquette. We’ll explain everything you need to know about using formal titles, including which to write when addressing invitations for your wedding.', 'Admin', '', '2022-12-29 01:28:56', '2022-12-29 01:30:00', NULL, 'Open', NULL, NULL, NULL, NULL);
+(137, 12, 'Cheking 100 units of electricity cost.', 'Admin', 'CodeWind_Technologies_Internship_Batches_June_2022.txt', '2022-12-30 16:26:34', '2022-12-30 16:30:00', '2022-12-30 20:15:06', 'Close', '', 'xcxcx', 'xcxczxczc', ''),
+(138, 13, 'Do tbus task adfing', 'Admin', '', '2022-12-30 22:13:45', '2022-12-30 22:17:00', NULL, 'Open', '', '', '', ''),
+(139, 38, 'Cheking 100 units of electricity cost.', 'Admin', 'CodeWind_Technologies_Internship_Batches_June_2022.txt', '2022-12-30 19:34:21', '2022-12-30 16:30:00', '2022-12-30 16:40:22', 'Close', '', NULL, NULL, NULL),
+(140, 12, 'find the stock in this month', 'Admin', '', '2022-12-30 19:51:00', '2022-12-30 20:10:00', '2022-12-30 21:52:49', 'Close', '', 'this is sayha980df g9a87hrt y7sdgfa79fa9f 76adtfga67aer a7dfhasfa9f\r\n\r\ns8uerha7w8erhya wer\r\n\r\nae\r\na\r\newr\r\na\r\nwer\r\na aerfuy7ha8w7etrgha76wgt67tg 78yhta78rt 678hrt7a9trha7yr8ths 76ys7rtyhs78rt r7 sert\r\n', 'y76gfay78swg8feh 87gzs87f  ay7zs8gedrf asy877drfg \r\nzfgzsdgf\r\nzsdgfzsdfgsgetyh  yudfgyfsdybyfgd yt7sdrufmas8fh yuzsdfbn 9asygfbasf\r\nzdfg\r\nadfgdrf\r\ngsdfg\r\nsdf\r\ngs\r\nd\r\ngsdsrdeg98s7dhg7sdrn g7sa8rd e', ''),
+(141, 33, 'Do tbus task adfing', 'Admin', '', '2022-12-30 22:14:01', '2022-12-30 22:17:00', '2022-12-30 22:14:36', 'Close', '', 'se5tyaertdr', 'artareta argar artawrt awrtaw4twe', '');
 
 -- --------------------------------------------------------
 
@@ -48810,11 +48809,13 @@ CREATE TABLE `emp_login` (
 --
 
 INSERT INTO `emp_login` (`id`, `emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES
-(1, 'emp_001', 'Aelea Commodities', 'admin', 'admin', 1, '0000-00-00 00:00:00', 'admin', 'aelea-logo.png', 'marketing@aeleacommodities.com', '1234567890'),
-(12, 'A001', 'Sahil Shaikh', 'A001', 'sahil', 1, '2022-11-10 10:51:45', 'employee', 'Photo.jpeg', 'sahilsk565678@gmail.com', '8169499969'),
-(13, 'A002', 'Rahil Shaikh ', 'A002', 'rahil', 1, '2022-11-10 12:17:19', 'employee', 'avatar2.jpg', 'rahil.shaikh@gmail.com', '8356876776'),
-(32, 'A004', 'raeesa', 'A004', 'raeesa', 1, '2022-11-15 22:09:27', 'management', '', 'raeesa@gmail.com', '9773669749'),
-(33, 'A005', 'sultan Khan', 'A005', '005', 1, '2022-12-11 18:48:54', 'employee', '', 'sultan@gmail.com', '97736697202');
+(1, 'emp_001', 'Aelea Commodities', 'admin', 'admin', 1, '0000-00-00 00:00:00', 'admin', 'Admin.jpeg', 'marketing@aeleacommodities.com', '9769865749'),
+(12, 'A001', 'Sahil Shaikh', 'sahilsk565678@gmail.com', 'sahil', 1, '2022-11-10 10:51:45', 'employee', 'sahil.png', 'sahilsk565678@gmail.com', '8169499969'),
+(13, 'A002', 'Rahil Shaikh ', 'rahil.shaikh@gmail.com', 'rahil', 1, '2022-11-10 12:17:19', 'employee', 'rahil.png', 'rahil.shaikh@gmail.com', '8356876776'),
+(33, 'A005', 'Nasreen Khan', 'A005', '005', 1, '2022-12-11 18:48:54', 'employee', 'nasreen.png', 'nasrin.112@gmail.com', '97736697202'),
+(35, 'emp_man01', 'Aliasgar ', 'marketing@aeleacommodities.com', 'ali', 1, '2022-12-30 16:02:08', 'management', 'logo png.png', 'marketing@aeleacommodities.com', '99200 76989'),
+(36, 'A006', 'Aeraf Shaikh', 'A006', '006', 1, '2022-12-30 16:12:11', 'employee', 'aeraf.png', 'aeraf09@gmail.com', '8356876789'),
+(38, 'A007', 'Riyaz Khan', 'riyaz1khan102@gmail.com', '007', 1, '2022-12-30 16:17:46', 'employee', 'riyaz.png', 'riyaz1khan102@gmail.com', '8356876789');
 
 -- --------------------------------------------------------
 
@@ -53151,7 +53152,7 @@ ALTER TABLE `asset_tb`
 -- AUTO_INCREMENT for table `assign_task`
 --
 ALTER TABLE `assign_task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT for table `bank_details`
@@ -53187,7 +53188,7 @@ ALTER TABLE `emp_assets`
 -- AUTO_INCREMENT for table `emp_login`
 --
 ALTER TABLE `emp_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `news_and_update`

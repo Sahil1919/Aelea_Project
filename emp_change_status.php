@@ -44,8 +44,8 @@ if (isset($_POST['submit'])) {
             $query .= "`Achievements`='$achievement',";
             $query .= "`Benefits`='$benefit',";
             // $query .= "`task`='$concern',";
-            $query .= "`work_due_date`='$due_date',";
-            $query .= "`work_assign_date`='$work_assign_date',";
+            // $query .= "`work_due_date`='$due_date',";
+            // $query .= "`work_assign_date`='$work_assign_date',";
         }
     
         if ($status=='Open'){
@@ -62,6 +62,10 @@ if (isset($_POST['submit'])) {
         else{
             $query .= "`attachments`='$docs',";
         }
+        $query .= "`status`='$status',";
+        $query .= "`Achievements`='$achievement',";
+        $query .= "`Benefits`='$benefit',";
+        $query .= "`attachments`='$docs',";
         $query .= "`remark`='$remark' WHERE `task_id`='$task_id' ";
         $update_password = mysqli_query($connection, $query);
         if (!$update_password) {

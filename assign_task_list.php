@@ -6,10 +6,6 @@ $app_code_obj=new App_Code();
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-  //  $msg = $AppCodeObj->Insert_pan_data("pan_mst");
-//    $userID = $_SESSION['user'];
-//    $NewPSWD = $_POST['NewPSWD'];
-//    $oldPSWD = $_POST['oldPSWD'];
     $task_doc = $_FILES['file_attachment']['name'];
     $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
     move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
@@ -18,7 +14,7 @@ if (isset($_POST['submit'])) {
            $task  = $_POST['task'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','Admin','$task_doc',now(),'Open')";
+     $query .= " VALUES ('$employee_id','$task','$assign_by','$task_doc',now(),'Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -161,23 +157,23 @@ while ($row = mysqli_fetch_assoc($qry)) {
      <?php } else { echo" $remark";}?>
    </td>
     
-  <?php if($work_com_date && $status!='WIP'): ?>
+   <?php if($work_com_date && $status!='WIP'): ?>
 
-        <?php if($work_due_date >= $date): ?>
-                <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-
-        <?php elseif($work_com_date <= $work_due_date): ?>
+    <?php if($work_due_date >= $date): ?>
             <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-                <?php else: ?>    
-                <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-            <?php endif; ?>
-        
+
+    <?php elseif($work_com_date <= $work_due_date): ?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+            <?php else: ?>    
+            <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
+        <?php endif; ?>
+
     <?php elseif($work_due_date >= $date): ?>
     <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-        <?php else: ?>    
-        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
+<?php else: ?>    
+<td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
 
-  <?php endif; ?>
+<?php endif; ?>
 
    
     
@@ -236,31 +232,6 @@ $('#download').on('click', function() {
         window.location.href = $url+ value;
     }
     })
-
-
-// 
-
-// var table = $('#example').DataTable({
-// }).on('search.dt', function() {
-//     $('#download').on('click', function() {
-//         $data = table.search();
-//       
-//         if ($data !== ""){
-         
-//          window.location.href = $url+ $data; ;
-//          }
-//         else{
-           
-//             window.location.href = $url;
-//         }
-//         // console.log($url)
-//         // console.log($data);
-//     // 
-// })
-// })
-// var table = $("#example").DataTable();
-
-    
 
 $(document).ready(function() {
     $('.datepicker').datepicker({

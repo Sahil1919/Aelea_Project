@@ -7,7 +7,7 @@ $CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $url_components = parse_url($CurPageURL);
 
 parse_str($url_components['query'], $params);
-
+echo $_SESSION['User_type'];
 // Logic to set the PDF table 
 if ($params['search'] != null)
 {

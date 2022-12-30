@@ -164,7 +164,7 @@ if ($params['search'] != null)
         $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work_com_date']);
+		$work_com_date = strtotime($row['work$work_com_date']);
         $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
 
         $status = $row['status'];
@@ -295,7 +295,7 @@ if ($params['search'] != null)
         $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work_com_date']);
+		$work_com_date = strtotime($row['work$work_com_date']);
         $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
 
         $status = $row['status'];
@@ -426,7 +426,7 @@ if ($params['search'] != null)
         $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work_com_date']);
+		$work_com_date = strtotime($row['work$work_com_date']);
         $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
 
         $status = $row['status'];
@@ -555,14 +555,8 @@ else
         $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work_com_date']);
-		if ($work_due_date != '' && $work_com_date != null){
-			$work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
-		}
-		else{
-			$work_com_date = '';
-		}
-        
+		$work_com_date = strtotime($row['work$work_com_date']);
+        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
 
         $status = $row['status'];
 		date_default_timezone_set('Asia/Kolkata');
@@ -613,7 +607,7 @@ else
 
 		$pdf->Ln(10);
 		$pdf->SetFont('helvetica', 'B',9); 
-		if ($row['remark'] != '' && $row['remark'] != null ){
+		if (isset($row['remark']) != ''){
             $remark=  $row['remark'];
             }
             else{
@@ -651,7 +645,7 @@ else
 			$pdf->MultiCell(180,4,$benefits,1,0);
     }
  }
-     
+
 		$pdf->Ln(12);
 		$pdf->SetFont('times','i',9);
 		$pdf->MultiCell(189, 15, 'This is a Computerize generated Work Submission Report is an important document for both the company and the users. This act as  proof of the To Do "s" and Concern task they completed. While for the company, it serves as a copy for work completion and remark Thank You. ',0,'L',0,1,'','',true);

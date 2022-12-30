@@ -6,10 +6,8 @@ $app_code_obj=new App_Code();
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-  //  $msg = $AppCodeObj->Insert_pan_data("pan_mst");
-//    $userID = $_SESSION['user'];
-//    $NewPSWD = $_POST['NewPSWD'];
-//    $oldPSWD = $_POST['oldPSWD'];
+    session_start();
+    $_SESSION['empid'] = $_POST['empid'];
     $task_doc = $_FILES['file_attachment']['name'];
     $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
     move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
@@ -52,6 +50,11 @@ END - Breadcrumbs
                                 </div>  
                             </div>
                                 <div class="element-box">
+                                <div>
+                                <a id="download" href='#' class="btn btn-danger float-right"><i class="fa fa-download"></i> Download PDF</a>
+</div>
+<br><br>
+
    <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
         <thead>
                     <tr>
@@ -179,12 +182,26 @@ while ($row = mysqli_fetch_assoc($qry)) {
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
                                 <script>
+
+
 $(document).ready(function() {
     $('#example').DataTable( {
-        dom: 'Bfrtip',
+        // dom: 'Blfrtip',
         buttons: [
             'pdfHtml5'
         ]
     } );
 } );
-        </script>                 
+$url = "generator.php?search=";
+$('#download').on('click', function() {
+    var value = $('.dataTables_filter input').val();
+    console.log(value);
+    if (value === undefined || value===""){
+        window.location.href = $url;
+    }
+    else{
+        // var value = $('.dataTables_filter input').val();
+        window.location.href = $url+ value;
+    }
+    })
+  </script>                 
