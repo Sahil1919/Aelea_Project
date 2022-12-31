@@ -267,8 +267,8 @@ if ($params['search'] != null)
 else
 {
 	$id = $params['id'];
-	
-    $qry = mysqli_query($connection, "SELECT * FROM pdf_views WHERE 'emp_id'='$id' ") or die("select query fail" . mysqli_error());
+	echo $id;
+    $qry = mysqli_query($connection, "SELECT * FROM pdf_views WHERE emp_id='$id' ") or die("select query fail" . mysqli_error());
     while ($row = mysqli_fetch_assoc($qry)) 
     {        
 		$pdf->Ln(18);

@@ -28,12 +28,12 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Email ID</label>
-                                        <input class="form-control" name="emailid" placeholder="Email ID" type="email">
+                                        <input class="form-control" name="emailid" placeholder="Email ID" type="email"  required>
                                     </div>
                                 </div>
  <div class="col-sm-3">
                                     <div class="form-group"><label for="">Mobile No.</label>
-                                        <input class="form-control" name="mobile" placeholder="Mobile No." type="text">
+                                        <input class="form-control" name="mobile" placeholder="Mobile No." type="text" pattern="[7-9]{1}[0-9]{9}" required>
                                     </div>
                                 </div>
  <div class="col-sm-3">
@@ -43,13 +43,13 @@
                                 </div>
  <div class="col-sm-3">
                                     <div class="form-group"><label for="">User ID</label>
-                                        <input class="form-control" name="userid" placeholder="User ID" type="text">
+                                        <input class="form-control" name="userid" placeholder="User ID" type="text" readonly>
                                     </div>
                                 </div>
 
  <div class="col-sm-3">
                                     <div class="form-group"><label for="">Password</label>
-                                        <input class="form-control" name="pswd" placeholder="password" type="text">
+                                        <input class="form-control" name="pswd" placeholder="password" type="text" pattern ="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                                     </div>
                                 </div>
 
@@ -70,3 +70,11 @@
                                         <input class="btn btn-primary" type="submit" value="Add Employee" name="submit" >
                                     </div>
                                 </div>
+                               
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $('input[name="emp_code"]').change(function() {
+    $('input[name="userid"]').val($(this).val());
+});
+</script>
+                                

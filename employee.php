@@ -19,16 +19,31 @@ if (isset($_POST['submit'])) {
     $userid = $_POST['userid'];
     $pswd = $_POST['pswd'];
     $user_role = strtolower($_POST['usertype']);
-    $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'$user_role','$post_image','$emailid','$mobile')";
-    //  $update_psqd = "UPDATE `user_details` SET Pswd='$NewPSWD' where  `User_ID`='$userID' and Pswd='$oldPSWD'  ";
-    $update_password = mysqli_query($connection, $query);
-    if (!$update_password) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } else {
 
-        echo "<script>alert('record saved successfully');</script>";
-        // return 'pass';
+    $qry = mysqli_query($connection, "SELECT emp_code FROM emp_login ") or die("select query fail" . mysqli_error());
+    $flag = 0;
+    while( $row = mysqli_fetch_assoc($qry)){
+        if ($row['emp_code'] == $emp_code){
+            echo "<script>alert('Employee Already Exist');</script>";
+            $flag = 1 ;
+            break;
+        }
     }
+    if ($flag !=1){
+        $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'$user_role','$post_image','$emailid','$mobile')";
+        //  $update_psqd = "UPDATE `user_details` SET Pswd='$NewPSWD' where  `User_ID`='$userID' and Pswd='$oldPSWD'  ";
+            $update_password = mysqli_query($connection, $query);
+            if (!$update_password) {
+                die('QUERY FAILD change pashword' . mysqli_error($connection));
+            } else {
+        
+                echo "<script>alert('record saved successfully');</script>";
+                // return 'pass';
+            }
+    }
+   
+        
+    
 }
 if (isset($_GET['id']) && isset($_GET['Status'])) {
    
@@ -250,4 +265,5 @@ $(document).ready(function() {
         ]
     } );
 } );
+
         </script> 

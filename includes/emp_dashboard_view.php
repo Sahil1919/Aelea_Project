@@ -70,32 +70,32 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                             </div>-->
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">
-                                    <div class="label">Total Task</div>
+                                    <div class="label">Total Concern</div>
                                     <div class="value"><?php echo $Total_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">
-                                    <div class="label">Open Task</div>
+                                    <div class="label">Open Concern</div>
                                     <div class="value"><?php echo $open_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">
-                                    <div class="label">Close Task</div>
+                                    <div class="label">Close Concern</div>
                                     <div class="value"><?php echo $close_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">
-                                    <div class="label">WIP Task</div>
+                                    <div class="label">WIP Concern</div>
                                     <div class="value"><?php echo $WIP_task; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="#">
-                                    <div class="label">Cancel Task</div>
+                                    <div class="label">Cancel Concern</div>
                                     <div class="value"><?php echo $cancel_task; ?></div>
                                </a>
                             </div>
