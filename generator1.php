@@ -126,268 +126,7 @@ parse_str($url_components['query'], $params);
 if ($params['search'] != null)
 {
 
-    $qry = mysqli_query($connection, "SELECT emp_code FROM pdf_views ") or die("select query fail" . mysqli_error());
-
-    while($row= mysqli_fetch_assoc($qry)){
-
-        if (strtolower($row['emp_code']) == strtolower($params['search'])){
-            $data = $row['emp_code'];
-            echo $data;
-            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views WHERE emp_code='$data' ") or die("select query fail" . mysqli_error());
-            while($row= mysqli_fetch_assoc($qry1)){
-                $pdf->Ln(15);
-
-		$emp_name = $row['emp_name'];
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(130, 5, 'Mr/Ms/Mrs - '.$emp_name, 0, 0);
-        $emp_id = $row['emp_code'];       
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(59, 5, 'Employee Number - '.$emp_id, 0, 1);
-		
-		$pdf->Ln(3);
-		$email_id = $row['email_id'];     
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(130, 5, 'Email ID - '.$email_id, 0, 0);
-		$role_type = $row['user_role']; 
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(189, 5, 'Role Type - '.$role_type, 0, 1);
-        
-		$pdf->Ln(3);
-        $emp_mob = $row['emp_mob'];
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
-
-		$pdf->Ln(3);
-        $concern = $row['task'];
-        $assign_by = $row['assignby'];
-		$work_assign_date = strtotime($row['work_assign_date']);
-        $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
-		$work_due_date = strtotime($row['work_due_date']);
-        $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work$work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
-
-        $status = $row['status'];
-		date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-y g:i:s A');
-        if($work_com_date && $status!='WIP')
-        {
-
-                if($work_due_date >= $date){
-                    $due_status = "DUE";
-                }
-
-                elseif($work_com_date <= $work_due_date){
-                    $due_status = "DUE";
-                }
-
-                else{
-                    $due_status = "OVERDUE";
-                }
-        }
-        elseif($work_due_date >= $date){
-            $due_status = "DUE";
-        }
-        else{
-            $due_status = "OVERDUE";
-        }
-
-		$pdf->Ln(3);
-		$pdf->SetFillColor(224,235,255);
-		$pdf->MultiCell(180,5,'Concern',1,0,'C',1);
-		$pdf->MultiCell(180,4,$concern,1,0);
-
-		$pdf->Ln(8);
-		$pdf->SetFont('helvetica', 'B',9); 
-		$pdf->Cell(25,5,'Assign By',1,0,'C',1);
-		$pdf->Cell(35,5,"Assign Date",1,0,'C',1);
-		$pdf->Cell(35,5,'Due Date',1,0,'C',1);
-		$pdf->Cell(35,5,'Completed on',1,0,'C',1);
-		$pdf->Cell(20,5,'Status',1,0,'C',1);
-		$pdf->Cell(25,5,'Due Status',1,0,'C',1);
-
-		$pdf->Ln(5);
-		$pdf->Cell(25,4,$assign_by,1,0,'C',0);
-		$pdf->Cell(35,4,$work_assign_date,1,0,'C',0);
-		$pdf->Cell(35,4,$work_due_date,1,0,'C',0);
-		$pdf->Cell(35,4,$work_com_date,1,0,'C',0);
-		$pdf->Cell(20,4,$status,1,0,'C',0);
-		$pdf->Cell(25,4,$due_status,1,0,'C',0);
-
-		$pdf->Ln(10);
-		$pdf->SetFont('helvetica', 'B',9); 
-		if (isset($row['remark']) != ''){
-            $remark=  $row['remark'];
-            }
-            else{
-                $remark= 'NA';
-            }
-		
-			$pdf->Ln(3);
-			$pdf->SetFillColor(224,235,255);
-			$pdf->MultiCell(180,5,'Remark',1,0,'C',1);
-			$pdf->MultiCell(180,4,$remark,1,0);
-
-			$pdf->Ln(3);
-        if (isset($row['Achievements']) != ''){
-            $achievements=  $row['Achievements'];
-            }
-            else{
-                $achievements= '';
-            }
-
-			$pdf->Ln(3);
-			$pdf->SetFillColor(224,235,255);
-			$pdf->MultiCell(180,5,'Achievements',1,0,'C',1);
-			$pdf->MultiCell(180,4,$achievements,1,0);
-
-			$pdf->Ln(3);
-            if (isset($row['Benefits']) != ''){
-                $benefits =  $row['Benefits'];
-            }
-            else{
-            $benefits = '';
-            }
-			$pdf->Ln(3);
-			$pdf->SetFillColor(224,235,255);
-			$pdf->MultiCell(180,5,'Benefits',1,0,'C',1);
-			$pdf->MultiCell(180,4,$benefits,1,0);
-                }
-            break;
-        }
-    }
-
-    $qry = mysqli_query($connection, "SELECT emp_name FROM pdf_views ") or die("select query fail" . mysqli_error());
-    while($row= mysqli_fetch_assoc($qry)){
-        // $name = strtolower($row['emp_name']);
-        if (str_starts_with(strtolower($row['emp_name']),strtolower($params['search']))){
-
-            $data = $row['emp_name'];
-            echo $data;
-            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views WHERE emp_name='$data' ") or die("select query fail" . mysqli_error());
-            while($row= mysqli_fetch_assoc($qry1)){
-                $pdf->Ln(15);
-
-		$emp_name = $row['emp_name'];
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(130, 5, 'Mr/Ms/Mrs - '.$emp_name, 0, 0);
-        $emp_id = $row['emp_code'];       
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(59, 5, 'Employee Number - '.$emp_id, 0, 1);
-		
-		$pdf->Ln(3);
-		$email_id = $row['email_id'];     
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(130, 5, 'Email ID - '.$email_id, 0, 0);
-		$role_type = $row['user_role']; 
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(189, 5, 'Role Type - '.$role_type, 0, 1);
-        
-		$pdf->Ln(3);
-        $emp_mob = $row['emp_mob'];
-		$pdf->SetFont('helvetica', 'B',10); 
-		$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
-
-		$pdf->Ln(3);
-        $concern = $row['task'];
-        $assign_by = $row['assignby'];
-        $work_assign_date = strtotime($row['work_assign_date']);
-        $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
-		$work_due_date = strtotime($row['work_due_date']);
-        $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work$work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
-
-        $status = $row['status'];
-		date_default_timezone_set('Asia/Kolkata');
-        $date = date('d-m-y g:i:s A');
-        if($work_com_date && $status!='WIP')
-        {
-
-                if($work_due_date >= $date){
-                    $due_status = "DUE";
-                }
-
-                elseif($work_com_date <= $work_due_date){
-                    $due_status = "DUE";
-                }
-
-                else{
-                    $due_status = "OVERDUE";
-                }
-        }
-        elseif($work_due_date >= $date){
-            $due_status = "DUE";
-        }
-        else{
-            $due_status = "OVERDUE";
-        }
-
-		$pdf->Ln(3);
-		$pdf->SetFillColor(224,235,255);
-		$pdf->MultiCell(180,5,'Concern',1,0,'C',1);
-		$pdf->MultiCell(180,4,$concern,1,0);
-
-		$pdf->Ln(8);
-		$pdf->SetFont('helvetica', 'B',9); 
-		$pdf->Cell(25,5,'Assign By',1,0,'C',1);
-		$pdf->Cell(35,5,"Assign Date",1,0,'C',1);
-		$pdf->Cell(35,5,'Due Date',1,0,'C',1);
-		$pdf->Cell(35,5,'Completed on',1,0,'C',1);
-		$pdf->Cell(20,5,'Status',1,0,'C',1);
-		$pdf->Cell(25,5,'Due Status',1,0,'C',1);
-
-		$pdf->Ln(5);
-		$pdf->Cell(25,4,$assign_by,1,0,'C',0);
-		$pdf->Cell(35,4,$work_assign_date,1,0,'C',0);
-		$pdf->Cell(35,4,$work_due_date,1,0,'C',0);
-		$pdf->Cell(35,4,$work_com_date,1,0,'C',0);
-		$pdf->Cell(20,4,$status,1,0,'C',0);
-		$pdf->Cell(25,4,$due_status,1,0,'C',0);
-
-		$pdf->Ln(10);
-		$pdf->SetFont('helvetica', 'B',9); 
-		if (isset($row['remark']) != ''){
-            $remark=  $row['remark'];
-            }
-            else{
-                $remark= 'NA';
-            }
-		
-			$pdf->Ln(3);
-			$pdf->SetFillColor(224,235,255);
-			$pdf->MultiCell(180,5,'Remark',1,0,'C',1);
-			$pdf->MultiCell(180,4,$remark,1,0);
-
-			$pdf->Ln(3);
-        if (isset($row['Achievements']) != ''){
-            $achievements=  $row['Achievements'];
-            }
-            else{
-                $achievements= '';
-            }
-
-			$pdf->Ln(3);
-			$pdf->SetFillColor(224,235,255);
-			$pdf->MultiCell(180,5,'Achievements',1,0,'C',1);
-			$pdf->MultiCell(180,4,$achievements,1,0);
-
-			$pdf->Ln(3);
-            if (isset($row['Benefits']) != ''){
-                $benefits =  $row['Benefits'];
-            }
-            else{
-            $benefits = '';
-            }
-			$pdf->Ln(3);
-			$pdf->SetFillColor(224,235,255);
-			$pdf->MultiCell(180,5,'Benefits',1,0,'C',1);
-			$pdf->MultiCell(180,4,$benefits,1,0);
-                }
-            break;
-        }
-    }
-
+    
     $qry = mysqli_query($connection, "SELECT task FROM pdf_views ") or die("select query fail" . mysqli_error());
     while($row= mysqli_fetch_assoc($qry)){
         $task = strtolower($row['task']);
@@ -426,8 +165,13 @@ if ($params['search'] != null)
         $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work$work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		$work_com_date = strtotime($row['work_com_date']);
+		if ($work_com_date!='' && $work_com_date != null){
+			$work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		}
+        else{
+			$work_com_date = '';
+		}
 
         $status = $row['status'];
 		date_default_timezone_set('Asia/Kolkata');
@@ -522,8 +266,9 @@ if ($params['search'] != null)
 
 else
 {
-
-    $qry = mysqli_query($connection, "SELECT * FROM pdf_views ") or die("select query fail" . mysqli_error());
+	$id = $params['id'];
+	
+    $qry = mysqli_query($connection, "SELECT * FROM pdf_views WHERE 'emp_id'='$id' ") or die("select query fail" . mysqli_error());
     while ($row = mysqli_fetch_assoc($qry)) 
     {        
 		$pdf->Ln(18);
@@ -555,8 +300,13 @@ else
         $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 		$work_due_date = strtotime($row['work_due_date']);
         $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-		$work_com_date = strtotime($row['work$work_com_date']);
-        $work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		$work_com_date = strtotime($row['work_com_date']);
+        if ($work_com_date!='' && $work_com_date != null){
+			$work_com_date = date( 'd-m-y g:i:s A', $work_com_date );
+		}
+        else{
+			$work_com_date = '';
+		}
 
         $status = $row['status'];
 		date_default_timezone_set('Asia/Kolkata');

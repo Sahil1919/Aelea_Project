@@ -6,8 +6,7 @@ $app_code_obj=new App_Code();
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-    session_start();
-    $_SESSION['empid'] = $_POST['empid'];
+   
     $task_doc = $_FILES['file_attachment']['name'];
     $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
     move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
@@ -184,6 +183,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <script>
 
 
+var empid = <?php echo(json_encode($emp_id1)); ?>;
 $(document).ready(function() {
     $('#example').DataTable( {
         // dom: 'Blfrtip',
@@ -192,16 +192,25 @@ $(document).ready(function() {
         ]
     } );
 } );
-$url = "generator.php?search=";
+$url = "generator1.php?search=";
+$id = "&id=";
+
 $('#download').on('click', function() {
     var value = $('.dataTables_filter input').val();
     console.log(value);
     if (value === undefined || value===""){
-        window.location.href = $url;
+        window.location.href = $url+$id+empid;
     }
     else{
         // var value = $('.dataTables_filter input').val();
-        window.location.href = $url+ value;
+        window.location.href = $url+ value+$id+empid;
     }
     })
+
+$(document).ready(function() {
+    $('.datepicker').datepicker({
+  weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+  showMonthsShort: true
+});
+} );
   </script>                 
