@@ -133,7 +133,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Email ID</label>
-                                        <input class="form-control" value="<?php echo $email_id;?>" name="emailid" placeholder="Email ID" type="email" readonly>
+                                        <input class="form-control" value="<?php echo $email_id;?>" name="emailid" placeholder="Email ID" type="email">
                                     </div>
                                 </div>
  <div class="col-sm-3">

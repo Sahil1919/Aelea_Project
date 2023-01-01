@@ -10,8 +10,23 @@ if (isset($_POST['submit'])) {
     $task_id = $_GET['task_id'];
     $achievement = $_POST['Achievements'];
     $benefit = $_POST['Benefits'];
+    $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
+    if ($total>0){
+    for ($i=0; $i<$total; $i++) {
+        $source = $_FILES["file_attachment"]["tmp_name"][$i];
+        $destination = $_FILES["file_attachment"]["name"][$i];
+        $collector[] = $destination;
+        move_uploaded_file($source, "attachment/$destination");
+      }
+    }
+    $docs =  implode(",",$collector);
+    
     $query = "UPDATE `assign_task` SET ";
+    if ($docs != ''){
+        $query .= "`attachments`='$docs',";
+    }
     $query .= "`Achievements`='$achievement',";
+    // $query .= "`attachments`='$docs',";
     $query .= "`Benefits`='$benefit' WHERE `task_id`='$task_id'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -23,8 +38,21 @@ if (isset($_POST['submit'])) {
     $task_id = $_GET['task_id'];
     $achievement = $_POST['Achievements'];
     $benefit = $_POST['Benefits'];
+    $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
+    if ($total>0){
+    for ($i=0; $i<$total; $i++) {
+        $source = $_FILES["file_attachment"]["tmp_name"][$i];
+        $destination = $_FILES["file_attachment"]["name"][$i];
+        $collector[] = $destination;
+        move_uploaded_file($source, "attachment/$destination");
+      }
+    }
+    $docs =  implode(",",$collector);
+    
     $query = "UPDATE `assign_task` SET ";
-
+    if ($docs != ''){
+        $query .= "`attachments`='$docs',";
+    }
     $query .= "`Achievements`='$achievement',";
     $query .= "`Benefits`='$benefit' WHERE `task_id`='$task_id' and `emp_id`='$emp_id'";
     $update_password = mysqli_query($connection, $query);
@@ -115,6 +143,11 @@ END - Breadcrumbs
                                 <textarea id='jshow' rows="5"  name="Benefits" class="form-control" placeholder="Benefits"><?php echo $benefit?></textarea>
                             </div>
                         </div>
+                        <div class="col-sm-3" name='file_attachment' id='jshow'>
+                                    <div class="form-group" id='jshow' name='file_attachment'><label id='jshow' for=""name ='file_attachment'>File Attachment</label>
+                                        <input id='jshow'name="file_attachment[]" type="file" multiple>
+                                    </div>
+                                </div>
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <br>

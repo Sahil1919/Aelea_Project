@@ -72,7 +72,7 @@ INSERT INTO `asset_tb` (`assetID`, `csno`, `make`, `model`, `mac`, `sn`, `pro`, 
 --
 
 CREATE TABLE `assign_task` (
-  `task_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL Primary,
   `emp_id` int(11) DEFAULT NULL,
   `task` text CHARACTER SET utf8 DEFAULT NULL,
   `assignby` varchar(255) DEFAULT NULL,
@@ -85,6 +85,7 @@ CREATE TABLE `assign_task` (
   `Achievements` text DEFAULT NULL,
   `Benefits` text DEFAULT NULL,
   `attachments` varchar(255) DEFAULT NULL
+  PRIMARY KEY ('task_id')
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -48801,7 +48802,8 @@ CREATE TABLE `emp_login` (
   `user_role` varchar(255) NOT NULL,
   `emp_pro` varchar(255) NOT NULL,
   `email_id` varchar(255) NOT NULL,
-  `emp_mob` varchar(255) NOT NULL
+  `emp_mob` varchar(255) NOT NULL,
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

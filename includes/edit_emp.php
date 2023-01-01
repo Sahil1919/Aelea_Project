@@ -40,7 +40,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee Code</label>
-                                        <input class="form-control" value="<?php echo $emp_code;?>" name="emp_code" placeholder="Employee Code" type="text">
+                                        <input class="form-control" value="<?php echo $emp_code;?>" name="emp_code" placeholder="Employee Code" type="text" readonly>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -66,7 +66,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 </div>
  <div class="col-sm-3">
                                     <div class="form-group"><label for="">User ID</label>
-                                        <input class="form-control" value="<?php echo $email_id;?>" name="userid" placeholder="User ID" type="text">
+                                        <input class="form-control" value="<?php echo $user_id;?>" name="userid" placeholder="User ID" type="text" readonly>
                                     </div>
                                 </div>
 
