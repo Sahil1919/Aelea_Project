@@ -59,7 +59,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                     </div>
                                 </div>
  <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Profile</label>
+                                    <div class="form-group"><label for="">Profile Picture</label>
                                         <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px">
                                         <input name="profile" type="file">
                                     </div>

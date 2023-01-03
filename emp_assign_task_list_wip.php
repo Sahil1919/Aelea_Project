@@ -34,7 +34,7 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Concern WIP</span></li>
+    <li class="breadcrumb-item"><span>Assign Do Next WIP</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -47,7 +47,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern WIP</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next WIP</h5>                                   
                                 </div>  
                             </div>
                                 <div class="element-box">
@@ -56,8 +56,8 @@ END - Breadcrumbs
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
-                        <th>Concern</th>
-                         <th>Assign By</th>
+                        <th>Do Next</th>
+                         <th>Assigned By</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
                             <th>Work Complete Date</th>

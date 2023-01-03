@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
  <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Profile</label>
+                                    <div class="form-group"><label for="">Upload Profile Photo</label>
                                         <input name="profile" type="file">
                                     </div>
                                 </div>

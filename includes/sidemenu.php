@@ -285,18 +285,18 @@
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Concern Management</span></a>
+                                </div><span>Do Next </span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Concern Management</div>
+                                <div class="sub-menu-header">Do Next Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="assign_task.php">Assign Concern</a></li>
-                                        <li><a href="assign_task_list.php">Concern List</a></li>  
-                                        <li><a href="assign_task_open_list.php">Open Concern</a></li>  
-                                        <li><a href="assign_task_list_close.php">Close Concern</a></li>  
-                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
-                                        <li><a href="assign_task_list_cancel.php">Cancel Concern</a></li>  
+                                        <li><a href="assign_task.php">Assign Do Next</a></li>
+                                        <li><a href="assign_task_list.php">Do Next List</a></li>  
+                                        <li><a href="assign_task_open_list.php">Open Do Next</a></li>  
+                                        <li><a href="assign_task_list_close.php">Close Do Next</a></li>  
+                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Do Next</a></li>  
+                                        <li><a href="assign_task_list_cancel.php">Cancel Do Next</a></li>  
                                     </ul>
                                 </div>
                             </div>
@@ -411,18 +411,18 @@
                             <a href="#">
                                 <div class="icon-w">
                                     <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Concern Management</span></a>
+                                </div><span>Do Next</span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Concern Management</div>
+                                <div class="sub-menu-header">Do Next Menu</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
                                         <!-- <li><a href="emp_assign_task.php">Assign Concern</a></li> -->
-                                        <li><a href="emp_assign_task_list.php">Concern List</a></li>  
-                                        <li><a href="emp_assign_task_list_open.php">Open Concern</a></li>  
-                                        <li><a href="emp_assign_task_list_close.php">Close Concern</a></li>  
-                                        <li><a href="emp_assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
-                                        <li><a href="emp_assign_task_list_cancel.php">Cancel Concern</a></li>  
+                                        <li><a href="emp_assign_task_list.php">Do Next List</a></li>  
+                                        <li><a href="emp_assign_task_list_open.php">Open Do Next</a></li>  
+                                        <li><a href="emp_assign_task_list_close.php">Close Do Next</a></li>  
+                                        <li><a href="emp_assign_task_list_wip.php">WIP(Work In Process) Do Next</a></li>  
+                                        <li><a href="emp_assign_task_list_cancel.php">Cancel Do Next</a></li>  
                                     </ul>
                                 </div>
                             </div>

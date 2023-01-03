@@ -33,4 +33,4 @@ include 'includes/db.php';
           <?php include './includes/sidemenu.php';?>
                 <div class="content-w">
                   
-    <?php include './includes/topmenubar.php';?>
+    <?php //include './includes/topmenubar.php';?>

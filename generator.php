@@ -204,7 +204,7 @@ if ($params['search'] != null)
 
 		$pdf->Ln(8);
 		$pdf->SetFont('helvetica', 'B',9); 
-		$pdf->Cell(25,5,'Assign By',1,0,'C',1);
+		$pdf->Cell(25,5,'Assigned By',1,0,'C',1);
 		$pdf->Cell(35,5,"Assign Date",1,0,'C',1);
 		$pdf->Cell(35,5,'Due Date',1,0,'C',1);
 		$pdf->Cell(35,5,'Completed on',1,0,'C',1);
@@ -340,7 +340,7 @@ if ($params['search'] != null)
 
 		$pdf->Ln(8);
 		$pdf->SetFont('helvetica', 'B',9); 
-		$pdf->Cell(25,5,'Assign By',1,0,'C',1);
+		$pdf->Cell(25,5,'Assigned By',1,0,'C',1);
 		$pdf->Cell(35,5,"Assign Date",1,0,'C',1);
 		$pdf->Cell(35,5,'Due Date',1,0,'C',1);
 		$pdf->Cell(35,5,'Completed on',1,0,'C',1);
@@ -476,7 +476,7 @@ if ($params['search'] != null)
 
 		$pdf->Ln(8);
 		$pdf->SetFont('helvetica', 'B',9); 
-		$pdf->Cell(25,5,'Assign By',1,0,'C',1);
+		$pdf->Cell(25,5,'Assigned By',1,0,'C',1);
 		$pdf->Cell(35,5,"Assign Date",1,0,'C',1);
 		$pdf->Cell(35,5,'Due Date',1,0,'C',1);
 		$pdf->Cell(35,5,'Completed on',1,0,'C',1);
@@ -611,7 +611,7 @@ else
 
 		$pdf->Ln(8);
 		$pdf->SetFont('helvetica', 'B',9); 
-		$pdf->Cell(25,5,'Assign By',1,0,'C',1);
+		$pdf->Cell(25,5,'Assigned By',1,0,'C',1);
 		$pdf->Cell(35,5,"Assign Date",1,0,'C',1);
 		$pdf->Cell(35,5,'Due Date',1,0,'C',1);
 		$pdf->Cell(35,5,'Completed on',1,0,'C',1);

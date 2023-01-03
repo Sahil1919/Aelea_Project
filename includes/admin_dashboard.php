@@ -81,32 +81,32 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list.php">
-                                    <div class="label">Total Concern</div>
+                                    <div class="label">Total (Do Next)</div>
                                     <div class="value"><?php echo $Total_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_open_list.php">
-                                    <div class="label">Open Concern</div>
+                                    <div class="label">Open (Do Next)</div>
                                     <div class="value"><?php echo $open_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list_close.php">
-                                    <div class="label">Close Concern</div>
+                                    <div class="label">Close (Do Next)</div>
                                     <div class="value"><?php echo $close_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list_wip.php">
-                                    <div class="label">WIP Concern</div>
+                                    <div class="label">WIP (Do Next)</div>
                                     <div class="value"><?php echo $WIP_task; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list_cancel.php">
-                                    <div class="label">Cancel Concern</div>
+                                    <div class="label">Cancel (Do Next)</div>
                                     <div class="value"><?php echo $cancel_task; ?></div>
                                </a>
                             </div>
