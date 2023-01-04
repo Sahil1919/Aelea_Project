@@ -45,7 +45,7 @@ $pdf = new PDF('p', 'mm', 'A4', true, 'UTF-8', false);
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Rahil Shaikh');
-$pdf->SetTitle('Work Concern Reoport');
+$pdf->SetTitle('Work Do Next Reoport');
 $pdf->SetSubject('');
 $pdf->SetKeywords('');
 
