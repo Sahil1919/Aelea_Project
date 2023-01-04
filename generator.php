@@ -669,7 +669,7 @@ else
      
 		$pdf->Ln(12);
 		$pdf->SetFont('times','i',9);
-		$pdf->MultiCell(189, 15, 'This is a Computerize generated Work Submission Report is an important document for both the company and the users. This act as  proof of the To Do "s" and Concern task they completed. While for the company, it serves as a copy for work completion and remark Thank You. ',0,'L',0,1,'','',true);
+		$pdf->MultiCell(189, 15, 'This is a Computerize generated Work Submission Report is an important document for both the company and the users. This act as  proof of the Do Next and Concern task they completed. While for the company, it serves as a copy for work completion and remark Thank You. ',0,'L',0,1,'','',true);
 		$pdf->Ln(8);
 		$pdf->SetFont('times','B',10);
 		$pdf->Cell(20,1,'__________________',0,0);
