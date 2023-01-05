@@ -183,7 +183,7 @@
                 -------------------->
                 <div class="menu-w color-scheme-light color-style-transparent menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
                     <div class="logo-w">
-                        <a class="logo" href="https://www.aeleacommodities.com">
+                        <a class="logo" href="#">
                         <div><img src="Login and Signup Form Design\logo.jpg" alt="" width="90" height="80"></div>
                             <div class="logo-label">Aelea Commodities</div>
                         </a>
@@ -278,9 +278,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li>
-                        <div class="mt-4">
-                        </li>
+                        <li class="sub-header"><span>Task Management</span></li>
+                        <h1><div class="mt-4"></h1>
                          <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
@@ -301,6 +300,29 @@
                                 </div>
                             </div>
                         </li>
+                        <!-- Concern management  Start-->
+                        <li class=" has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-wallet-loaded"></div>
+                                </div><span>Concern </span></a>
+                            <div class="sub-menu-w">
+                                <div class="sub-menu-header">Concern Management</div>
+                                <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
+                                <div class="sub-menu-i">
+                                    <ul class="sub-menu">
+                                        <li><a href="assign_concern.php">Assign Concern</a></li>
+                                        <li><a href="#">Concern List</a></li>  
+                                        <li><a href="#">Open Concern</a></li>  
+                                        <li><a href="#">Close Concern</a></li>  
+                                        <li><a href="#">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="#">Cancel Concern</a></li>  
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Concern management END  -->
+
                                    <!-- <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
@@ -417,7 +439,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <!-- <li><a href="emp_assign_task.php">Assign Concern</a></li> -->
+                                        <li><a href="emp_assign_task.php">Assign Concern</a></li> 
                                         <li><a href="emp_assign_task_list.php">Do Next List</a></li>  
                                         <li><a href="emp_assign_task_list_open.php">Open Do Next</a></li>  
                                         <li><a href="emp_assign_task_list_close.php">Close Do Next</a></li>  
@@ -427,6 +449,28 @@
                                 </div>
                             </div>
                         </li>
+
+                        <li class=" has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-wallet-loaded"></div>
+                                </div><span>Concern </span></a>
+                            <div class="sub-menu-w">
+                                <div class="sub-menu-header">Concern Management</div>
+                                <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
+                                <div class="sub-menu-i">
+                                    <ul class="sub-menu">
+                                        <li><a href="assign_task.php">Assign Concern</a></li>
+                                        <li><a href="assign_task_list.php">Concern List</a></li>  
+                                        <li><a href="assign_task_open_list.php">Open Concern</a></li>  
+                                        <li><a href="assign_task_list_close.php">Close Concern</a></li>  
+                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="assign_task_list_cancel.php">Cancel Concern</a></li>  
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        
        <!-- <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">

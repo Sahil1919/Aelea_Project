@@ -54,6 +54,12 @@ $retailer_account = "SELECT task_id FROM assign_task where status='Cancel'";
 $cancel_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $cancel_task = mysqli_num_rows($result);
+}
+
+$retailer_account = "SELECT task_id FROM assign_concern";
+$Total_concern = 0;
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $Total_concern = mysqli_num_rows($result);
 }?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>
@@ -110,6 +116,12 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                     <div class="value"><?php echo $cancel_task; ?></div>
                                </a>
                             </div>
+                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="assign_concern_list.php">
+                                    <div class="label">Total Concern</div>
+                                    <div class="value"><?php echo $Total_concern; ?></div>
+                               </a>
+                            </div>
 
                             
 </div>
@@ -119,5 +131,3 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                     <div class="value"><?php echo $pan_Approve_count_row; ?></div>
                                 </a>
                             </div>-->
-                    
-  
