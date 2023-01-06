@@ -72,6 +72,18 @@ $retailer_account = "SELECT task_id FROM assign_concern where status='Close'";
 $close_task1 = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $close_task1 = mysqli_num_rows($result);
+}
+
+$retailer_account = "SELECT task_id FROM assign_task where status='WIP'";
+$WIP_task1 = 0;
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $WIP_task = mysqli_num_rows($result);
+}
+
+$retailer_account = "SELECT task_id FROM assign_task where status='Cancel'";
+$cancel_task1 = 0;
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $cancel_task = mysqli_num_rows($result);
 }?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>
@@ -97,37 +109,57 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                     <div class="value"><?php echo $Deactive_emp; ?></div>
                                 </a>
                             </div>
+
+                            
+</div>
+<!--                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="#">
+                                    <div class="label">Approve</div>
+                                    <div class="value"><?php echo $pan_Approve_count_row; ?></div>
+                                </a>
+                            </div>-->
+
+<!-- DO Next -->
+                    <h6 class="element-header">Do Next</h6>
+                    <div class="element-content">
+                        <div class="row">
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list.php">
-                                    <div class="label">Total (Do Next)</div>
+                                    <div class="label">Total</div>
                                     <div class="value"><?php echo $Total_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_open_list.php">
-                                    <div class="label">Open (Do Next)</div>
+                                    <div class="label">Open</div>
                                     <div class="value"><?php echo $open_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list_close.php">
-                                    <div class="label">Close (Do Next)</div>
+                                    <div class="label">Close</div>
                                     <div class="value"><?php echo $close_task; ?></div>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list_wip.php">
-                                    <div class="label">WIP (Do Next)</div>
+                                    <div class="label">WIP</div>
                                     <div class="value"><?php echo $WIP_task; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_task_list_cancel.php">
-                                    <div class="label">Cancel (Do Next)</div>
+                                    <div class="label">Cancel</div>
                                     <div class="value"><?php echo $cancel_task; ?></div>
                                </a>
                             </div>
+                            
+                            <!-- Concerns  -->
+<div>
+                    <h6 class="element-header">Concerns</h6>
+                    <div class="element-content">
+                        <div class="row">
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_concern_list.php">
                                     <div class="label">Total Concern</div>
@@ -152,22 +184,13 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_concern_list_wip.php">
                                     <div class="label">WIP Concern</div>
-                                    <div class="value"><?php echo $close_task1 = 0; ?></div>
+                                    <div class="value"><?php echo $WIP_task1 = 0; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="assign_concern_list_cancel.php">
                                     <div class="label">Cancel Concern</div>
-                                    <div class="value"><?php echo $close_task1 = 0; ?></div>
+                                    <div class="value"><?php echo $cancel_task1 = 0; ?></div>
                                </a>
-                            </div>
-
-                            
-</div>
-<!--                            <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="#">
-                                    <div class="label">Approve</div>
-                                    <div class="value"><?php echo $pan_Approve_count_row; ?></div>
-                                </a>
-                            </div>-->
+                            </div></div>

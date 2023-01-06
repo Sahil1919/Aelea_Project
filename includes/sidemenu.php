@@ -283,7 +283,7 @@
                          <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
-                                    <div class="os-icon os-icon-wallet-loaded"></div>
+                                    <div class="os-icon os-icon-pencil-12"></div>
                                 </div><span>Do Next </span></a>
                             <div class="sub-menu-w">
                                 <div class="sub-menu-header">Do Next Management</div>
@@ -304,7 +304,7 @@
                         <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
-                                    <div class="os-icon os-icon-wallet-loaded"></div>
+                                    <div class="os-icon os-icon-message-square"></div>
                                 </div><span>Concern </span></a>
                             <div class="sub-menu-w">
                                 <div class="sub-menu-header">Concern Management</div>
@@ -317,6 +317,28 @@
                                         <li><a href="assign_concern_close_list.php">Close Concern</a></li>  
                                         <li><a href="assign_concern_list_wip.php">WIP(Work In Process) Concern</a></li>  
                                         <li><a href="assign_concern_list_cancel.php">Cancel Concern</a></li>  
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Concern management END  -->
+                        <!-- Concern management  Start-->
+                        <li class=" has-sub-menu">
+                            <a href="#">
+                                <div class="icon-w">
+                                    <div class="os-icon os-icon-check-circle"></div>
+                                </div><span>A & B </span></a>
+                            <div class="sub-menu-w">
+                                <div class="sub-menu-header">A & B  Management</div>
+                                <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
+                                <div class="sub-menu-i">
+                                    <ul class="sub-menu">
+                                        <li><a href="assign_concern.php">Achievement & Benefit</a></li>
+                                        <!-- <li><a href="assign_concern_list.php">Concern List</a></li>  
+                                        <li><a href="assign_concern_open_list.php">Open Concern</a></li>  
+                                        <li><a href="assign_concern_close_list.php">Close Concern</a></li>  
+                                        <li><a href="assign_concern_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="assign_concern_list_cancel.php">Cancel Concern</a></li>   -->
                                     </ul>
                                 </div>
                             </div>
@@ -439,7 +461,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="emp_assign_task.php">Assign Concern</a></li> 
+                                        <li><a href="emp_assign_task.php">Assign Do Next</a></li> 
                                         <li><a href="emp_assign_task_list.php">Do Next List</a></li>  
                                         <li><a href="emp_assign_task_list_open.php">Open Do Next</a></li>  
                                         <li><a href="emp_assign_task_list_close.php">Close Do Next</a></li>  
@@ -470,6 +492,7 @@
                                 </div>
                             </div>
                         </li>
+                    
                         
        <!-- <li class=" has-sub-menu">
                             <a href="#">
