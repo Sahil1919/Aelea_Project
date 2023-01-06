@@ -60,6 +60,18 @@ $retailer_account = "SELECT task_id FROM assign_concern";
 $Total_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $Total_concern = mysqli_num_rows($result);
+}
+
+$retailer_account = "SELECT task_id FROM assign_concern";
+$open_task1 = 0;
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $open_task1 = mysqli_num_rows($result);
+}
+
+$retailer_account = "SELECT task_id FROM assign_concern where status='Close'";
+$close_task1 = 0;
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $close_task1 = mysqli_num_rows($result);
 }?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>
@@ -120,6 +132,34 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                                 <a class="element-box el-tablo" href="assign_concern_list.php">
                                     <div class="label">Total Concern</div>
                                     <div class="value"><?php echo $Total_concern; ?></div>
+                               </a>
+                            </div>
+
+                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="assign_concern_open_list.php">
+                                    <div class="label">Open Concern</div>
+                                    <div class="value"><?php echo $open_task1; ?></div>
+                               </a>
+                            </div>
+
+                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="assign_concern_close_list.php">
+                                    <div class="label">Close Concern</div>
+                                    <div class="value"><?php echo $close_task1 = 0; ?></div>
+                               </a>
+                            </div>
+
+                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="assign_concern_list_wip.php">
+                                    <div class="label">WIP Concern</div>
+                                    <div class="value"><?php echo $close_task1 = 0; ?></div>
+                               </a>
+                            </div>
+
+                            <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="assign_concern_list_cancel.php">
+                                    <div class="label">Cancel Concern</div>
+                                    <div class="value"><?php echo $close_task1 = 0; ?></div>
                                </a>
                             </div>
 

@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
     $employee_id = $_POST['empid'];
            $task  = $_POST['task'];
            //  = $_POST['file_attachment'];
-    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
+    $query = "INSERT INTO `assign_concern`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
      $query .= " VALUES ('$employee_id','$task','Admin','$task_doc',now(),'Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -33,7 +33,7 @@ if(isset($_GET['delete_task']))
     $task_id=$_GET['delete_task'];
     // echo $task_id;
     // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
-    $query="DELETE FROM `assign_task` WHERE task_id=$task_id";
+    $query="DELETE FROM `assign_concern` WHERE task_id=$task_id";
     $delete_task = mysqli_query($connection, $query);
       if (!$delete_task) {
         die('QUERY FAILD change password' . mysqli_error($connection));
@@ -47,7 +47,7 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Do Next Close</span></li>
+    <li class="breadcrumb-item"><span>Assign Concern Close</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -60,7 +60,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next Close</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern Close</h5>                                   
                                 </div>  
                             </div>
                                 <div class="element-box">
@@ -87,7 +87,7 @@ END - Breadcrumbs
         </thead>   
         <tbody>
                                  <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where status='Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -180,7 +180,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
                               
                                 </td>
-                              <td><a class="btn btn-danger" href="assign_task_list_close.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
+                              <td><a class="btn btn-danger" href="assign_concern_close_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
 
                     </tr>
 <?php }?>

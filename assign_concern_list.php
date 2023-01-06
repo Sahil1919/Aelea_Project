@@ -191,7 +191,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
                               
                                 </td>
-    <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
+    <td><a class="btn btn-danger" href="assign_concern_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
                     </tr>
 <?php }?>
         </tbody>

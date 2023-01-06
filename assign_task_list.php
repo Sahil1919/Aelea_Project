@@ -76,7 +76,7 @@ END - Breadcrumbs
                         <th>S No.</th>
                         <th>Employee Name</th>
                         <!-- <th>Role Type</th> -->
-                        <th>Concern</th>
+                        <th>Do Next</th>
                          <th>Assigned By</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
