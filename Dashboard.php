@@ -42,6 +42,9 @@ START - Breadcrumbs
 <div class="scrollmenu">
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
     <li class="breadcrumb-item"><span>Dashboard</span></li>
+    <li class="breadcrumb-item"><a id='donext' href="admin_dashboard_donext_dash.php" ><span>Do Next</span></a></li>
+    <li class="breadcrumb-item"><a href=""><span>Achievement & benefits</a></span></li>
+    <li class="breadcrumb-item"><a href="assign_task.php"><span>Concerns</span></a></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -68,6 +71,7 @@ END - Breadcrumbs
         if($_SESSION['User_type']=='admin')
         {
                include './includes/admin_dashboard.php';  
+               //include './includes/admin_dashboard_donext_dash.php';  
         } 
         elseif($_SESSION['User_type']=='management'){
             include './includes/man_dashboard.php';
@@ -93,13 +97,11 @@ END - Breadcrumbs
 
 <?php include './includes/admin_footer.php'; ?>
         
-        <script>
-$(document).ready(function() {
-    $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'pdfHtml5'
-        ]
-    } );
-} );
-        </script>
+       
+<script>
+
+var user_type = <?php echo(json_encode($_SESSION['User_type'])); ?>;
+$('#donext').on('click', function() {
+    
+    })
+</script>   

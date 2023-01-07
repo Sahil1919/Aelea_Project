@@ -1,3 +1,9 @@
+   <?php
+   // add the sql fetching query
+   
+   ?>
+
+   
    <div class="element-box">
 
                             <div class="row">
@@ -37,7 +43,7 @@
                                     </div>
                                 </div>
  <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Upload Profile Photo</label>
+                                    <div class="form-group"><label for="">Profile Picture</label>
                                         <input name="profile" type="file">
                                     </div>
                                 </div>
@@ -60,6 +66,19 @@
                                             <option>--select Employee--</option>
                                             <option value="Admin" >Admin</option>
                                             <option value="Management" >Management</option>
+                                            <option value="Repoting Manager" >Repoting Manager</option>
+                                            <option value="Employee" >Employee</option>
+                                        </select> 
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group"><label for="">Reporting To</label>
+                                        <select id="emp_id" name="usertype" class="form-control">
+                                            <option>--Repoting Manager--</option>
+                                            <option value="Admin" >Admin</option>
+                                            <option value="Management" >Management</option>
+                                            <option value="Repoting Manager" >Repoting Manager</option>
                                             <option value="Employee" >Employee</option>
                                         </select> 
                                     </div>
