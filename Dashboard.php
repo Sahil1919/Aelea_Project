@@ -41,10 +41,20 @@ START - Breadcrumbs
 <ul class="breadcrumb">
 <div class="scrollmenu">
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-    <li class="breadcrumb-item"><span>Dashboard</span></li>
-    <li class="breadcrumb-item"><a id='donext' href="admin_donext_dash.php" ><span>Do Next</span></a></li>
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
-    <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concerns</span></a></li>
+    <td>
+    <?php if ($_SESSION['User_type']=='employee')
+    {?>
+        <li class="breadcrumb-item"><span>Dashboard</span></li>
+        <li class="breadcrumb-item"><a href="emp_a&b_dash.php"><span>Achievement & benefits</a></span></li>
+        <li class="breadcrumb-item"><a href="emp_concern_dash.php"><span>Concerns</span></a></li>
+
+     <?php } else {?>
+        <li class="breadcrumb-item"><span>Dashboard</span></li>
+        <li class="breadcrumb-item"><a id='donext' href="admin_donext_dash.php" ><span>Do Next</span></a></li>
+        <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
+        <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concerns</span></a></li>
+     <?php } ?>
+    
 </ul>
 <!--------------------
 END - Breadcrumbs

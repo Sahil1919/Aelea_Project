@@ -189,13 +189,6 @@
                         </a>
                     </div>                    
                     
-<!--                      <div class="logged-user-w">
-                            <div class="avatar-w"><img alt="" src="user_profile/<?php echo $_SESSION['emp_pro'];?>"></div>
-                            <div class="logged-user-info-w">
-                                <div class="logged-user-name"><?php echo $_SESSION['emp_name'];?></div>
-                                <div class="logged-user-role"><?php echo $_SESSION['User_type'];?></div>
-                            </div>
-                        </div>-->
                         
                     <div class="logged-user-w avatar-inline">
                         <div class="logged-user-i">
@@ -240,24 +233,6 @@
 
                         </li>
                         
-                        <!-- <li class="sub-header"><span>Settings</span></li>
-                        <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-ui-46"></div>
-                                </div><span>Settings</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Settings</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                        <li><a href="bank_details.php">Bank Details</a></li>
-                                        <li><a href="download.php">Document Upload</a></li>
-                                        <li><a href="add_alert.php">Alert</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li> -->
                         <li class="sub-header"><span>User Manager</span></li>
                         <h1><div class="mt-4"></h1>
                         <li class=" has-sub-menu">
@@ -302,24 +277,10 @@
                         </li>
                          <!-- A & B management  Start-->
                          <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-check-circle"></div>
+                            <a href="admin_a&b_dash.php">
+                                <div class="icon-w">                                    
+                                    <div class="os-icon os-icon-check-circle"></div>                                    
                                 </div><span>A & B </span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">A & B  Management</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                        <li><a href="assign_task_list_close.php">Achievement & Benefit</a></li>
-                                        <!-- <li><a href="assign_concern_list.php">Concern List</a></li>  
-                                        <li><a href="assign_concern_open_list.php">Open Concern</a></li>  
-                                        <li><a href="assign_concern_close_list.php">Close Concern</a></li>  
-                                        <li><a href="assign_concern_list_wip.php">WIP(Work In Process) Concern</a></li>  
-                                        <li><a href="assign_concern_list_cancel.php">Cancel Concern</a></li>   -->
-                                    </ul>
-                                </div>
-                            </div>
                         </li>
                         <!-- A & B management END  -->
                         <!-- Concern management  Start-->
@@ -343,28 +304,6 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- Concern management END  -->
-                    
-                                   <!-- <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Assets Management System</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Assets Management</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                            <li><a href="add_assets.php">Add Asset</a></li>
-                                         <li><a href="assets_list.php">Asset List</a></li>
-                                           <li><a href="emp_assign_assets.php">Assign Employee Asset</a></li>  
-                                            <li><a href="emp_assign_assets_list.php">Assign Employee Asset List</a></li>  
-                                            <li><a href="emp_assign_assets.php">Assign Employee Asset</a></li>  
-                                           
-                                    </ul>
-                                </div>
-                            </div>
-                        </li> -->
 
                     </ul>
                     
@@ -378,86 +317,16 @@
                                     <div class="os-icon os-icon-layout"></div>
                                 </div><span>Dashboard</span></a>
 
-                        <!-- </li>
-                           <li class="sub-header"><span>Settings</span></li>
-                        <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-ui-46"></div>
-                                </div><span>Settings</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Settings</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                        <li><a href="bank_details.php">Bank Details</a></li>
-                                        <li><a href="download.php">Document Upload</a></li>
-                                        <li><a href="add_alert.php">Alert</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li> -->
-<!--                        <li class="sub-header"><span>Settings</span></li>
-                        <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-ui-46"></div>
-                                </div><span>Settings</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Settings</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                        <li><a href="bank_details.php">Bank Details</a></li>
-                                        <li><a href="download.php">Download</a></li>
-                                        <li><a href="add_alert.php">Alert</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="sub-header"><span>User Manager</span></li>
-                        <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-users"></div>
-                                </div><span>Employee User</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Employee User</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                        <li><a href="employee.php?source=add_emp">Create Employee Account</a></li>
-                                        <li><a href="employee.php">Employee Account List</a></li>
-                                        <li><a href="employee_active.php">Employee Account Activate</a></li>
-                                        <li><a href="employee_deactive.php">Deactivate Employee Account</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>-->
-                      <!-- <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-ui-46"></div>
-                                </div><span>Send Bulk Email</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Send Bulk Email</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-users"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                        <li><a href="send_bulk_email.php">Send Bulk Email</a></li>
-                                    
-                                    </ul>
-                                </div>
-                            </div>
-                        </li> -->
+                        <h1><div class="mt-4"></h1>
+                        <li class="sub-header"><span>Task Management</span></li>
                         <h1><div class="mt-4"></h1>
                          <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
-                                    <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Do Next</span></a>
+                                    <div class="os-icon os-icon-pencil-12"></div>
+                                </div><span>Do Next </span></a>
                             <div class="sub-menu-w">
-                                <div class="sub-menu-header">Do Next Menu</div>
+                                <div class="sub-menu-header">Do Next Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
@@ -471,47 +340,35 @@
                                 </div>
                             </div>
                         </li>
-
+                         <!-- A & B management  Start-->
+                         <li class=" has-sub-menu">
+                            <a href="emp_a&b_dash.php">
+                                <div class="icon-w">                                    
+                                    <div class="os-icon os-icon-check-circle"></div>                                    
+                                </div><span>A & B </span></a>
+                        </li>
+                        <!-- A & B management END  -->
+                        <!-- Concern management  Start-->
                         <li class=" has-sub-menu">
                             <a href="#">
                                 <div class="icon-w">
-                                    <div class="os-icon os-icon-wallet-loaded"></div>
+                                    <div class="os-icon os-icon-message-square"></div>
                                 </div><span>Concern </span></a>
                             <div class="sub-menu-w">
                                 <div class="sub-menu-header">Concern Management</div>
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="assign_task.php">Assign Concern</a></li>
-                                        <li><a href="assign_task_list.php">Concern List</a></li>  
-                                        <li><a href="assign_task_open_list.php">Open Concern</a></li>  
-                                        <li><a href="assign_task_list_close.php">Close Concern</a></li>  
-                                        <li><a href="assign_task_list_wip.php">WIP(Work In Process) Concern</a></li>  
-                                        <li><a href="assign_task_list_cancel.php">Cancel Concern</a></li>  
+                                        <li><a href="assign_concern.php">Assign Concern</a></li>
+                                        <li><a href="assign_concern_list.php">Concern List</a></li>  
+                                        <li><a href="assign_concern_open_list.php">Open Concern</a></li>  
+                                        <li><a href="assign_concern_close_list.php">Close Concern</a></li>  
+                                        <li><a href="assign_concern_list_wip.php">WIP(Work In Process) Concern</a></li>  
+                                        <li><a href="assign_concern_list_cancel.php">Cancel Concern</a></li>  
                                     </ul>
                                 </div>
                             </div>
                         </li>
-                    
-                        
-       <!-- <li class=" has-sub-menu">
-                            <a href="#">
-                                <div class="icon-w">
-                                    <div class="os-icon os-icon-wallet-loaded"></div>
-                                </div><span>Asset Management System</span></a>
-                            <div class="sub-menu-w">
-                                <div class="sub-menu-header">Asset Management System</div>
-                                <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
-                                <div class="sub-menu-i">
-                                    <ul class="sub-menu">
-                                    <li><a href="add_assets.php">Add Asset</a></li>
-                                         <li><a href="assets_list.php">Asset List</a></li>
-                                        <li><a href="emp_assign_assets.php">Assign Employee Asset</a></li>  
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li> -->
                     </ul>
                     <?php     
  }

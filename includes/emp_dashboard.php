@@ -7,6 +7,7 @@
                     <div class="element-actions">
 <?php 
   $emp_id=  $_SESSION['user'];
+  
 
 $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
 $Total_task = 0;
@@ -40,29 +41,10 @@ if ($result = mysqli_query($connection, $retailer_account)) {
 }
 ?>
                     </div>
-                    <h6 class="element-header">Dashboard</h6>
+                    <h6 class="element-header">Do Next</h6>
                     <div class="element-content">
                         <div class="row">
-<!--                            <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="#">
-                                    <div class="label">Total Employee</div>
-                                    <div class="value"><?php echo $Total_emp; ?></div>
- </a>
-                            </div>
-                            <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="#">
-                                    <div class="label">Active Employee</div>
-                                    <div class="value"><?php echo $Active_emp; ?></div>
-                                                                                        <div class="trending trending-down-basic"><span>9%</span><i class="os-icon os-icon-arrow-down"></i></div>
-                                </a>
-                            </div>
 
-                            <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="#">
-                                    <div class="label">Deactivate Employee</div>
-                                    <div class="value"><?php echo $Deactive_emp; ?></div>
-                                </a>
-                            </div>-->
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="emp_assign_task_list.php">
                                     <div class="label">Total (Do Next)</div>
