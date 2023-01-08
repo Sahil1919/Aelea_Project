@@ -147,6 +147,30 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                         <input name="profile" type="file">
                                     </div>
                                 </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group"><label for="">Employee</label>
+                                        <select id="emp_id" name="usertype" class="form-control">
+                                            <option>--select Employee--</option>
+                                            <option value="Admin" >Admin</option>
+                                            <option value="Management" >Management</option>
+                                            <option value="Repoting Manager" >Repoting Manager</option>
+                                            <option value="Employee" >Employee</option>
+                                        </select> 
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group"><label for="">Reporting To</label>
+                                        <select id="emp_id" name="usertype" class="form-control">
+                                            <option>--Repoting Manager--</option>
+                                            <option value="Admin" >Admin</option>
+                                            <option value="Management" >Management</option>
+                                            <option value="Repoting Manager" >Repoting Manager</option>
+                                            <option value="Employee" >Employee</option>
+                                        </select> 
+                                    </div>
+                                </div>
 <!-- <div class="col-sm-3">
                                     <div class="form-group"><label for="">User ID</label>
                                         <input class="form-control" value="<?php echo $user_id;?>" name="userid" placeholder="User ID" type="text">

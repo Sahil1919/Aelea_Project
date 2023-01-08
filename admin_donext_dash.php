@@ -1,98 +1,43 @@
 
 <?php
 include './includes/admin_header.php';
-
 ?>
 <?php 
-
 $connection = mysqli_connect("localhost","root","","task_management");
-
-$retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management') ";
-$Total_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Total_emp = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management') and status='1' ";
-$Active_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Active_emp = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management') and status='0' ";
-$Deactive_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Deactive_emp = mysqli_num_rows($result);
-}
-
 $retailer_account = "SELECT task_id FROM assign_task";
 $Total_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $Total_task = mysqli_num_rows($result);
 }
-
 $retailer_account = "SELECT task_id FROM assign_task where status='Open'";
 $open_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $open_task = mysqli_num_rows($result);
 }
-
-
 $retailer_account = "SELECT task_id FROM assign_task where status='WIP'";
 $WIP_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $WIP_task = mysqli_num_rows($result);
 }
-
 $retailer_account = "SELECT task_id FROM assign_task where status='Close'";
 $close_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $close_task = mysqli_num_rows($result);
 }
-
 $retailer_account = "SELECT task_id FROM assign_task where status='Cancel'";
 $cancel_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $cancel_task = mysqli_num_rows($result);
 }
-
-$retailer_account = "SELECT task_id FROM assign_concern";
-$Total_concern = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Total_concern = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT task_id FROM assign_concern";
-$open_task1 = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $open_task1 = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT task_id FROM assign_concern where status='Close'";
-$close_task1 = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $close_task1 = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT task_id FROM assign_task where status='WIP'";
-$WIP_task1 = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $WIP_task = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT task_id FROM assign_task where status='Cancel'";
-$cancel_task1 = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $cancel_task = mysqli_num_rows($result);
-}?>
+?>
 
 <ul class="breadcrumb">
 <div class="scrollmenu">
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
     <li class="breadcrumb-item"><a id='donext' href="Dashboard.php" ><span>Dashboard</span></a></li>
-    <li class="breadcrumb-item"><a id='donext' href="wrap.php" ><span>Do Next</span></a></li>
-    <li class="breadcrumb-item"><a href=""><span>Achievement & benefits</a></span></li>
-    <li class="breadcrumb-item"><a href="assign_task.php"><span>Concerns</span></a></li>
+    <li class="breadcrumb-item"><a id='donext'><span>Do Next</span></a></li>
+    <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
+    <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concern</span></a></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -156,4 +101,13 @@ END - Breadcrumbs
 
 <?php include './includes/admin_footer.php'; ?>
         
- 
+        <script>
+$(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'pdfHtml5'
+        ]
+    } );
+} );
+        </script>
