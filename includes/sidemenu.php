@@ -294,7 +294,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="assign_concern.php">Assign Concern</a></li>
+                                        <!-- <li><a href="assign_concern.php">Assign Concern</a></li> -->
                                         <li><a href="assign_concern_list.php">Concern List</a></li>  
                                         <li><a href="assign_concern_open_list.php">Open Concern</a></li>  
                                         <li><a href="assign_concern_close_list.php">Close Concern</a></li>  
@@ -304,6 +304,14 @@
                                 </div>
                             </div>
                         </li>
+                        <!--Approval Request-->
+                        <li class=" has-sub-menu">
+                            <a href="admin_a&b_dash.php">
+                                <div class="icon-w">                                    
+                                    <div class="os-icon os-icon-bell"></div>                                    
+                                </div><span>Approval Request</span></a>
+                        </li>
+                        <!--Approval Request END  -->
 
                     </ul>
                     
@@ -359,7 +367,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <!-- <li><a href="assign_concern.php">Total Concern</a></li> -->
+                                        <li><a href="assign_concern.php">Raise Concern</a></li>
                                         <li><a href="emp_assign_concern_list.php">Total Concern List</a></li>  
                                         <li><a href="emp_assign_concern_list_open.php">Open Concern</a></li>  
                                         <li><a href="emp_assign_concern_list_close.php">Close Concern</a></li>  
