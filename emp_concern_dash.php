@@ -5,7 +5,12 @@ include './includes/admin_header.php';
 ?>
 <?php 
 $emp_id=  $_SESSION['user'];
-  
+
+$retailer_account = "SELECT task_id FROM assign_concern where emp_id='$emp_id'";
+$Total_task = 0;
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $Total_task = mysqli_num_rows($result);
+}
 
 $retailer_account = "SELECT task_id FROM assign_concern where status='Open' and  emp_id='$emp_id'";
 $open_concern = 0;
@@ -61,29 +66,36 @@ END - Breadcrumbs
                     <div class="element-content">
                         <div class="row">
 
+                        <div class="col-sm-4 col-xxxl-3">
+                                <a class="element-box el-tablo" href="emp_assign_concern_list.php">
+                                    <div class="label">Total Concern</div>
+                                    <div class="value"><?php echo $Total_task; ?></div>
+                               </a>
+                            </div>
+
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="assign_concern_open_list.php">
+                                <a class="element-box el-tablo" href="emp_assign_concern_list_open.php">
                                     <div class="label">Open Concern</div>
                                     <div class="value"><?php echo $open_concern; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="assign_concern_close_list.php">
+                                <a class="element-box el-tablo" href="emp_assign_concern_list_close.php">
                                     <div class="label">Close Concern</div>
                                     <div class="value"><?php echo $close_concern = 0; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="assign_concern_list_wip.php">
+                                <a class="element-box el-tablo" href="emp_assign_concern_list_wip.php">
                                     <div class="label">WIP Concern</div>
                                     <div class="value"><?php echo $wip_concern = 0; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="assign_concern_list_cancel.php">
+                                <a class="element-box el-tablo" href="emp_assign_concern_list_cancel.php">
                                     <div class="label">Cancel Concern</div>
                                     <div class="value"><?php echo $cancel_task = 0; ?></div>
                                </a>
