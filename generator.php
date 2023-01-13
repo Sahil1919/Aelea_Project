@@ -114,6 +114,8 @@ $pdf->AddPage();
 		$pdf->SetFont('helvetica', 'U',15); 
 		$pdf->Ln(2);
 		$pdf->Cell(189, 3, 'Work Submission Report ', 0, 1,'C');
+		$pdf->Line(10,55,200,55);
+		$pdf->Line(10,56,200,56);
 
 $CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
 
@@ -606,7 +608,7 @@ else
 
 		$pdf->Ln(3);
 		$pdf->SetFillColor(224,235,255);
-		$pdf->MultiCell(180,5,'Concern',1,0,'C',1);
+		$pdf->MultiCell(180,5,'Do Next',1,0,'C',1);
 		$pdf->MultiCell(180,4,$concern,1,0);
 
 		$pdf->Ln(8);
@@ -664,6 +666,8 @@ else
 			$pdf->SetFillColor(224,235,255);
 			$pdf->MultiCell(180,5,'Benefits',1,0,'C',1);
 			$pdf->MultiCell(180,4,$benefits,1,0);
+			//$pdf->Line(10,49,200,49);
+			
     }
  }
      
