@@ -220,7 +220,7 @@ $(document).ready(function() {
         ]
     } );
 } );
-$url = "generator.php?search=";
+$url = "tabletesting.php?search=";
 $('#download').on('click', function() {
     var value = $('.dataTables_filter input').val();
     console.log(value);
