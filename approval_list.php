@@ -24,18 +24,59 @@ if (isset($_POST['submit'])) {
        // return 'pass';
     }
 }
-if(isset($_GET['delete_task']))
+
+if(isset($_GET['share']) && isset($_GET['user_id']) && isset($_GET['emp_id']) )
 {
-    $task_id=$_GET['delete_task'];
-    // echo $task_id;
-    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
-    $query="DELETE FROM `assign_task` WHERE task_id=$task_id";
-    $delete_task = mysqli_query($connection, $query);
-      if (!$delete_task) {
-        die('QUERY FAILD change password' . mysqli_error($connection));
-    } else {
-    }
+    $task_id=$_GET['share'];
+    $task_id = $task_id+1;
+    $userID=$_GET['user_id'];
+    $emp_id=$_GET['emp_id'];
+    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+     $query .= " VALUES ('$emp_id','','Admin','',now(),'','')";
+    $update_password = mysqli_query($connection, $query);
     
+    $query="UPDATE assign_task AS tab1 , assign_task AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
+    WHERE tab1.emp_id=$userID AND  tab2.`emp_id` =$emp_id";
+    
+    $update_password = mysqli_query($connection, $query);
+    $task_id = $task_id-1;
+    $query1="UPDATE `approval_list` SET `approval_status`='Approved', `approve_req`='1' WHERE `task_id`='$task_id' ";
+    $update_password1 = mysqli_query($connection, $query1);
+    if (!$update_password1) {
+        echo "uiu";
+        die('QUERY FAILD change pashword' . mysqli_error($connection));
+    }
+   
+}
+
+if(isset($_GET['approve_req']) && isset($_GET['user_id']) && isset($_GET['emp_id']) )
+{
+    $task_id=$_GET['approve_req'];
+    $userID=$_GET['user_id'];
+    $emp_id=$_GET['emp_id'];
+    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
+    $query="UPDATE `assign_task` SET `emp_id`='$emp_id' WHERE `task_id`='$task_id' and emp_id='$userID'";
+    $update_password = mysqli_query($connection, $query);
+    if (!$update_password) {
+        die('QUERY FAILD change pashword' . mysqli_error($connection));
+    }
+    else{
+        $query="UPDATE `approval_list` SET `approval_status`='Approved', `approve_req`='1' WHERE `task_id`='$task_id' ";
+        $update_password = mysqli_query($connection, $query);
+    }
+}
+
+
+if(isset($_GET['reject']) && isset($_GET['user_id']) && isset($_GET['emp_id']) )
+{
+    $task_id=$_GET['reject'];
+    $userID=$_GET['user_id'];
+    $emp_id=$_GET['emp_id'];
+    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
+    
+    $query="UPDATE `approval_list` SET `approval_status`='Reject', `approve_req`='0' WHERE `task_id`='$task_id' ";
+    $update_password = mysqli_query($connection, $query);
+    // header("Refresh:0; url=./includes/sidemenu.php");
 }
 ?>
 
@@ -43,8 +84,8 @@ if(isset($_GET['delete_task']))
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_donext_dash.php">Back</a></li>
-    <li class="breadcrumb-item"><span>Assign Do Next List</span></li>
+    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
+    <li class="breadcrumb-item"><span>Approval List</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -59,23 +100,23 @@ END - Breadcrumbs
                             <div class="row">
                             <div class="scrollmenu">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next List</h5>    
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Approval List</h5>    
                                                                    
                                 </div>  
                                 
                                 <div class="element-box">
-                                <div>
+                                <!-- <div>
                                 <a id="download" href='#' class="btn btn-danger float-right"><i class="fa fa-download"></i> Download PDF</a>
 </div>
-<br><br>
+<br><br> -->
     <!-- <form action="GET" action='wrap.php'> -->
        <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
        <!-- <a id='example' style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a> -->
        <thead>
                     <tr>
                         <th>S No.</th>
-                        <th>Employee Name</th>
-                        <!-- <th>Role Type</th> -->
+                        <th>From Employee Name</th>
+                        <th>To Employeeb Name</th>
                         <th>Do Next</th>
                          <th>Assigned By</th>
                           <th>Download File</th>
@@ -87,27 +128,33 @@ END - Breadcrumbs
                              <th>Due Status</th>
                               
 <!--                               <th>Edit</th>-->
-                        <th>Change Status/Transfer Concern/Share Concern</th>
-
-                          <th>Delete</th>
+                        <th>Reporting To</th>
+                        <th>Approval For</th>
+                          <th>Approval Status</th>
+                          <th>Approve Request</th>
                     </tr>
         </thead>
         <tbody>
                                                                <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
-    $task_id = $row['task_id'];
-            $emp_id = $row['emp_id']; 
+    $user_id = $row['user_id'];
+    $emp_id = $row['emp_id'];
+
+    // $query = mysqli_query($connection, "SELECT * FROM emp_login WHERE id = '$user_id'");
+    // $data=mysqli_fetch_assoc($query);
+    // $from_name = $data['emp_name'];
+
+            // $emp_id = $row['emp_id']; 
             // $user_role = $row['user_role'];
             $task = $row['task'];
-            $assignby = $row['assignby'];
+            $assignby = $row['assign_by'];
             $task_doc = $row['task_doc'];
-            // var_dump($task_doc);
             $work_assign_date = strtotime($row['work_assign_date']);
             $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 
@@ -115,23 +162,33 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
 
             $work_com_date = strtotime($row['work_com_date']);
-            if ($work_com_date){
+            // echo gettype($work_com_date);
+            if (gettype($work_com_date)!='integer'){
                 
                 $work_com_date = date( 'd-m-y g:i:s A', $work_com_date);
+            }
+            else{
+                $work_com_date = '';
             }
             
 
            $status  = $row['status'];
                 $remark  = $row['remark'];
+                $report_to = $row['report_to'];
+                $approval_for = $row['approval_for'];
+                $approval_status = $row['approval_status'];
+                $approval_required = $row['approve_req'];
     ?>
                     <tr>
   <td><?php echo $count;?></td>
+  <td> <?php echo $app_code_obj->getName($user_id);?></td>
+  <!-- <td><?php echo $app_code_obj->get_User_role($user_id);?></td>  -->
   <td> <?php echo $app_code_obj->getName($emp_id);?></td>
   <!-- <td><?php echo $app_code_obj->get_User_role($emp_id);?></td>  -->
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
   <td>
-      <?php if($task_doc !='' && $task_doc !=0)
+      <?php if($task_doc !='')
       {?>
       <?php $docs = explode(",",$task_doc);?>
       <?php foreach($docs as $value) 
@@ -182,18 +239,21 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><?php echo $created;?></td> 
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
-    <td>
-                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
-                                  <br>
-                                  <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Concern</a>
-                                  <br>
-                                  <br>
-                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
-                              
-                                </td>
-    <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
-                    </tr>
+    <td><?php echo $app_code_obj->getName($report_to);?></td>
+    <td><?php echo $approval_for?></td>
+    <td><a href="#" class="btn btn-warning"> <?php echo $approval_status;?></a> <br></td>
+    <td> 
+    <?php if ($approval_for=='Transfer Do Next')
+    {?>
+    <a class="btn btn-success" href="approval_list.php?approve_req=<?php echo $row['task_id']; ?>&user_id=<?php echo $row['user_id']; ?>&emp_id=<?php echo $row['emp_id']; ?>">Approve</a>
+    <?php } else {?>  
+        <a class="btn btn-success" href="approval_list.php?share=<?php echo $row['task_id'];?>&user_id=<?php echo $row['user_id'];?>&emp_id=<?php echo  $row['emp_id']; ?>">Approve</a>
+    <?php } ?> 
+    <br><br>
+    <a class="btn btn-danger" href="approval_list.php?reject=<?php echo $row['task_id'];?>&user_id=<?php echo $row['user_id'];?>&emp_id=<?php echo  $row['emp_id']; ?>"> Reject </a>
+    </td>
+</tr>
+
 <?php }?>
         </tbody>
        </table></form>
@@ -216,7 +276,9 @@ while ($row = mysqli_fetch_assoc($qry)) {
 $(document).ready(function() {
     $('#example').DataTable( {
         // dom: 'Blfrtip',
-        "lengthMenu": [[25,50,100,500], [25,50,100,500]]
+        buttons: [
+            'pdfHtml5'
+        ]
     } );
 } );
 $url = "tabletesting.php?search=";

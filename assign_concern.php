@@ -20,10 +20,10 @@ $docs =  implode(",",$collector);
     
     $employee_id = $_POST['empid'];
            $task  = $_POST['Concern'];
-    $due_date = $_POST['duedate'];
+    // $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_concern`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','$assign_by','$docs',now(),'$due_date','Open')";
+     $query .= " VALUES ('$employee_id','$task','$assign_by','$docs',now(),'','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -68,7 +68,7 @@ END - Breadcrumbs
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee</label>
-                                        <select id="emp_id" name="empid" class="form-control">
+                                        <select id="emp_id" name="empid" class="form-control select2">
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
@@ -95,11 +95,11 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                     </div>
                                 </div>
 
-                                <div class="col-sm-3">
+                                <!-- <div class="col-sm-3">
                                     <div class="form-group"><label for="">Due Date </label>  
                                         <input class="form-control" id="from-datepicker" name="duedate" placeholder="" type="datetime-local" >                                      
                                     </div>
-                                </div>
+                                </div> -->
                                     <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
                                     <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker3.min.css"> -->
                                     
@@ -138,4 +138,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
-      
+
+        <script>
+    $('.select2').select2();
+</script>

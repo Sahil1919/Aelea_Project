@@ -125,17 +125,18 @@ START - Breadcrumbs
 <!--------------------
 END - Breadcrumbs
 -------------------->
-<div class="content-panel-toggler"><i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span></div>
-<div class="content-i">
-    <div class="content-box">
-        <div class="element-wrapper">
-              <div class="element-box">
-<table class="dataTable table table-responsive">
+<!-- <div class="content-panel-toggler"><i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span></div>
+<div class="content-i"> -->
+    <div class="element-box">
+        
+        <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
+        <thead>
                     <tr>
                         <th>S No.</th>
                         <th>Emp Code</th>
                         <th>Name</th>
                         <th>Role Type</th>
+                        <th>Reporting To</th>
                          <th>Mobile No</th>
                           <th>Email ID</th>
                            <!-- <th>User ID</th> -->
@@ -146,8 +147,10 @@ END - Breadcrumbs
                                <th>Edit</th>
                           <th>Delete</th>
                     </tr>
+            </thead> 
+            <tbody>
                                                                <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='0' and user_role IN ('employee', 'management')") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='0' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -160,6 +163,22 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $status = $row['status'];
             $created = $row['created'];
             $user_role = ucfirst($row['user_role']);
+            $report_id = $row['report_to'];
+             
+            if (strlen($report_id) != 0) 
+            {
+              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where id = '$report_id' ") or die("select query fail" . mysqli_error());
+              while ($report_row = mysqli_fetch_assoc($qry1))
+              {
+                $report_code = $report_row['emp_code'];
+                $report_name = $report_row['emp_name'];
+              }         
+            }
+            else{
+              $report_code = "";
+              $report_name = "";
+            }
+
             $emp_pro = $row['emp_pro'];
             $email_id = $row['email_id'];
             $emp_mob = $row['emp_mob'];
@@ -178,6 +197,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $emp_code;?></td>
   <td><?php echo $emp_name;?></td>
   <td><?php echo $user_role;?></td> 
+  <td><?php if (strlen($report_id) != 0) echo $report_code."/".$report_name; else echo $report_code.$report_name;?></td> 
   <td><?php echo $emp_mob;?></td> 
   <td><?php echo $email_id;?></td> 
   
@@ -187,85 +207,22 @@ while ($row = mysqli_fetch_assoc($qry)) {
     <!--<td><?php echo $emp_pro;?></td>--> 
     <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 
-      <td><a href="employee_deactive.php?id=<?php echo $row['id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
+      <td><a href="employee_active.php?id=<?php echo $row['id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>
-                              <td><a class="btn btn-danger" href="employee_deactive.php?delete=<?php echo $id;?>">Delete</a></td>
+                              <td><a class="btn btn-danger" href="employee_active.php?delete=<?php echo $id;?>">Delete</a></td>
                     </tr>
 <?php }?>
-                </table>
+</tbody>    </table>
    </div>
-            <!--            <div class="element-box">
-            
-                                        <div class="row">
-                                             <div class="col-md-12">
-                                                <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Add New Employee</h5>                                   
-                                            </div>  
-                                        </div>
-                                              <form class="container" action="#" method="post" enctype="multipart/form-data">
-            
-            
-                                        <div class="row">
-            
-                                      
-                                            <fieldset class="col-md-12">
-                                                <legend>Company Details
-                                                    <hr></legend>
-                                            </fieldset>
-            
-                                            <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Employee Code</label>
-                                                    <input class="form-control" name="emp_code" placeholder="Employee Code" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Name</label>
-                                                    <input class="form-control" name="Name" placeholder="Name" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Email ID</label>
-                                                    <input class="form-control" name="emailid" placeholder="Email ID" type="email">
-                                                </div>
-                                            </div>
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Mobile No.</label>
-                                                    <input class="form-control" name="mobile" placeholder="Mobile No." type="text">
-                                                </div>
-                                            </div>
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Profile</label>
-                                                    <input name="profile" type="file">
-                                                </div>
-                                            </div>
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">User ID</label>
-                                                    <input class="form-control" name="userid" placeholder="User ID" type="text">
-                                                </div>
-                                            </div>
-            
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Password</label>
-                                                    <input class="form-control" name="pswd" placeholder="password" type="password">
-                                                </div>
-                                            </div>
-            
-            
-            
-            
-                                            <div class="form-buttons-w text-right">
-                                                <input class="btn btn-primary" type="submit" value="Add Employee" name="submit">
-                                            </div>
-                                        </div>
-                                    </form>
-                                        </div>-->
-
-        </div>
-    </div>
-</div>
-</div>
-
 
 
 <?php include './includes/Plugin.php'; ?>
 <?php include './includes/admin_footer.php'; ?>
-                                
+<script>
+   $(document).ready(function() {
+    $('#example').DataTable( {
+        // dom: 'Blfrtip', 
+        "lengthMenu": [[25,50,100,500], [25,50,100,500]]
+    } );
+} );
+</script>

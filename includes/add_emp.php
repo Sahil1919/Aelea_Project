@@ -61,12 +61,12 @@
 
 
                                 <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Employee</label>
+                                    <div class="form-group"><label for="">Employee Type</label>
                                         <select id="emp_id" name="usertype" class="form-control">
                                             <option>--select Employee--</option>
                                             <option value="Admin" >Admin</option>
                                             <option value="Management" >Management</option>
-                                            <option value="Repoting Manager" >Repoting Manager</option>
+                                            <option value="Reporting Manager" >Reporting Manager</option>
                                             <option value="Employee" >Employee</option>
                                         </select> 
                                     </div>
@@ -74,12 +74,22 @@
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Reporting To</label>
-                                        <select id="emp_id" name="usertype" class="form-control">
+                                        <select id="rm_id" name="report_to" class="form-control select2">
                                             <option>--Repoting Manager--</option>
-                                            <option value="Admin" >Admin</option>
-                                            <option value="Management" >Management</option>
-                                            <option value="Repoting Manager" >Repoting Manager</option>
-                                            <option value="Employee" >Employee</option>
+                                            <?php
+                                                          
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error());
+$count = 0;
+while ($row = mysqli_fetch_assoc($qry)) {
+    $count = $count + 1;
+  
+    $id = $row['id'];
+            $emp_code = $row['emp_code'];
+            $emp_name = $row['emp_name'];
+            $user_role =  ucfirst($row['user_role']);
+        
+            echo "<option value=".$id.">".$emp_code."/".$emp_name."/".$user_role."</option>";
+}?>
                                         </select> 
                                     </div>
                                 </div>
@@ -95,5 +105,8 @@
     $('input[name="emp_code"]').change(function() {
     $('input[name="userid"]').val($(this).val());
 });
+
+    $('.select2').select2();
+
 </script>
                                 

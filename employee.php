@@ -8,6 +8,7 @@ if (isset($_POST['submit'])) {
 //    $temp = explode(".", $_FILES["profile"]["name"]);
 //    $user_pro = round(gen_image_code_unique()) . '.' . end($temp);
 //    move_uploaded_file($_FILES["profile"]["tmp_name"], "user_profile/" . $user_pro);
+
       $post_image = $_FILES['profile']['name'];
     $post_image_temp = $_FILES['profile']['tmp_name'];
     move_uploaded_file($post_image_temp, "user_profile/$post_image");
@@ -19,7 +20,8 @@ if (isset($_POST['submit'])) {
     $userid = $_POST['userid'];
     $pswd = $_POST['pswd'];
     $user_role = strtolower($_POST['usertype']);
-
+    $report_to = strtolower($_POST['report_to']);
+    // print($report_to);
     $qry = mysqli_query($connection, "SELECT emp_code FROM emp_login ") or die("select query fail" . mysqli_error());
     $flag = 0;
     while( $row = mysqli_fetch_assoc($qry)){
@@ -30,7 +32,7 @@ if (isset($_POST['submit'])) {
         }
     }
     if ($flag !=1){
-        $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'$user_role','$post_image','$emailid','$mobile')";
+        $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`,`report_to`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'$user_role','$post_image','$emailid','$mobile','$report_to')";
         //  $update_psqd = "UPDATE `user_details` SET Pswd='$NewPSWD' where  `User_ID`='$userID' and Pswd='$oldPSWD'  ";
             $update_password = mysqli_query($connection, $query);
             if (!$update_password) {
@@ -259,11 +261,10 @@ END - Breadcrumbs
                                 <script>
 $(document).ready(function() {
     $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'pdfHtml5'
-        ]
+        // dom: 'Blfrtip', 
+        "lengthMenu": [[25,50,100,500], [25,50,100,500]]
     } );
 } );
+
 
         </script> 

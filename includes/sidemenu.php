@@ -1,4 +1,11 @@
-      <!--------------------
+<?php
+                                // include 'db.php';
+                                $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+                                $count = mysqli_num_rows($qry);
+                                // $count = $row['total'];
+                                // echo $count;
+                                ?>
+    <!--------------------
                 START - Mobile Menu
                 -------------------->
                 <div class="menu-mobile menu-activated-on-click color-scheme-dark">
@@ -294,7 +301,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <!-- <li><a href="assign_concern.php">Assign Concern</a></li> -->
+                                        <li><a href="assign_concern.php">Raise Concern</a></li>
                                         <li><a href="assign_concern_list.php">Concern List</a></li>  
                                         <li><a href="assign_concern_open_list.php">Open Concern</a></li>  
                                         <li><a href="assign_concern_close_list.php">Close Concern</a></li>  
@@ -306,10 +313,29 @@
                         </li>
                         <!--Approval Request-->
                         <li class=" has-sub-menu">
-                            <a href="admin_a&b_dash.php">
-                                <div class="icon-w">                                    
-                                    <div class="os-icon os-icon-bell"></div>                                    
-                                </div><span>Approval Request</span></a>
+                            <a href="approval_list.php">
+                                <div class="icon-w">
+                                    <?php if ($count !=0) {?>
+                                        <div class="messages-notifications os-dropdown-position-left">
+                                            <i class="os-icon os-icon-mail-14"></i>
+                                            <div class="new-messages-count">
+                                                <?php echo $count ?>
+                                            </div>
+                                        </div>
+                                    <?php } else {?>
+                                        <div class="messages-left">
+                                            <i class="os-icon os-icon-mail-14"></i>
+                                            <div class="new-messages-count">
+                                                
+                                            </div>
+                                        </div>
+                                            <?php }?>
+
+                                </div>
+                                <span>Approval List </span></a>
+                            </a>
+                           
+                                
                         </li>
                         <!--Approval Request END  -->
 
@@ -367,7 +393,7 @@
                                 <div class="sub-menu-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <div class="sub-menu-i">
                                     <ul class="sub-menu">
-                                        <li><a href="assign_concern.php">Raise Concern</a></li>
+                                        <li><a href="emp_assign_concern.php">Raise Concern</a></li>
                                         <li><a href="emp_assign_concern_list.php">Total Concern List</a></li>  
                                         <li><a href="emp_assign_concern_list_open.php">Open Concern</a></li>  
                                         <li><a href="emp_assign_concern_list_close.php">Close Concern</a></li>  

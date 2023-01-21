@@ -7,6 +7,7 @@
                         <th>Emp Code</th>
                         <th>Name</th>
                         <th>Role Type</th>
+                        <th>Reporting To</th>
                          <th>Mobile No</th>
                           <th>Email ID</th>
                           
@@ -20,12 +21,13 @@
                     </tr>
         </thead>   <tbody>
                                                                <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management') ") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager')") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
     $id = $row['id'];
+    // echo $id;
             $emp_code = $row['emp_code'];
             $emp_name = $row['emp_name'];
             $user_id = $row['user_id'];
@@ -33,6 +35,23 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $status = $row['status'];
             $created = $row['created'];
             $user_role = ucfirst($row['user_role']);
+            $report_id = $row['report_to'];
+            // var_dump($report_id);
+            if (strlen($report_id) != 0) 
+            {
+              
+              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where report_to = '$report_id' ") or die("select query fail" . mysqli_error());
+              while ($report_row = mysqli_fetch_assoc($qry1))
+              {
+                $report_code = $report_row['emp_code'];
+                $report_name = $report_row['emp_name'];
+              }         
+            }
+            else{
+              $report_code = "";
+              $report_name = "";
+            }       
+
             $emp_pro = $row['emp_pro'];
             $email_id = $row['email_id'];
             $emp_mob = $row['emp_mob'];
@@ -51,6 +70,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $emp_code;?></td>
   <td><?php echo $emp_name;?></td>
   <td><?php echo $user_role;?></td> 
+  <td><?php if (strlen($report_id) != 0) echo $report_code."/".$report_name; else echo $report_code.$report_name;?></td> 
   <td><?php echo $emp_mob;?></td> 
   <td><?php echo $email_id;?></td> 
   
@@ -67,3 +87,5 @@ while ($row = mysqli_fetch_assoc($qry)) {
 <?php }?>
         </tbody>     </table>
    </div>
+
+   

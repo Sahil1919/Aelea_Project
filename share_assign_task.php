@@ -32,31 +32,58 @@ $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `
     else{
    $userID = $_SESSION['user'];
    $task_id=$_GET['task_id'];
-   $task_id = $task_id+1;
-    
+//    $task_id = $task_id+1;
     $employee_id = $_POST['empid'];
-   
-$query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
+    $result=mysqli_query($connection,"SELECT * from emp_login WHERE id='$userID'");
+    $data1=mysqli_fetch_assoc($result);
+    $report_to = $data1['report_to'];
+
+    $result1=mysqli_query($connection,"SELECT *  from assign_task WHERE `task_id`='$task_id' and emp_id='$userID'");
+    $data=mysqli_fetch_assoc($result1);
+
+    $task = $data['task'];
+    $assign_by = $data['assignby'];
+    $task_doc = $data['task_doc'];
+    $work_assign_date = $data['work_assign_date'];
+    $work_due_date = $data['work_due_date'];
+    $work_com_date = $data['work_com_date'];
+    $status = $data['status'];
+    $remark = $data['remark'];
+    $approval_for = 'Share Do Next';
+    $approval_status = 'Pending';
+    $approve_req = 0;
+
+
+    $query = "INSERT INTO `approval_list`(`user_id`, `emp_id`, `task_id`, `task`, `assign_by`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `report_to`, `approval_for`, `approval_status`,`approve_req`)";
+    $query.= "VALUES ('$userID','$employee_id','$task_id','$task','$assign_by','$task_doc','$work_assign_date','$work_due_date','$work_com_date','$status','$remark','$report_to','$approval_for','$approval_status','$approve_req')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
     } 
+    
+//     $employee_id = $_POST['empid'];
+   
+// $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+//      $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
+//     $update_password = mysqli_query($connection, $query);
+//     if (!$update_password) {
+//         die('QUERY FAILD change pashword' . mysqli_error($connection));
+//     } 
 
-           $query="UPDATE assign_task AS tab1 , assign_task AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
-           WHERE tab1.emp_id=$userID AND  tab2.`emp_id` =$employee_id";
-    $update_password = mysqli_query($connection, $query);
-    if (!$update_password) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } }
-}
+    //        $query="UPDATE assign_task AS tab1 , assign_task AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
+    //        WHERE tab1.emp_id=$userID AND  tab2.`emp_id` =$employee_id";
+    // $update_password = mysqli_query($connection, $query);
+    // if (!$update_password) {
+    //     die('QUERY FAILD change pashword' . mysqli_error($connection));
+    // } }
+}}
 ?>
 <!--------------------
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Share Concern</span></li>
+    <li class="breadcrumb-item"><span>Share Do Next</span></li>
 </ul>   
 <!--------------------
 END - Breadcrumbs
@@ -69,7 +96,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Share Concern</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Share Do Next</h5>                                   
                                 </div>  
                             </div>
                                   <form class="container" action="#" method="post" enctype="multipart/form-data">
@@ -85,11 +112,11 @@ END - Breadcrumbs
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee</label>
-                                        <select id="emp_id" name="empid" class="form-control">
+                                        <select id="emp_id" name="empid" class="form-control select2">
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management') and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','repoting manager') and status='1'") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -134,4 +161,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
-                                
+            
+       
+       <script>
+    $('.select2').select2();
+</script>

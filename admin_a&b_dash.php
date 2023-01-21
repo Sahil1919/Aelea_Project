@@ -47,14 +47,14 @@ END - Breadcrumbs
                     <div class="element-content">
                         <div class="row">
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="assign_task_list.php">
+                                <a class="element-box el-tablo" href="total_list_a&b.php">
                                     <div class="label">Total (Do Next)</div>
                                     <div class="value"><?php echo $Total_task; ?></div>
  </a>
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="assign_task_list_close.php">
+                                <a class="element-box el-tablo" href="total_a&b_done.php">
                                     <div class="label">Total A & B</div>
                                     <div class="value"><?php echo $close_task; ?></div>
  </a>

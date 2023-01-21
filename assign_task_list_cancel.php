@@ -46,7 +46,7 @@ if(isset($_GET['delete_task']))
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="admin_donext_dash.php">Back</a></li>
     <li class="breadcrumb-item"><span>Assign Do Next Cancel</span></li>
 </ul>
 <!--------------------
@@ -192,10 +192,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
                <script>
 $(document).ready(function() {
     $('#example').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'pdfHtml5'
-        ]
+        // dom: 'Bfrtip',
+        "lengthMenu": [[25,50,100,500], [25,50,100,500]]
     } );
 } );
         </script>                    
