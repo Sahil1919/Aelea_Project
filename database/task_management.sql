@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2022 at 06:25 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jan 21, 2023 at 03:15 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,39 @@ SET time_zone = "+00:00";
 --
 -- Database: `task_management`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `approval_list`
+--
+
+CREATE TABLE `approval_list` (
+  `srno` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `emp_id` int(10) NOT NULL,
+  `task_id` int(10) NOT NULL,
+  `task` varchar(255) NOT NULL,
+  `assign_by` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `task_doc` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `work_assign_date` datetime(6) NOT NULL,
+  `work_due_date` datetime(6) NOT NULL,
+  `work_com_date` datetime(6) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `remark` varchar(255) NOT NULL,
+  `report_to` varchar(255) NOT NULL,
+  `approval_for` varchar(255) NOT NULL,
+  `approval_status` varchar(255) NOT NULL,
+  `approve_req` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `approval_list`
+--
+
+INSERT INTO `approval_list` (`srno`, `user_id`, `emp_id`, `task_id`, `task`, `assign_by`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `report_to`, `approval_for`, `approval_status`, `approve_req`) VALUES
+(40, 37, 39, 40, 'kufytiguhl', 'Admin', '', '2023-01-21 15:16:58.000000', '2023-01-21 15:21:00.000000', '0000-00-00 00:00:00.000000', 'Open', '', '36', 'Transfer Do Next', 'Reject', 0),
+(41, 37, 39, 40, 'kufytiguhl', 'Admin', '', '2023-01-21 15:16:58.000000', '2023-01-21 15:21:00.000000', '0000-00-00 00:00:00.000000', 'Open', '', '36', 'Transfer Do Next', 'Reject', 0);
 
 -- --------------------------------------------------------
 
@@ -54,7 +87,7 @@ CREATE TABLE `asset_tb` (
   `delete_status` int(2) NOT NULL,
   `created` datetime NOT NULL,
   `asset_tp` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `asset_tb`
@@ -68,36 +101,62 @@ INSERT INTO `asset_tb` (`assetID`, `csno`, `make`, `model`, `mac`, `sn`, `pro`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `assign_concern`
+--
+
+CREATE TABLE `assign_concern` (
+  `task_id` int(11) NOT NULL,
+  `emp_id` int(11) NOT NULL,
+  `task` text NOT NULL,
+  `assignby` varchar(30) NOT NULL,
+  `task_doc` varchar(1000) NOT NULL,
+  `work_assign_date` datetime(6) NOT NULL,
+  `work_due_date` datetime(6) DEFAULT NULL,
+  `work_com_date` datetime(6) DEFAULT NULL,
+  `status` varchar(10) NOT NULL,
+  `remark` text NOT NULL,
+  `attachments` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `assign_concern`
+--
+
+INSERT INTO `assign_concern` (`task_id`, `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `attachments`) VALUES
+(3, 30, 'gaergsertg', 'Employee', '', '2023-01-21 16:19:43.000000', '0000-00-00 00:00:00.000000', '2023-01-21 16:56:09.000000', 'Close', 'Done', ''),
+(4, 37, 'uyfkkugilgiu', 'Employee', '', '2023-01-21 17:44:29.000000', '0000-00-00 00:00:00.000000', NULL, 'Open', '', ''),
+(5, 39, 'uyfkkugilgiu', 'Employee', '', '2023-01-21 18:23:22.000000', '0000-00-00 00:00:00.000000', NULL, 'Open', '', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `assign_task`
 --
 
 CREATE TABLE `assign_task` (
-  `task_id` int(11) NOT NULL Primary,
+  `task_id` int(11) NOT NULL,
   `emp_id` int(11) DEFAULT NULL,
-  `task` text CHARACTER SET utf8 DEFAULT NULL,
+  `task` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `assignby` varchar(255) DEFAULT NULL,
   `task_doc` varchar(255) DEFAULT NULL,
   `work_assign_date` datetime DEFAULT NULL,
   `work_due_date` datetime DEFAULT NULL,
   `work_com_date` datetime DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
-  `remark` text CHARACTER SET utf8 DEFAULT NULL,
+  `remark` text CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `Achievements` text DEFAULT NULL,
   `Benefits` text DEFAULT NULL,
   `attachments` varchar(255) DEFAULT NULL
-  PRIMARY KEY ('task_id')
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `assign_task`
 --
 
 INSERT INTO `assign_task` (`task_id`, `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `work_com_date`, `status`, `remark`, `Achievements`, `Benefits`, `attachments`) VALUES
-(137, 12, 'Cheking 100 units of electricity cost.', 'Admin', 'CodeWind_Technologies_Internship_Batches_June_2022.txt', '2022-12-30 16:26:34', '2022-12-30 16:30:00', '2022-12-30 20:15:06', 'Close', '', 'xcxcx', 'xcxczxczc', ''),
-(138, 13, 'Do tbus task adfing', 'Admin', '', '2022-12-30 22:13:45', '2022-12-30 22:17:00', NULL, 'Open', '', '', '', ''),
-(139, 38, 'Cheking 100 units of electricity cost.', 'Admin', 'CodeWind_Technologies_Internship_Batches_June_2022.txt', '2022-12-30 19:34:21', '2022-12-30 16:30:00', '2022-12-30 16:40:22', 'Close', '', NULL, NULL, NULL),
-(140, 12, 'find the stock in this month', 'Admin', '', '2022-12-30 19:51:00', '2022-12-30 20:10:00', '2022-12-30 21:52:49', 'Close', '', 'this is sayha980df g9a87hrt y7sdgfa79fa9f 76adtfga67aer a7dfhasfa9f\r\n\r\ns8uerha7w8erhya wer\r\n\r\nae\r\na\r\newr\r\na\r\nwer\r\na aerfuy7ha8w7etrgha76wgt67tg 78yhta78rt 678hrt7a9trha7yr8ths 76ys7rtyhs78rt r7 sert\r\n', 'y76gfay78swg8feh 87gzs87f  ay7zs8gedrf asy877drfg \r\nzfgzsdgf\r\nzsdgfzsdfgsgetyh  yudfgyfsdybyfgd yt7sdrufmas8fh yuzsdfbn 9asygfbasf\r\nzdfg\r\nadfgdrf\r\ngsdfg\r\nsdf\r\ngs\r\nd\r\ngsdsrdeg98s7dhg7sdrn g7sa8rd e', ''),
-(141, 33, 'Do tbus task adfing', 'Admin', '', '2022-12-30 22:14:01', '2022-12-30 22:17:00', '2022-12-30 22:14:36', 'Close', '', 'se5tyaertdr', 'artareta argar artawrt awrtaw4twe', '');
+(39, 39, 'kufytiguhl', 'Admin', '', '2023-01-21 15:16:13', '2023-01-21 15:21:00', NULL, 'Open', NULL, NULL, NULL, NULL),
+(40, 37, 'kufytiguhl', 'Admin', '', '2023-01-21 15:16:58', '2023-01-21 15:21:00', NULL, 'Open', NULL, NULL, NULL, NULL),
+(42, 1, 'dsegrewrgtf', 'Management', '', '2023-01-21 19:02:12', '2023-01-21 19:07:00', NULL, 'Open', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -113,7 +172,7 @@ CREATE TABLE `bank_details` (
   `acHN` varchar(255) NOT NULL,
   `createOn` date NOT NULL,
   `empID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `bank_details`
@@ -132,7 +191,7 @@ CREATE TABLE `cities` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `state_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `cities`
@@ -48488,7 +48547,7 @@ CREATE TABLE `countries` (
   `sortname` varchar(3) NOT NULL,
   `name` varchar(150) NOT NULL,
   `phonecode` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `countries`
@@ -48753,7 +48812,7 @@ CREATE TABLE `download` (
   `download_name` varchar(255) NOT NULL,
   `download_file` varchar(255) NOT NULL,
   `empID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `download`
@@ -48776,7 +48835,7 @@ CREATE TABLE `emp_assets` (
   `des` text NOT NULL,
   `status` int(11) NOT NULL,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `emp_assets`
@@ -48803,21 +48862,20 @@ CREATE TABLE `emp_login` (
   `emp_pro` varchar(255) NOT NULL,
   `email_id` varchar(255) NOT NULL,
   `emp_mob` varchar(255) NOT NULL,
-  
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `report_to` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `emp_login`
 --
 
-INSERT INTO `emp_login` (`id`, `emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES
-(1, 'emp_001', 'Aelea Commodities', 'admin', 'admin', 1, '0000-00-00 00:00:00', 'admin', 'Admin.jpeg', 'marketing@aeleacommodities.com', '9769865749'),
-(12, 'A001', 'Sahil Shaikh', 'sahilsk565678@gmail.com', 'sahil', 1, '2022-11-10 10:51:45', 'employee', 'sahil.png', 'sahilsk565678@gmail.com', '8169499969'),
-(13, 'A002', 'Rahil Shaikh ', 'rahil.shaikh@gmail.com', 'rahil', 1, '2022-11-10 12:17:19', 'employee', 'rahil.png', 'rahil.shaikh@gmail.com', '8356876776'),
-(33, 'A005', 'Nasreen Khan', 'A005', '005', 1, '2022-12-11 18:48:54', 'employee', 'nasreen.png', 'nasrin.112@gmail.com', '97736697202'),
-(35, 'emp_man01', 'Aliasgar ', 'marketing@aeleacommodities.com', 'ali', 1, '2022-12-30 16:02:08', 'management', 'logo png.png', 'marketing@aeleacommodities.com', '99200 76989'),
-(36, 'A006', 'Aeraf Shaikh', 'A006', '006', 1, '2022-12-30 16:12:11', 'employee', 'aeraf.png', 'aeraf09@gmail.com', '8356876789'),
-(38, 'A007', 'Riyaz Khan', 'riyaz1khan102@gmail.com', '007', 1, '2022-12-30 16:17:46', 'employee', 'riyaz.png', 'riyaz1khan102@gmail.com', '8356876789');
+INSERT INTO `emp_login` (`id`, `emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`, `report_to`) VALUES
+(1, 'emp_001', 'Aelea Commodities', 'admin', 'admin', 1, '0000-00-00 00:00:00', 'admin', 'hr.png', 'marketing@aeleacommodities.com', '9769865749', ''),
+(30, 'man_1', 'Hozefa Jawadwala', 'man_1', 'Hozefa@123', 1, '2023-01-20 11:39:37', 'management', 'management.jpeg', 'marketing@aeleacommodities.com', '9769865749', ''),
+(36, 'RM01', 'Aliasgar', 'RM01', 'Aliasgar@123', 1, '2023-01-21 08:58:19', 'reporting manager', '', 'ali@123', '7856458962', '30'),
+(37, 'A001', 'Sahil Shaikh', 'A001', 'Sahil@123', 1, '2023-01-21 08:59:29', 'employee', '', 'sahilsk565678@gmail.com', '8169499969', '36'),
+(38, 'RM02', 'Raghav', 'RM02', 'Raghav@123', 1, '2023-01-21 10:15:46', 'reporting manager', '', 'raghav@123', '7564123658', '30'),
+(39, 'A002', 'Rahil Shaikh ', 'A002', 'Rahil@123', 1, '2023-01-21 10:16:46', 'employee', '', 'rahilshaikh261001@gmail.com', '7512569854', '38');
 
 -- --------------------------------------------------------
 
@@ -48827,11 +48885,11 @@ INSERT INTO `emp_login` (`id`, `emp_code`, `emp_name`, `user_id`, `pswd`, `statu
 
 CREATE TABLE `news_and_update` (
   `news_id` int(11) NOT NULL,
-  `news_title` text CHARACTER SET utf8 NOT NULL,
-  `remark` text CHARACTER SET utf8 NOT NULL,
+  `news_title` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `remark` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `created` date NOT NULL,
   `news_type` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `news_and_update`
@@ -48870,6 +48928,30 @@ CREATE TABLE `pdf_views` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `pdf_views1`
+-- (See below for the actual view)
+--
+CREATE TABLE `pdf_views1` (
+`emp_code` varchar(255)
+,`emp_name` varchar(255)
+,`user_id` varchar(255)
+,`user_role` varchar(255)
+,`email_id` varchar(255)
+,`emp_mob` varchar(255)
+,`emp_id` int(11)
+,`task` text
+,`assignby` varchar(30)
+,`work_assign_date` datetime(6)
+,`work_due_date` datetime(6)
+,`work_com_date` datetime(6)
+,`status` varchar(10)
+,`remark` text
+,`attachments` varchar(255)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `prod_list_1`
 --
 
@@ -48879,7 +48961,7 @@ CREATE TABLE `prod_list_1` (
   `p_name` varchar(255) NOT NULL,
   `p_price` varchar(255) NOT NULL,
   `p_reason` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -48895,7 +48977,7 @@ CREATE TABLE `result_show` (
   `mobileno` varchar(255) NOT NULL,
   `marks` varchar(255) NOT NULL,
   `created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -48908,7 +48990,7 @@ CREATE TABLE `service_mst` (
   `service_nm` varchar(255) NOT NULL,
   `remark` varchar(255) NOT NULL,
   `created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -48920,7 +49002,7 @@ CREATE TABLE `states` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `country_id` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `states`
@@ -53058,15 +53140,30 @@ DROP TABLE IF EXISTS `pdf_views`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pdf_views`  AS SELECT `emp_login`.`emp_code` AS `emp_code`, `emp_login`.`emp_name` AS `emp_name`, `emp_login`.`user_id` AS `user_id`, `emp_login`.`user_role` AS `user_role`, `emp_login`.`email_id` AS `email_id`, `emp_login`.`emp_mob` AS `emp_mob`, `assign_task`.`emp_id` AS `emp_id`, `assign_task`.`task` AS `task`, `assign_task`.`assignby` AS `assignby`, `assign_task`.`work_assign_date` AS `work_assign_date`, `assign_task`.`work_due_date` AS `work_due_date`, `assign_task`.`work_com_date` AS `work_com_date`, `assign_task`.`status` AS `status`, `assign_task`.`remark` AS `remark`, `assign_task`.`Achievements` AS `Achievements`, `assign_task`.`Benefits` AS `Benefits`, `assign_task`.`attachments` AS `attachments` FROM (`assign_task` join `emp_login`) WHERE `assign_task`.`emp_id` = `emp_login`.`id``id`  ;
 
+-- --------------------------------------------------------
+
+--
+-- Structure for view `pdf_views1`
+--
+DROP TABLE IF EXISTS `pdf_views1`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `pdf_views1`  AS SELECT `emp_login`.`emp_code` AS `emp_code`, `emp_login`.`emp_name` AS `emp_name`, `emp_login`.`user_id` AS `user_id`, `emp_login`.`user_role` AS `user_role`, `emp_login`.`email_id` AS `email_id`, `emp_login`.`emp_mob` AS `emp_mob`, `assign_concern`.`emp_id` AS `emp_id`, `assign_concern`.`task` AS `task`, `assign_concern`.`assignby` AS `assignby`, `assign_concern`.`work_assign_date` AS `work_assign_date`, `assign_concern`.`work_due_date` AS `work_due_date`, `assign_concern`.`work_com_date` AS `work_com_date`, `assign_concern`.`status` AS `status`, `assign_concern`.`remark` AS `remark`, `assign_concern`.`attachments` AS `attachments` FROM (`assign_concern` join `emp_login`) WHERE `assign_concern`.`emp_id` = `emp_login`.`id``id`  ;
+
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `asset_tb`
+-- Indexes for table `approval_list`
 --
-ALTER TABLE `asset_tb`
-  ADD PRIMARY KEY (`assetID`);
+ALTER TABLE `approval_list`
+  ADD PRIMARY KEY (`srno`);
+
+--
+-- Indexes for table `assign_concern`
+--
+ALTER TABLE `assign_concern`
+  ADD PRIMARY KEY (`task_id`);
 
 --
 -- Indexes for table `assign_task`
@@ -53075,69 +53172,9 @@ ALTER TABLE `assign_task`
   ADD PRIMARY KEY (`task_id`);
 
 --
--- Indexes for table `bank_details`
---
-ALTER TABLE `bank_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `cities`
---
-ALTER TABLE `cities`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `countries`
---
-ALTER TABLE `countries`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `download`
---
-ALTER TABLE `download`
-  ADD PRIMARY KEY (`dID`);
-
---
--- Indexes for table `emp_assets`
---
-ALTER TABLE `emp_assets`
-  ADD PRIMARY KEY (`assign_id`);
-
---
 -- Indexes for table `emp_login`
 --
 ALTER TABLE `emp_login`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `news_and_update`
---
-ALTER TABLE `news_and_update`
-  ADD PRIMARY KEY (`news_id`);
-
---
--- Indexes for table `prod_list_1`
---
-ALTER TABLE `prod_list_1`
-  ADD PRIMARY KEY (`ID`);
-
---
--- Indexes for table `result_show`
---
-ALTER TABLE `result_show`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `service_mst`
---
-ALTER TABLE `service_mst`
-  ADD PRIMARY KEY (`service_id`);
-
---
--- Indexes for table `states`
---
-ALTER TABLE `states`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -53145,82 +53182,28 @@ ALTER TABLE `states`
 --
 
 --
--- AUTO_INCREMENT for table `asset_tb`
+-- AUTO_INCREMENT for table `approval_list`
 --
-ALTER TABLE `asset_tb`
-  MODIFY `assetID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `approval_list`
+  MODIFY `srno` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `assign_concern`
+--
+ALTER TABLE `assign_concern`
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `assign_task`
 --
 ALTER TABLE `assign_task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
-
---
--- AUTO_INCREMENT for table `bank_details`
---
-ALTER TABLE `bank_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `cities`
---
-ALTER TABLE `cities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48315;
-
---
--- AUTO_INCREMENT for table `countries`
---
-ALTER TABLE `countries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=247;
-
---
--- AUTO_INCREMENT for table `download`
---
-ALTER TABLE `download`
-  MODIFY `dID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `emp_assets`
---
-ALTER TABLE `emp_assets`
-  MODIFY `assign_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `emp_login`
 --
 ALTER TABLE `emp_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT for table `news_and_update`
---
-ALTER TABLE `news_and_update`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `prod_list_1`
---
-ALTER TABLE `prod_list_1`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `result_show`
---
-ALTER TABLE `result_show`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `service_mst`
---
-ALTER TABLE `service_mst`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `states`
---
-ALTER TABLE `states`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4121;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
