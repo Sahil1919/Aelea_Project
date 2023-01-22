@@ -97,7 +97,7 @@ END - Breadcrumbs
                 <body>
 
                 <div class="container mt-3">          
-                <table class="table table-bordered">
+                <table class="table table-bordered" >
                     <thead>
                     <tr>
                     <th><img src="achieve1.JPG" alt="" width="500"  height="110"></th>
@@ -115,8 +115,8 @@ END - Breadcrumbs
 
                    ?>
                  <tr>
-                        <td><pre><?php echo $achievement?></pre></td>
-                        <td><pre><?php echo $benefit?></pre></td>
+                 <pre><td width="50%" style="vertical-align:middle;font-weight:bold;"><?php echo $achievement?></td></pre>
+                 <td width="50%" style="vertical-align:middle;font-weight:bold;"><?php echo $benefit?></td>
                     
                     </tr>
                     
