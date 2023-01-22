@@ -228,7 +228,7 @@
                                 </div>
                                 <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <ul>
-                                    <?php if ($_SESSION['User_type']=='employee'){?>
+                                    <?php if ($_SESSION['User_type']=='employee' || $_SESSION['User_type']=='reporting manager'){?>
                                    <li><a href="update_profile_for_emp.php"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
                                    <?php } else {?>
                                    <li><a href="update_emp_profile.php"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>

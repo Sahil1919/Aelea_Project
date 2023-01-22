@@ -73,6 +73,7 @@ if (isset($_GET['id']) && isset($_GET['Status'])) {
   // header("location:./admin/retailer_account_list.php");
 }
 if (isset($_POST['update'])) {
+    // var_dump($_POST['update']);
     $emp_id=$_GET['emp_id'];
       $post_image = $_FILES['profile']['name'];
     $post_image_temp = $_FILES['profile']['tmp_name'];
@@ -82,8 +83,10 @@ if (isset($_POST['update'])) {
     $emailid = $_POST['emailid'];
     $mobile = $_POST['mobile'];
     //$profile = $_POST['profile'];
-    $userid = $_POST['userid'];
-    $pswd = $_POST['pswd'];
+    // $userid = $_POST['userid'];
+    // $pswd = $_POST['pswd'];
+    $emp_role = $_POST['usertype'];
+    $emp_report_to = $_POST['report_to'];
        $query1 = "select * from emp_login where id=" . $emp_id . "";
         $select_userprofile_image1 = mysqli_query($connection, $query1);
         while ($row1 = mysqli_fetch_array($select_userprofile_image1)) {
@@ -95,22 +98,25 @@ if (isset($_POST['update'])) {
  $query="UPDATE `emp_login` SET ";
         $query .= "`emp_code`='$emp_code',";
          $query .="`emp_name`='$Name',";
-        $query .= "`user_id`='$userid',";
-        $query .="`pswd`='$pswd',";
+        // $query .= "`user_id`='$userid',";
+        // $query .="`pswd`='$pswd',";
         // $query .= "`status`='',";
       //  $query .= "`created`='',";
        //$query .= "`user_role`='',";
         $query .= "`emp_pro`='$post_image',";
         $query .= "`email_id`='$emailid',";
+        $query .= "`user_role`='$emp_role',";
+        $query .= "`report_to`='$emp_report_to',";
         $query .= "`emp_mob`='$mobile' WHERE `id`='$emp_id'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD Update' . mysqli_error($connection));
-    } else {
+    } 
+    // else {
 
-        echo "<script>alert('record update successfully');</script>";
-        // return 'pass';
-    }
+    //     echo "<script>alert('record update successfully');</script>";
+    //     // return 'pass';
+    // }
 }
 if(isset($_GET['delete']))
 {

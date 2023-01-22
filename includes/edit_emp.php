@@ -151,7 +151,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee</label>
-                                        <select id="emp_id" name="usertype" class="form-control">
+                                        <select id="emp_role" name="usertype" class="form-control">
                                             <option><?php echo $user_role;?></option>
                                             <option value="Admin" >Admin</option>
                                             <option value="Management" >Management</option>
@@ -163,13 +163,12 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Reporting To</label>
-                                        <select id="emp_id" name="usertype" class="form-control">
+                                        <select id="rm_id" name="report_to" class="form-control select2">
                                             <option><?php echo $app_code_obj->getName($report_to);?></option>
                                             <?php
-                                                   
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager') and status='1' ") or die("select query fail" . mysqli_error());
-
-    $count = 0;
+                                                          
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error());
+$count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
@@ -180,9 +179,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
         
             echo "<option value=".$id.">".$emp_code."/".$emp_name."/".$user_role."</option>";
 }?>
-                                              
-                                            
-                                        </select>
+                                        </select> 
                                     </div>
                                 </div>
 <!-- <div class="col-sm-3">

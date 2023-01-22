@@ -8,7 +8,8 @@ $msg = '';
 $app_code_obj=new App_Code();
 
 if (isset($_POST['update'])) {
-    $emp_id = $_SESSION['user'];//$_GET['emp_id'];
+    var_dump($_POST['update']);
+    $emp_id=$_GET['emp_id'];
       $post_image = $_FILES['profile']['name'];
     $post_image_temp = $_FILES['profile']['tmp_name'];
     move_uploaded_file($post_image_temp, "user_profile/$post_image");
@@ -19,6 +20,8 @@ if (isset($_POST['update'])) {
     //$profile = $_POST['profile'];
     // $userid = $_POST['userid'];
     // $pswd = $_POST['pswd'];
+    $emp_role = $_POST['usertype'];
+    $emp_report_to = $_POST['report_to'];
        $query1 = "select * from emp_login where id=" . $emp_id . "";
         $select_userprofile_image1 = mysqli_query($connection, $query1);
         while ($row1 = mysqli_fetch_array($select_userprofile_image1)) {
@@ -28,15 +31,17 @@ if (isset($_POST['update'])) {
         }
    // $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'employee','$post_image','$emailid','$mobile')";
  $query="UPDATE `emp_login` SET ";
-        // $query .= "`emp_code`='$emp_code',";
-        //  $query .="`emp_name`='$Name',";
-      //  $query .= "`user_id`='$userid',";
-      //  $query .="`pswd`='$pswd',";
+        $query .= "`emp_code`='$emp_code',";
+         $query .="`emp_name`='$Name',";
+        // $query .= "`user_id`='$userid',";
+        // $query .="`pswd`='$pswd',";
         // $query .= "`status`='',";
       //  $query .= "`created`='',";
        //$query .= "`user_role`='',";
         $query .= "`emp_pro`='$post_image',";
-        // $query .= "`email_id`='$emailid',";
+        $query .= "`email_id`='$emailid',";
+        $query .= "`user_role`='$emp_role',";
+        $query .= "`report_to`='$emp_report_to',";
         $query .= "`emp_mob`='$mobile' WHERE `id`='$emp_id'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -166,13 +171,12 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Reporting To</label>
-                                        <select id="emp_id" name="usertype" class="form-control">
+                                        <select id="rm_id" name="report_to" class="form-control select2">
                                             <option><?php echo $app_code_obj->getName($report_to);?></option>
                                             <?php
-                                                   
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager') and status='1' ") or die("select query fail" . mysqli_error());
-
-    $count = 0;
+                                                          
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error());
+$count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
