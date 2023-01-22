@@ -34,7 +34,7 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Do Next Close</span></li>
+    <li class="breadcrumb-item"><span>Assign Do Next Open</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -47,7 +47,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next Close</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next Open</h5>                                   
                                 </div>  
                             </div>
                                 <div class="element-box">

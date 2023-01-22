@@ -3,7 +3,9 @@ include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
-
+include './includes/App_Code.php';
+$msg = '';
+$app_code_obj=new App_Code();
 
 if (isset($_POST['update'])) {
     $emp_id = $_SESSION['user'];//$_GET['emp_id'];
@@ -70,7 +72,7 @@ function gen_image_code_unique() {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
     <li class="breadcrumb-item"><span>Employee</span></li>
 </ul>
 <!--------------------
@@ -81,7 +83,8 @@ END - Breadcrumbs
     <div class="content-box">
         <div class="element-wrapper">
                                                                       <?php
-                                                             $id=  $userID = $_SESSION['user'];//$_GET['emp_id'];
+                                                             $id = $_SESSION['user'];//$_GET['emp_id'];
+                                                            //  echo $id;
                                                                       
                  $qry = mysqli_query($connection, "SELECT * FROM emp_login where id='$id'") or die("select query fail" . mysqli_error());
 $count = 0;
@@ -95,11 +98,12 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $pswd = $row['pswd'];
             $status = $row['status'];
             $created = $row['created'];
-            $user_role = $row['user_role'];
+            $user_role = ucfirst($row['user_role']);
             $emp_pro = $row['emp_pro'];
             $email_id = $row['email_id'];
             $emp_mob = $row['emp_mob'];
-
+            $report_to = $row['report_to'];
+            // echo $report_to;
         
 
     ?>
@@ -151,7 +155,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee</label>
                                         <select id="emp_id" name="usertype" class="form-control">
-                                            <option>--select Employee--</option>
+                                            <option><?php echo $user_role;?></option>
                                             <option value="Admin" >Admin</option>
                                             <option value="Management" >Management</option>
                                             <option value="Reporting Manager" >Reporting Manager</option>
@@ -163,11 +167,22 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Reporting To</label>
                                         <select id="emp_id" name="usertype" class="form-control">
-                                            <option>--Reporting Manager--</option>
-                                            <option value="Admin" >Admin</option>
-                                            <option value="Management" >Management</option>
-                                            <option value="Reporting Manager" >Reporting Manager</option>
-                                            <option value="Employee" >Employee</option>
+                                            <option><?php echo $app_code_obj->getName($report_to);?></option>
+                                            <?php
+                                                   
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager') and status='1' ") or die("select query fail" . mysqli_error());
+
+    $count = 0;
+while ($row = mysqli_fetch_assoc($qry)) {
+    $count = $count + 1;
+  
+    $id = $row['id'];
+            $emp_code = $row['emp_code'];
+            $emp_name = $row['emp_name'];
+            $user_role =  ucfirst($row['user_role']);
+        
+            echo "<option value=".$id.">".$emp_code."/".$emp_name."/".$user_role."</option>";
+}?>
                                         </select> 
                                     </div>
                                 </div>
