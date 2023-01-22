@@ -149,9 +149,16 @@ END - Breadcrumbs
                     </tr>
             </thead> 
             <tbody>
-                                                               <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='1' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" . mysqli_error());
-$count = 0;
+    <?php
+    if ($_SESSION['User_type']=='reporting manager'){
+        $sess_report_id = $_SESSION['user'];
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='1' and  `user_role` IN ('employee')") or die("select query fail" . mysqli_error());
+    }
+    else{
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='0' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" . mysqli_error());
+    }
+
+    $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   

@@ -25,7 +25,7 @@ if (isset($_POST['login'])) {
             echo "<script>alert('your account is currently deactivated. please contact customer care PHONE- +91 022 66340989                                                                     EMAIL -  marketing@aeleacommodities.com');  window.location.href='../login.php';</script>";
         } else {
             echo "<script>alert ('Login Successfull');
-       window.location.href='dashboard.php';
+       window.location.href='Dashboard.php';
        </script>";
         }
     } else { ?>

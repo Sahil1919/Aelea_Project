@@ -154,7 +154,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                             <option>--select Employee--</option>
                                             <option value="Admin" >Admin</option>
                                             <option value="Management" >Management</option>
-                                            <option value="Repoting Manager" >Repoting Manager</option>
+                                            <option value="Reporting Manager" >Reporting Manager</option>
                                             <option value="Employee" >Employee</option>
                                         </select> 
                                     </div>
@@ -163,10 +163,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Reporting To</label>
                                         <select id="emp_id" name="usertype" class="form-control">
-                                            <option>--Repoting Manager--</option>
+                                            <option>--Reporting Manager--</option>
                                             <option value="Admin" >Admin</option>
                                             <option value="Management" >Management</option>
-                                            <option value="Repoting Manager" >Repoting Manager</option>
+                                            <option value="Reporting Manager" >Reporting Manager</option>
                                             <option value="Employee" >Employee</option>
                                         </select> 
                                     </div>

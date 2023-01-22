@@ -70,10 +70,16 @@ END - Breadcrumbs
                                     <div class="form-group"><label for="">Employee</label>
                                         <select id="emp_id" name="empid" class="form-control select2">
                                             <option>--select Employee--</option>
-                                                                                                       <?php
-                                                          
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
-$count = 0;
+    <?php
+    if ($_SESSION['User_type']=='reporting manager'){    
+        $sess_report_id = $_SESSION['user'];                                                      
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+    }
+    else{
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
+    }
+
+    $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   

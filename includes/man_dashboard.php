@@ -7,32 +7,62 @@
                 <div class="element-wrapper">
                     <div class="element-actions">
 <?php 
+if ($_SESSION['User_type']=='management'){
+    $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management','reporting manager','admin') ";
+    $Total_emp = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Total_emp = mysqli_num_rows($result);
+    }
 
-$retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management') ";
-$Total_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Total_emp = mysqli_num_rows($result);
+    $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1' ";
+    $Active_emp = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Active_emp = mysqli_num_rows($result);
+    }
+
+    $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='0' ";
+    $Deactive_emp = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Deactive_emp = mysqli_num_rows($result);
+    }
+
+
+    $emp_id=  $_SESSION['user'];
+    $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
+    $Total_task_man = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Total_task_man = mysqli_num_rows($result);
+    }
+}
+else {
+    $sess_report_id = $_SESSION['user'];
+    $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee') and report_to='$sess_report_id' or id='$sess_report_id'  ";
+    $Total_emp = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Total_emp = mysqli_num_rows($result);
+    }
+
+    $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ";
+    $Active_emp = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Active_emp = mysqli_num_rows($result);
+    }
+
+    $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee') and status='0' and report_to='$sess_report_id' ";
+    $Deactive_emp = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Deactive_emp = mysqli_num_rows($result);
+    }
+
+
+    $emp_id=  $_SESSION['user'];
+    $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
+    $Total_task_man = 0;
+    if ($result = mysqli_query($connection, $retailer_account)) {
+        $Total_task_man = mysqli_num_rows($result);
+    }
 }
 
-$retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management') and status='1' ";
-$Active_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Active_emp = mysqli_num_rows($result);
-}
-
-$retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management') and status='0' ";
-$Deactive_emp = 0;
-if ($result = mysqli_query($connection, $retailer_account)) {
-    $Deactive_emp = mysqli_num_rows($result);
-}
-
-
-$emp_id=  $_SESSION['user'];
-  $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
-  $Total_task_man = 0;
-  if ($result = mysqli_query($connection, $retailer_account)) {
-      $Total_task_man = mysqli_num_rows($result);
-  }
 ?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>

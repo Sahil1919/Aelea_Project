@@ -135,8 +135,15 @@ END - Breadcrumbs
                     </tr>
         </thead>
         <tbody>
-                                                               <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+     <?php
+    if ($_SESSION['User_type'] == 'reporting manager'){
+        $sess_report_id = $_SESSION['user'];
+$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to='$sess_report_id' ") or die("select query fail" . mysqli_error());
+    }
+    else{
+    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+    }
+
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -276,9 +283,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
 $(document).ready(function() {
     $('#example').DataTable( {
         // dom: 'Blfrtip',
-        buttons: [
-            'pdfHtml5'
-        ]
+        "lengthMenu": [[25,50,100,500], [25,50,100,500]]
     } );
 } );
 $url = "tabletesting.php?search=";

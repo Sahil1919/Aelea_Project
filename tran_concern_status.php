@@ -60,7 +60,7 @@ END - Breadcrumbs
 
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Employee</label>
-                                        <select id="emp_id" name="empid" class="form-control">
+                                        <select id="emp_id" name="empid" class="form-control select2">
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
@@ -109,3 +109,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
+
+        <script>
+    $('.select2').select2();
+</script>

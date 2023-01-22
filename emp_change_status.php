@@ -4,8 +4,8 @@ include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-
-    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
+        
+    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager' ){
         $assign_by = ucfirst($_SESSION['User_type']);
         $task_id = $_GET['task_id'];
         $status = $_POST['status'];
@@ -229,7 +229,7 @@ jQuery(document).ready(function() {
                             <div class="form-group"><label for="">Change Status</label>
                                 <select id='status' name="status" class="form-control" >
                                     <option value='select' selected >--Select--</option>
-                                    <?php  if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' )
+                                    <?php  if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']='reporting manager' )
                                     {?>
                                         <option value="Open">Open</option>
                                         <option value="WIP">WIP</option>

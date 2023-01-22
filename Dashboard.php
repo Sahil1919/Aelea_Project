@@ -78,13 +78,14 @@ END - Breadcrumbs
         
          
                   </marquee> -->
-        <?php         
+        <?php
+        // echo $_SESSION['User_type'];         
         if($_SESSION['User_type']=='admin')
         {
                include './includes/admin_dashboard.php';  
                //include './includes/admin_dashboard_donext_dash.php';  
         } 
-        elseif($_SESSION['User_type']=='management'){
+        elseif($_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager'){
             include './includes/man_dashboard.php';
         }
  else {

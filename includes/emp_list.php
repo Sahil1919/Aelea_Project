@@ -20,9 +20,15 @@
                           <th>View</th>
                     </tr>
         </thead>   <tbody>
-                                                               <?php
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager')") or die("select query fail" . mysqli_error());
-$count = 0;
+  <?php
+  if ($_SESSION['User_type']=='reporting manager'){
+    $sess_report_id = $_SESSION['user'];
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and report_to= '$sess_report_id' or id='$sess_report_id'") or die("select query fail" . mysqli_error());
+  }
+  else{
+  $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager')") or die("select query fail" . mysqli_error());
+  }
+  $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
@@ -40,11 +46,12 @@ while ($row = mysqli_fetch_assoc($qry)) {
             if (strlen($report_id) != 0) 
             {
               
-              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where report_to = '$report_id' ") or die("select query fail" . mysqli_error());
+              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where id = '$report_id' ") or die("select query fail" . mysqli_error());
               while ($report_row = mysqli_fetch_assoc($qry1))
               {
                 $report_code = $report_row['emp_code'];
                 $report_name = $report_row['emp_name'];
+                echo $report_name;
               }         
             }
             else{

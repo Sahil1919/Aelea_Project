@@ -5,12 +5,13 @@ $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
 
-    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
+    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager' ){
         $emp_id = $_SESSION['user'];
     $task_id = $_GET['task_id'];
-    // $employee_id =$emp_id; 
+    
     $status = $_POST['status'];
     $remark = $_POST['remark'];
+    // echo $remark;
     //$status  = $_POST['status'];
 //    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
 //     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'Open')";

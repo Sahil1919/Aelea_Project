@@ -90,9 +90,10 @@ END - Breadcrumbs
                                     <div class="form-group"><label for="">Employee</label>
                                         <select id="emp_id" name="empid" class="form-control select2">
                                             <option>--select Employee--</option>
-                                                                                                       <?php
+    <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','repoting manager') and status='1'") or die("select query fail" . mysqli_error());
+$qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','repoting manager') and status='1'") or die("select query fail" . mysqli_error());
+
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
