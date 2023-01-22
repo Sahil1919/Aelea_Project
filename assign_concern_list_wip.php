@@ -64,10 +64,10 @@ END - Breadcrumbs
                                 </div>  
                                 
                                 <div class="element-box">
-                                <div>
+                                <!-- <div>
                                 <a id="download" href='#' class="btn btn-danger float-right"><i class="fa fa-download"></i> Download PDF</a>
 </div>
-<br><br>
+<br><br> -->
     <!-- <form action="GET" action='wrap.php'> -->
        <table id="example" style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%">
        <!-- <a id='example' style="width: 100%;" class="display table table-bordered table-responsive" style="width:100%" href="assign_concern_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a> -->

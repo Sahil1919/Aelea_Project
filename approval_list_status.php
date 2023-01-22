@@ -74,7 +74,7 @@ if(isset($_GET['reject']) && isset($_GET['user_id']) && isset($_GET['emp_id']) )
     $emp_id=$_GET['emp_id'];
     // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
     
-    $query="UPDATE `approval_list` SET `approval_status`='Rejected', `approve_req`='0' WHERE `task_id`='$task_id' ";
+    $query="UPDATE `approval_list` SET `approval_status`='Reject', `approve_req`='0' WHERE `task_id`='$task_id' ";
     $update_password = mysqli_query($connection, $query);
     // header("Refresh:0; url=./includes/sidemenu.php");
 }
@@ -131,18 +131,19 @@ END - Breadcrumbs
                         <th>Reporting To</th>
                         <th>Approval For</th>
                           <th>Approval Status</th>
-                          <th>Approve Request</th>
+                          <!-- <th>Approve Request</th> -->
                     </tr>
         </thead>
         <tbody>
      <?php
-    if ($_SESSION['User_type'] == 'reporting manager'){
-        $sess_report_id = $_SESSION['user'];
-$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to='$sess_report_id' ") or die("select query fail" . mysqli_error());
-    }
-    else{
-    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
-    }
+//     if ($_SESSION['User_type'] == 'reporting manager'){
+//         $sess_report_id = $_SESSION['user'];
+// $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to='$sess_report_id' ") or die("select query fail" . mysqli_error());
+//     }
+//     else{
+    $sess_id = $_SESSION['user'];
+    $qry = mysqli_query($connection, "SELECT * FROM approval_list where user_id = '$sess_id' ") or die("select query fail" . mysqli_error());
+    // }
 
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
@@ -248,8 +249,14 @@ while ($row = mysqli_fetch_assoc($qry)) {
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
     <td><?php echo $app_code_obj->getName($report_to);?></td>
     <td><?php echo $approval_for?></td>
+    <?php if ($approval_status == 'Pending') {?>
     <td><a href="#" class="btn btn-warning"> <?php echo $approval_status;?></a> <br></td>
-    <td> 
+    <?php } elseif($approval_status=='Approved') {?>
+        <td><a href="#" class="btn btn-success"> <?php echo $approval_status;?></a> <br></td>
+        <?php } else{?>
+            <td><a href="#" class="btn btn-danger"> <?php echo $approval_status;?></a> <br></td>
+            <?php }?>
+    <!-- <td> 
     <?php if ($approval_for=='Transfer Do Next')
     {?>
     <a class="btn btn-success" href="approval_list.php?approve_req=<?php echo $row['task_id']; ?>&user_id=<?php echo $row['user_id']; ?>&emp_id=<?php echo $row['emp_id']; ?>">Approve</a>
@@ -258,7 +265,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
     <?php } ?> 
     <br><br>
     <a class="btn btn-danger" href="approval_list.php?reject=<?php echo $row['task_id'];?>&user_id=<?php echo $row['user_id'];?>&emp_id=<?php echo  $row['emp_id']; ?>"> Reject </a>
-    </td>
+    </td> -->
 </tr>
 
 <?php }?>

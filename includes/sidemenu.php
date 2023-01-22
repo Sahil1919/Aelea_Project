@@ -537,23 +537,15 @@
                         </li>
                         <!--Approval Request-->
                     <li class=" has-sub-menu">
-                        <a href="approval_list.php">
+                        <a href="approval_list_status.php">
                             <div class="icon-w">
-                                <?php if ($count !=0) {?>
-                                    <div class="messages-notifications os-dropdown-position-left">
-                                        <i class="os-icon os-icon-mail-14"></i>
-                                        <div class="new-messages-count">
-                                            <?php echo $count ?>
-                                        </div>
-                                    </div>
-                                <?php } else {?>
                                     <div class="messages-left">
                                         <i class="os-icon os-icon-mail-14"></i>
                                         <div class="new-messages-count">
                                             
                                         </div>
                                     </div>
-                                        <?php }?>
+                                       
 
                             </div>
                             <span>Approval List </span></a>
