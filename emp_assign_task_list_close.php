@@ -58,8 +58,10 @@ END - Breadcrumbs
                         <th>Employee Name</th>
                         <th>Do Next</th>
                          <th>Assigned By</th>
+                         <th>Report To</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
+                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                              <th>Status</th>
                    <th>Change Status/Transfer Concern/Share Concern</th>
@@ -72,42 +74,45 @@ END - Breadcrumbs
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
-  
-   // $id = $row['id'];
-//            $emp_code = $row['emp_code'];
-//            $emp_name = $row['emp_name'];
-//            $user_id = $row['user_id'];
-//            $pswd = $row['pswd'];
-//            $status = $row['status'];
-//            $created = $row['created'];
-//            $user_role = $row['user_role'];
-//            $emp_pro = $row['emp_pro'];
-//            $email_id = $row['email_id'];
-//            $emp_mob = $row['emp_mob'];
-//                                                                             $status = '';
-//    $btnClass = '';
-//    if ($row['status'] == '1') {
-//        $btnClass = "btn  btn-success btn-sm";
-//        $status = "Active";
-//    } else {
-//        $status = "Deactive";
-//        $btnClass = "btn btn-danger btn-sm";
-//    }
     $task_id = $row['task_id'];
             $emp_id1 = $row['emp_id']; 
             $task = $row['task'];
             $assignby = $row['assignby'];
+            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+        
+            while ($report_row = mysqli_fetch_assoc($qry1))
+            {
+            if (strlen($report_row['report_to']) != 0) 
+            {
+                $report_to = $report_row['report_to'];
+                
+            }
+            else{
+                $report_to = "";
+            }
+            
+            }
             $task_doc = $row['task_doc'];
-            $work_assign_date = $row['work_assign_date'];
-            $work_com_date = $row['work_com_date'];
+            $work_assign_date = strtotime($row['work_assign_date']);
+            $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
+
+            $work_due_date = strtotime($row['work_due_date']);
+            $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
+
+            $work_com_date = strtotime($row['work_com_date']);
+            if ($work_com_date){
+                
+                $work_com_date = date( 'd-m-y g:i:s A', $work_com_date);
+            }
            $status  = $row['status'];
-                $remark  = $row['remark'];
+               $remark  = $row['remark'];
     ?>
                     <tr>
   <td><?php echo $count;?></td>
   <td> <?php echo $app_code_obj->getName($emp_id1);?></td>
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
+  <td><?php echo $app_code_obj->getName($report_to);?></td>
   <td>
       <?php if($task_doc !='')
       {?>
@@ -115,6 +120,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <?php }?>
   </td> 
     <td><?php echo $work_assign_date;?></td> 
+    <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
   <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
 

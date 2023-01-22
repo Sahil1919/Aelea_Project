@@ -34,7 +34,7 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Do Next Cancel</span></li>
+    <li class="breadcrumb-item"><span>Assign Do Next Close</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -47,7 +47,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next Cancel</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next Close</h5>                                   
                                 </div>  
                             </div>
                                 <div class="element-box">
@@ -58,12 +58,13 @@ END - Breadcrumbs
                         <th>Employee Name</th>
                         <th>Do Next</th>
                          <th>Assigned By</th>
+                         <th>Report To</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
+                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                              <th>Status</th>
-                             <th>Remark</th>
-       <th>Change Status/Transfer Concern/Share Concern</th>
+                   <th>Change Status/Transfer Concern/Share Concern</th>
                     </tr>
         </thead>
         <tbody>
@@ -73,42 +74,45 @@ END - Breadcrumbs
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
-  
-   // $id = $row['id'];
-//            $emp_code = $row['emp_code'];
-//            $emp_name = $row['emp_name'];
-//            $user_id = $row['user_id'];
-//            $pswd = $row['pswd'];
-//            $status = $row['status'];
-//            $created = $row['created'];
-//            $user_role = $row['user_role'];
-//            $emp_pro = $row['emp_pro'];
-//            $email_id = $row['email_id'];
-//            $emp_mob = $row['emp_mob'];
-//                                                                             $status = '';
-//    $btnClass = '';
-//    if ($row['status'] == '1') {
-//        $btnClass = "btn  btn-success btn-sm";
-//        $status = "Active";
-//    } else {
-//        $status = "Deactive";
-//        $btnClass = "btn btn-danger btn-sm";
-//    }
     $task_id = $row['task_id'];
             $emp_id1 = $row['emp_id']; 
             $task = $row['task'];
             $assignby = $row['assignby'];
+            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+        
+            while ($report_row = mysqli_fetch_assoc($qry1))
+            {
+            if (strlen($report_row['report_to']) != 0) 
+            {
+                $report_to = $report_row['report_to'];
+                
+            }
+            else{
+                $report_to = "";
+            }
+            
+            }
             $task_doc = $row['task_doc'];
-            $work_assign_date = $row['work_assign_date'];
-            $work_com_date = $row['work_com_date'];
+            $work_assign_date = strtotime($row['work_assign_date']);
+            $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
+
+            $work_due_date = strtotime($row['work_due_date']);
+            $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
+
+            $work_com_date = strtotime($row['work_com_date']);
+            if ($work_com_date){
+                
+                $work_com_date = date( 'd-m-y g:i:s A', $work_com_date);
+            }
            $status  = $row['status'];
-                $remark  = $row['remark'];
+               $remark  = $row['remark'];
     ?>
                     <tr>
   <td><?php echo $count;?></td>
   <td> <?php echo $app_code_obj->getName($emp_id1);?></td>
   <td><?php echo $task;?></td>
   <td><?php echo $assignby;?></td> 
+  <td><?php echo $app_code_obj->getName($report_to);?></td>
   <td>
       <?php if($task_doc !='')
       {?>
@@ -116,17 +120,16 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <?php }?>
   </td> 
     <td><?php echo $work_assign_date;?></td> 
+    <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a></td> 
-  <td><?php echo $remark;?></td>
-
+  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
 
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
-                             <td>
+                        <td>
                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
@@ -138,7 +141,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 </td>
                     </tr>
 <?php }?>
-        </tbody> </table>
+             </tbody>   </table>
    </div>
                             </div>
            
@@ -151,7 +154,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 
 <?php include './includes/Plugin.php'; ?>
         <?php include './includes/admin_footer.php'; ?>
-                                  <script>
+                                 <script>
 $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
@@ -160,4 +163,4 @@ $(document).ready(function() {
         ]
     } );
 } );
-        </script>               
+        </script>                

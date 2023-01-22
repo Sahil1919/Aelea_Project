@@ -33,8 +33,8 @@ if (isset($_POST['submit'])) {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="emp_concern_dash.php">Back</a></li>
-    <li class="breadcrumb-item"><span>Assign Concern WIP</span></li>
+    <li class="breadcrumb-item"><a href="emp_a&b_dash.php">Back</a></li>
+    <li class="breadcrumb-item"><span>Assign Do Next Close</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -47,7 +47,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern List</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next Close</h5>                                   
                                 </div>  
                             </div>
                                 <div class="element-box">
@@ -61,17 +61,16 @@ END - Breadcrumbs
                          <th>Report To</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
-                            <!-- <th>Work Due Date</th> -->
+                            <th>Work Due Date</th>
                             <th>Work Complete Date</th>
                              <th>Status</th>
-                             <th>Remark</th>
-                   <!-- <th>Change Status/Transfer Concern/Share Concern</th> -->
+                   <th>Change Status/Transfer Concern/Share Concern</th>
                     </tr>
         </thead>
         <tbody>
                                                                <?php
                                                             $emp_id=  $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_concern where emp_id='$emp_id' and status='WIP' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' and status='Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -121,17 +120,16 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <?php }?>
   </td> 
     <td><?php echo $work_assign_date;?></td> 
-    <!-- <td><?php echo $work_due_date;?></td>  -->
+    <td><?php echo $work_due_date;?></td> 
   <td><?php echo $work_com_date;?></td> 
-  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> </td>
-  <td><?php echo $remark;?></td> 
+  <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> <br><?php echo $remark;?></td> 
 
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
-                        <!-- <td>
+                        <td>
                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
@@ -140,7 +138,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <br>
                                   <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
                               
-                                </td> -->
+                                </td>
                     </tr>
 <?php }?>
              </tbody>   </table>

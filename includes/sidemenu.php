@@ -224,8 +224,12 @@
                                 </div>
                                 <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
                                 <ul>
+                                    <?php if ($_SESSION['User_type']=='employee'){?>
+                                   <li><a href="update_profile_for_emp.php"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
+                                   <?php } else {?>
                                    <li><a href="update_emp_profile.php"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a></li>
-                                    <li><a href="change_password.php"><i class="os-icon os-icon-others-43"></i><span>Change Password</span></a></li>
+                                   <?php }?> 
+                                   <li><a href="change_password.php"><i class="os-icon os-icon-others-43"></i><span>Change Password</span></a></li>
                                     <li><a href="logout.php"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a></li>
                                 </ul>
                             </div>
@@ -238,7 +242,7 @@
                         
                     ?>
                            <ul class="main-menu" style="height: 840px;">
-,
+
                         <li class="">
                             <a href="Dashboard.php">
                                 <div class="icon-w">

@@ -72,6 +72,7 @@ END - Breadcrumbs
                         <!-- <th>Role Type</th> -->
                         <th>Concern</th>
                          <th>Assigned By</th>
+                         <th>Report To</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
                            <th>Work Due Date</th>
@@ -101,6 +102,20 @@ END - Breadcrumbs
                // $user_role = $row['user_role'];
                $task = $row['task'];
                $assignby = $row['assignby'];
+               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+        
+            while ($report_row = mysqli_fetch_assoc($qry1))
+            {
+            if (strlen($report_row['report_to']) != 0) 
+            {
+                $report_to = $report_row['report_to'];
+                
+            }
+            else{
+                $report_to = "";
+            }
+            
+            }
                $task_doc = $row['task_doc'];
                // var_dump($task_doc);
                $work_assign_date = strtotime($row['work_assign_date']);
@@ -124,7 +139,8 @@ END - Breadcrumbs
      <td> <?php echo $app_code_obj->getName($emp_id);?></td>
      <!-- <td><?php echo $app_code_obj->get_User_role($emp_id);?></td>  -->
      <td><?php echo $task;?></td>
-     <td><?php echo $assignby;?></td> 
+     <td><?php echo $assignby;?></td>
+     <td><?php echo $app_code_obj->getName($report_to);?></td> 
      <td>
          <?php if($task_doc !='' && $task_doc !=0)
          {?>
@@ -204,6 +220,20 @@ END - Breadcrumbs
                // $user_role = $row['user_role'];
                $task = $row['task'];
                $assignby = $row['assignby'];
+               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+        
+            while ($report_row = mysqli_fetch_assoc($qry1))
+            {
+            if (strlen($report_row['report_to']) != 0) 
+            {
+                $report_to = $report_row['report_to'];
+                
+            }
+            else{
+                $report_to = "";
+            }
+            
+            }
                $task_doc = $row['task_doc'];
                // var_dump($task_doc);
                $work_assign_date = strtotime($row['work_assign_date']);
@@ -227,7 +257,8 @@ END - Breadcrumbs
      <td> <?php echo $app_code_obj->getName($emp_id);?></td>
      <!-- <td><?php echo $app_code_obj->get_User_role($emp_id);?></td>  -->
      <td><?php echo $task;?></td>
-     <td><?php echo $assignby;?></td> 
+     <td><?php echo $assignby;?></td>
+     <td><?php echo $app_code_obj->getName($report_to);?></td> 
      <td>
          <?php if($task_doc !='' && $task_doc !=0)
          {?>
@@ -301,6 +332,20 @@ END - Breadcrumbs
                // $user_role = $row['user_role'];
                $task = $row['task'];
                $assignby = $row['assignby'];
+               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+        
+            while ($report_row = mysqli_fetch_assoc($qry1))
+            {
+            if (strlen($report_row['report_to']) != 0) 
+            {
+                $report_to = $report_row['report_to'];
+                
+            }
+            else{
+                $report_to = "";
+            }
+            
+            }
                $task_doc = $row['task_doc'];
                // var_dump($task_doc);
                $work_assign_date = strtotime($row['work_assign_date']);
@@ -324,7 +369,8 @@ END - Breadcrumbs
      <td> <?php echo $app_code_obj->getName($emp_id);?></td>
      <!-- <td><?php echo $app_code_obj->get_User_role($emp_id);?></td>  -->
      <td><?php echo $task;?></td>
-     <td><?php echo $assignby;?></td> 
+     <td><?php echo $assignby;?></td>
+     <td><?php echo $app_code_obj->getName($report_to);?></td> 
      <td>
          <?php if($task_doc !='' && $task_doc !=0)
          {?>

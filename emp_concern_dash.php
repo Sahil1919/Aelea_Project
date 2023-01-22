@@ -83,21 +83,21 @@ END - Breadcrumbs
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="emp_assign_concern_list_close.php">
                                     <div class="label">Close Concern</div>
-                                    <div class="value"><?php echo $close_concern = 0; ?></div>
+                                    <div class="value"><?php echo $close_concern; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="emp_assign_concern_list_wip.php">
                                     <div class="label">WIP Concern</div>
-                                    <div class="value"><?php echo $wip_concern = 0; ?></div>
+                                    <div class="value"><?php echo $wip_concern; ?></div>
                                </a>
                             </div>
 
                             <div class="col-sm-4 col-xxxl-3">
                                 <a class="element-box el-tablo" href="emp_assign_concern_list_cancel.php">
                                     <div class="label">Cancel Concern</div>
-                                    <div class="value"><?php echo $cancel_task = 0; ?></div>
+                                    <div class="value"><?php echo $cancel_task; ?></div>
                                </a>
                             </div>
                         </div>

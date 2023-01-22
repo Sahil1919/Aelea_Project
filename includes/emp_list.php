@@ -51,7 +51,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
               {
                 $report_code = $report_row['emp_code'];
                 $report_name = $report_row['emp_name'];
-                echo $report_name;
+                // echo $report_name;
               }         
             }
             else{
