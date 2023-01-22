@@ -189,9 +189,32 @@ jQuery(document).ready(function() {
             jQuery('textarea[name=remark]').hide();  
             jQuery('div[name=remark]').hide(); 
 
-        }  else {
-            // jQuery('textarea[name=other_remark]').hide();  
+        }else if (jQuery(this).val() === 'WIP'){
+            
+            jQuery('div[name=concern]').hide();  
+            jQuery('label[name=concern]').hide();  
+            jQuery('input[name=concern]').hide(); 
+            jQuery('div[name=duedate]').hide();  
+            jQuery('label[name=duedate]').hide();  
+            jQuery('input[name=duedate]').hide(); 
             jQuery('textarea[name=other_remark]').hide();  
+            jQuery('textarea[name=other_remark1]').hide();  
+            jQuery('div[name=other_remark]').hide(); 
+            jQuery('div[name=other_remark1]').hide();
+            jQuery('label[name=other_remark]').hide();
+            jQuery('label[name=other_remark1]').hide();    
+            jQuery('input[name=file_attachment]').hide(); 
+            jQuery('label[name=file_attachment]').hide(); 
+            jQuery('div[name=file_attachment]').hide(); 
+            jQuery('div[name=remark]').show();  
+            jQuery('textarea[name=remark]').show();  
+            jQuery('div[name=remark]').show(); 
+
+        }  
+        
+        else {
+            // jQuery('textarea[name=other_remark]').hide();  
+            jQuery('textarea[name=other_remark]').show();  
             jQuery('textarea[name=other_remark1]').hide();  
             jQuery('div[name=other_remark]').hide(); 
             jQuery('div[name=other_remark1]').hide();
@@ -200,9 +223,9 @@ jQuery(document).ready(function() {
             jQuery('input[name=file_attachment]').hide(); 
             jQuery('label[name=file_attachment]').hide(); 
             jQuery('div[name=file_attachment]').hide(); 
-            jQuery('div[name=remark]').show();  
-            jQuery('textarea[name=remark]').show();  
-            jQuery('div[name=remark]').show(); 
+            jQuery('div[name=remark]').hide();  
+            jQuery('textarea[name=remark]').hide();  
+            jQuery('div[name=remark]').hide(); 
         }
     });
 });
@@ -229,14 +252,15 @@ jQuery(document).ready(function() {
                             <div class="form-group"><label for="">Change Status</label>
                                 <select id='status' name="status" class="form-control" >
                                     <option value='select' selected >--Select--</option>
-                                    <?php  if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']='reporting manager' )
+                                    <?php  if ($_SESSION['User_type']=='employee')
                                     {?>
-                                        <option value="Open">Open</option>
+                                        <!-- <option value="Open">Open</option> -->
                                         <option value="WIP">WIP</option>
                                         <option value="Close">Close</option>  
                                         <option value="Cancel">Cancel</option>
                                         
                                     <?php } else {?>
+                                        <option value="Open">Open</option>
                                     <option value="WIP">WIP</option>
                                     <option value="Close">Close</option>  
                                     <option value="Cancel">Cancel</option>
@@ -261,8 +285,8 @@ jQuery(document).ready(function() {
                         </div>
                         
                         <div class="col-sm-3" name='concern'>
-                            <div class="form-group" name='concern'><label for="" name='concern'>Concern</label>
-                                <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Concern" name='concern' ></textarea>
+                            <div class="form-group" name='concern'><label for="" name='concern'>Do Next</label>
+                                <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Do Next" name='concern' ></textarea>
                             </div>
                         </div>
 

@@ -200,7 +200,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
 <?php
  if ($_SESSION['User_type'] == 'reporting manager'){
     $sess_report_id = $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT assign_task.`task_id`, assign_task.emp_id,assign_task.task,assign_task.status,assign_task.`assignby`,
+                 $qry = mysqli_query($connection, "SELECT DISTINCT assign_task.`task_id`, assign_task.emp_id,assign_task.task,assign_task.status,assign_task.`assignby`,
                  assign_task.task_doc,assign_task.work_assign_date,assign_task.work_due_date,assign_task.work_com_date,assign_task.remark,assign_task.Achievements,
                  assign_task.Benefits,assign_task.attachments FROM assign_task,emp_login where user_role IN ('employee','reporting manager') and emp_id=id and report_to='36' ")
                   or die("select query fail" . mysqli_error());

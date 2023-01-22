@@ -20,7 +20,7 @@ if (isset($_POST['update'])) {
     //$profile = $_POST['profile'];
     // $userid = $_POST['userid'];
     // $pswd = $_POST['pswd'];
-    $emp_role = $_POST['usertype'];
+    $emp_role = strtolower($_POST['usertype']);
     $emp_report_to = $_POST['report_to'];
        $query1 = "select * from emp_login where id=" . $emp_id . "";
         $select_userprofile_image1 = mysqli_query($connection, $query1);

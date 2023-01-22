@@ -14,9 +14,10 @@ if (isset($_POST['submit'])) {
        $emp_id=  $_SESSION['user'];
     $employee_id =$emp_id; //$_POST['empid'];
            $task  = $_POST['task'];
+           $duedate = $_POST['duedate'];
            //  = $_POST['file_attachment'];
-    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'Open')";
+    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`,`work_due_date`, `status`)";
+     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'$duedate','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -32,7 +33,7 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assign Concern</span></li>
+    <li class="breadcrumb-item"><span>Assign Do Next</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -45,7 +46,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Concern</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assign Do Next</h5>                                   
                                 </div>  
                             </div>
                                   <form class="container" action="#" method="post" enctype="multipart/form-data">
@@ -84,6 +85,11 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Concern</label>
                                         <input class="form-control" name="task" placeholder="Enter Concern" type="text">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group"><label for="">Due Date </label>  
+                                        <input class="form-control" id="from-datepicker" name="duedate" placeholder="" type="datetime-local" >                                      
                                     </div>
                                 </div>
   <div class="col-sm-3">

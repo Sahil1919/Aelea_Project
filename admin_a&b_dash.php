@@ -93,7 +93,7 @@ END - Breadcrumbs
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">
-                                <a class="element-box el-tablo" href="total_list_a&b.php">
+                                <a class="element-box el-tablo" href="total_a&b_done.php">
                                     <div class="label">Close</div>
                                     <div class="value"><?php echo $close_task; ?></div>
  </a>

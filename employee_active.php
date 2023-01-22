@@ -154,7 +154,7 @@ END - Breadcrumbs
 
 if ($_SESSION['User_type']=='reporting manager'){
     $sess_report_id = $_SESSION['user'];
-    echo $sess_report_id;
+    // echo $sess_report_id;
     $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and status = '1' and report_to= '$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
 }
 else{

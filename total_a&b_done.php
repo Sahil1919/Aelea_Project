@@ -88,7 +88,7 @@ END - Breadcrumbs
         <tbody>
                                  <?php
                  if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-                    $qry = mysqli_query($connection, "SELECT * FROM assign_task order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                    $qry = mysqli_query($connection, "SELECT * FROM assign_task where status = 'Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
    $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');

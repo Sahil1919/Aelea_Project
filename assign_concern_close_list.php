@@ -95,7 +95,7 @@ END - Breadcrumbs
         <tbody>
       <?php
       if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-        $qry = mysqli_query($connection, "SELECT * FROM assign_concern and status= 'Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -196,7 +196,7 @@ $task_id = $row['task_id'];
 if ($_SESSION['User_type'] == 'reporting manager'){
 $sess_report_id = $_SESSION['user'];
         $qry = mysqli_query($connection, "SELECT assign_concern.`task_id`, assign_concern.emp_id,assign_concern.task,assign_concern.status,assign_concern.`assignby`,
-        assign_concern.task_doc,assign_concern.work_assign_date,assign_concern.work_due_date,assign_concern.work_com_date,assign_concern.remark,assign_concern.attachments FROM assign_concern,emp_login where user_role IN ('employee','reporting manager') and assign_concern.status= 'Close' and emp_id=id and report_to='$sess_report_id' ")
+        assign_concern.task_doc,assign_concern.work_assign_date,assign_concern.work_due_date,assign_concern.work_com_date,assign_concern.remark,assign_concern.attachments FROM assign_concern,emp_login where assign_concern.status='Close' and user_role IN ('employee','reporting manager') and emp_id=id and report_to='$sess_report_id' ")
          or die("select query fail" . mysqli_error());
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
@@ -294,7 +294,7 @@ $task_id = $row['task_id'];
            </tr>
 <?php }
 // ANother While loop for Manager
-$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern where assign_concern.emp_id='$sess_report_id' and status='Close' ") or die("select query fail" . mysqli_error());
+$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern where status='Close' and  assign_concern.emp_id='$sess_report_id'") or die("select query fail" . mysqli_error());
 // $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
