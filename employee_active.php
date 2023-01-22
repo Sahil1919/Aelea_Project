@@ -149,16 +149,18 @@ END - Breadcrumbs
                     </tr>
             </thead> 
             <tbody>
-    <?php
-    if ($_SESSION['User_type']=='reporting manager'){
-        $sess_report_id = $_SESSION['user'];
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='1' and  `user_role` IN ('employee')") or die("select query fail" . mysqli_error());
-    }
-    else{
-        $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='0' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" . mysqli_error());
-    }
 
-    $count = 0;
+    <?php
+
+if ($_SESSION['User_type']=='reporting manager'){
+    $sess_report_id = $_SESSION['user'];
+    echo $sess_report_id;
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and status = '1' and report_to= '$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+}
+else{
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='1' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" . mysqli_error());
+}
+$count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   
