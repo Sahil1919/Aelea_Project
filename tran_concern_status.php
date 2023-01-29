@@ -7,9 +7,9 @@ if (isset($_POST['submit'])) {
 
     if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager' ){
         $task_id=$_GET['task_id'];
-        echo $task_id;    
+        //echo $task_id;    
     $employee_id = $_POST['empid'];
-    echo $employee_id;
+    //echo $employee_id;
            $query="UPDATE `assign_concern` SET `emp_id`='$employee_id' WHERE `task_id`='$task_id' ";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
