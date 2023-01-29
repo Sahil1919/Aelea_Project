@@ -4999,7 +4999,7 @@ input[type="button"].btn-block {
     padding: .75rem 1rem;
     margin-bottom: 1rem;
     list-style: none;
-    background-color: #e9ecef;
+    background-color: #0e7be8;
     border-radius: 4px;
     
 }
@@ -5008,20 +5008,24 @@ input[type="button"].btn-block {
     display: inline-block;
     padding-right: .5rem;
     padding-left: .5rem;
-    color: #636c72;
+    color: #0b7ced;
     content: "/"
 }
 
 .breadcrumb-item + .breadcrumb-item:hover::before {
+    color: #037be4;
     text-decoration: underline;
+    text-decoration-color: #0e7be8;
 }
 
 .breadcrumb-item + .breadcrumb-item:hover::before {
-    text-decoration: none
+    text-decoration: none;
+    text-decoration-color: #0e7be8;
 }
 
 .breadcrumb-item.active {
-    color: #636c72
+    color: #0e7be8;
+    text-decoration-color: #0e7be8
 }
 
 .pagination {
@@ -11566,13 +11570,14 @@ legend:before {
     margin-bottom: 0px;
     display: inline-block;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 20px;
+    
     
     font-family: "Avenir Next W01", "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
 }
 
 .breadcrumb li a {
-    color: #3E4B5B
+    color: #0e7be8
 }
 
 .breadcrumb li span {

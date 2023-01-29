@@ -176,6 +176,22 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
+
+					$pdf->Ln(3);
 					$concern = $row['task'];
 					$assign_by = $row['assignby'];
 					$work_assign_date = strtotime($row['work_assign_date']);
@@ -361,6 +377,22 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
+
+					$pdf->Ln(3);
 					$concern = $row['task'];
 					$assign_by = $row['assignby'];
 					$work_assign_date = strtotime($row['work_assign_date']);
@@ -542,6 +574,22 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
+
+					$pdf->Ln(3);
 					$concern = $row['task'];
 					$assign_by = $row['assignby'];
 					$work_assign_date = strtotime($row['work_assign_date']);
@@ -677,6 +725,8 @@ if ($params['search'] != null)
 			break;
 		}
     }
+
+
 	// EMP Name Logic
     $qry = mysqli_query($connection, "SELECT emp_name FROM pdf_views ") or die("select query fail" . mysqli_error());
     while($row= mysqli_fetch_assoc($qry)){
@@ -721,6 +771,22 @@ if ($params['search'] != null)
 					$emp_mob = $row['emp_mob'];
 					$pdf->SetFont('helvetica', 'B',10); 
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
+
+					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
 
 					$pdf->Ln(3);
 					$concern = $row['task'];
@@ -908,6 +974,22 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
+
+					$pdf->Ln(3);
 					$concern = $row['task'];
 					$assign_by = $row['assignby'];
 					$work_assign_date = strtotime($row['work_assign_date']);
@@ -1087,6 +1169,22 @@ if ($params['search'] != null)
 					$emp_mob = $row['emp_mob'];
 					$pdf->SetFont('helvetica', 'B',10); 
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
+
+					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
 
 					$pdf->Ln(3);
 					$concern = $row['task'];
@@ -1225,6 +1323,7 @@ if ($params['search'] != null)
         }
     }
 
+	//-- Search by Concern logic -- //
     $qry = mysqli_query($connection, "SELECT task FROM pdf_views ") or die("select query fail" . mysqli_error());
     while($row= mysqli_fetch_assoc($qry)){
         $task = strtolower($row['task']);
@@ -1269,6 +1368,22 @@ if ($params['search'] != null)
 					$emp_mob = $row['emp_mob'];
 					$pdf->SetFont('helvetica', 'B',10); 
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
+
+					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
 
 					$pdf->Ln(3);
 					$concern = $row['task'];
@@ -1456,6 +1571,22 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
+
+					$pdf->Ln(3);
 					$concern = $row['task'];
 					$assign_by = $row['assignby'];
 					$work_assign_date = strtotime($row['work_assign_date']);
@@ -1635,6 +1766,22 @@ if ($params['search'] != null)
 					$emp_mob = $row['emp_mob'];
 					$pdf->SetFont('helvetica', 'B',10); 
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
+
+					$pdf->Ln(3);
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+				
+					$report_row = mysqli_fetch_assoc($qry2);
+					$report_to = $report_row['report_to'];
+					if ($report_to !=0){
+						$report_to_code = $app_code_obj->getName($report_to); 
+						$report_to_name = $app_code_obj->get_User_role($report_to);
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - '.$report_to_code, 0, 1);
+					}
+					else{
+						$pdf->SetFont('helvetica', 'B',10); 
+						$pdf->Cell(189, 5, 'Reporting To - ', 0, 1);
+					}
 
 					$pdf->Ln(3);
 					$concern = $row['task'];
@@ -1777,6 +1924,7 @@ if ($params['search'] != null)
 else
 {
 
+	// --- Select all Download reoprt 
     $qry = mysqli_query($connection, "SELECT * FROM pdf_views ") or die("select query fail" . mysqli_error());
 	$count = 0;
 	$result=mysqli_query($connection,"SELECT count(*) as total from pdf_views");
@@ -2165,9 +2313,10 @@ else
 			$pdf->writeHtml($htlm);	
 			
 			$pdf->Ln(10);
-			$pdf->SetFont('times','i',9);
-			$pdf->MultiCell(189, 15, 'This is a Computerize generated Work Submission Report is an important document for both the company and the users. This act as proof of the
-			Do Next and Concern task they completed. While for the company, it serves as a copy for work completion and remark Thank You.',0,'C',0,1,'','',true);
+			$pdf->SetFont('times','i',10);
+			$pdf->MultiCell(189, 15, 'This is a Computerize generated Work Submission Report is an important document for both the company and the users. 
+			This act as  proof of the Do Next task they completed. While for the company, 
+			it serves as a copy for work completion and remark Thank You. ',0,'C',0,1,'','',true);
 			$pdf->Ln(12);
 			$pdf->SetFont('times','B',10);
 			$pdf->Cell(20,1,'__________________',0,0);
