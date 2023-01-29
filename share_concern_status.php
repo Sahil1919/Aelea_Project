@@ -5,51 +5,52 @@ $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
 
-    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
-        $userID = $_SESSION['user'];
-   $task_id=$_GET['task_id'];
-   $qry = mysqli_query($connection, "SELECT `emp_id` FROM assign_concern where task_id=$task_id ") or die("select query fail" . mysqli_error());
-    $row = mysqli_fetch_assoc($qry);
-    $empid=$row['emp_id'];
-   $task_id = $task_id+1;
+//     if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager' ){
+//         $userID = $_SESSION['user'];
+//    $task_id=$_GET['task_id'];
+//    $qry = mysqli_query($connection, "SELECT `emp_id` FROM assign_concern where task_id=$task_id ") or die("select query fail" . mysqli_error());
+//     $row = mysqli_fetch_assoc($qry);
+//     $empid=$row['emp_id'];
+//    $task_id = $task_id+1;
     
-    $employee_id = $_POST['empid'];
+//     $employee_id = $_POST['empid'];
    
-$query = "INSERT INTO `assign_concern`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
-    $update_password = mysqli_query($connection, $query);
-    if (!$update_password) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } 
+// $query = "INSERT INTO `assign_concern`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+//      $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
+//     $update_password = mysqli_query($connection, $query);
+//     if (!$update_password) {
+//         die('QUERY FAILD change pashword' . mysqli_error($connection));
+//     } 
 
-           $query="UPDATE assign_concern AS tab1 , assign_concern AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
-           WHERE tab1.emp_id=$empid AND  tab2.`emp_id` =$employee_id";
-    $update_password = mysqli_query($connection, $query);
-    if (!$update_password) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
-    }
-    }
-    else{
+//            $query="UPDATE assign_concern AS tab1 , assign_concern AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
+//            WHERE tab1.emp_id=$empid AND  tab2.`emp_id` =$employee_id";
+//     $update_password = mysqli_query($connection, $query);
+//     if (!$update_password) {
+//         die('QUERY FAILD change pashword' . mysqli_error($connection));
+//     }
+//     }
+//     else{
    $userID = $_SESSION['user'];
    $task_id=$_GET['task_id'];
    $task_id = $task_id+1;
     
     $employee_id = $_POST['empid'];
+    
    
-$query = "INSERT INTO `assign_concern`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','','Admin','',now(),'','')";
+$query = "INSERT INTO `assign_concern`( `emp_id`,`userid`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+     $query .= " VALUES ('$employee_id','$userID','','Admin','',now(),'','')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
     } 
 
-           $query="UPDATE assign_concern AS tab1 , assign_concern AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
-           WHERE tab1.emp_id=$userID AND  tab2.`emp_id` =$employee_id";
+    $query="UPDATE assign_concern AS tab1 , assign_concern AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
+           WHERE  tab2.`emp_id` =$employee_id";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
     } }
-}
+// }
 ?>
 <!--------------------
 START - Breadcrumbs
@@ -87,10 +88,25 @@ END - Breadcrumbs
                                     <div class="form-group"><label for="">Employee</label>
                                         <select id="emp_id" name="empid" class="form-control select2">
                                             <option>--select Employee--</option>
-                                                                                                       <?php
+    <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
-$count = 0;
+    $sess_report_id = $_SESSION['user'];
+    if ($_SESSION['User_type']=='reporting manager'){    
+                                                            
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+    }
+    elseif ($_SESSION['User_type']=='management' || $_SESSION['User_type']=='admin'){
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
+    }
+    else{
+        $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+        $row = mysqli_fetch_assoc($qry1);
+        
+        $report_to_id = $row['report_to'];
+        
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where report_to = '$report_to_id' ") or die("select query fail" . mysqli_error());
+    }
+    $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
   

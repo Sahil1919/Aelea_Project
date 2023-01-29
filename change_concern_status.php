@@ -5,39 +5,7 @@ $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
 
-    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager' ){
-        $emp_id = $_SESSION['user'];
-    $task_id = $_GET['task_id'];
     
-    $status = $_POST['status'];
-    $remark = $_POST['remark'];
-    // echo $remark;
-    //$status  = $_POST['status'];
-//    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
-//     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'Open')";
-    $query = "UPDATE `assign_concern` SET ";
-//                  $query .=  "`task_id`='',";
-//                  $query .=  "`emp_id`='',";
-    //   $query .=  "`task`='',";
-    //    $query .=  "`assignby`='',";
-    //   $query .=  "`task_doc`='',";
-    //    $query .=  "`work_assign_date`='',";
-    if ($status=='Close') {
-        $query .= "`work_com_date`=now(),";
-    }
-
-    $query .= "`status`='$status',";
-    $query .= "`remark`='$remark' WHERE `task_id`='$task_id'";
-    $update_password = mysqli_query($connection, $query);
-    if (!$update_password) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } else {
-
-        echo "<script>alert('Record Save Successfully'); window.location.href='emp_assign_task_list.php';</script>";
-        // return 'pass';
-    }
-    }
-
     $emp_id = $_SESSION['user'];
     $task_id = $_GET['task_id'];
     // $employee_id =$emp_id; 
@@ -62,11 +30,9 @@ if (isset($_POST['submit'])) {
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } else {
-
-        echo "<script>alert('Record Save Successfully'); window.location.href='emp_assign_task_list.php';</script>";
-        // return 'pass';
-    }
+    } 
+    
+    
 }
 ?>
 <!--------------------

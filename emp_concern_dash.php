@@ -4,34 +4,35 @@ include './includes/admin_header.php';
 
 ?>
 <?php 
-$emp_id=  $_SESSION['user'];
+$assignby=  ucfirst($_SESSION['emp_name']);
+$emp_id = $_SESSION['user'];
 
-$retailer_account = "SELECT task_id FROM assign_concern where emp_id='$emp_id'";
+$retailer_account = "SELECT task_id FROM assign_concern where assignby='$assignby' and userid='$emp_id'  or emp_id='$emp_id'";
 $Total_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $Total_task = mysqli_num_rows($result);
 }
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='Open' and  emp_id='$emp_id'";
+$retailer_account = "SELECT task_id FROM assign_concern where status='Open' or userid='$emp_id' and  emp_id='$emp_id' ";
 $open_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $open_concern = mysqli_num_rows($result);
 }
 
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='WIP' and  emp_id='$emp_id'";
+$retailer_account = "SELECT task_id FROM assign_concern where status='WIP' or userid='$emp_id' and  emp_id='$emp_id'";
 $wip_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $wip_concern = mysqli_num_rows($result);
 }
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='Close' and  emp_id='$emp_id'";
+$retailer_account = "SELECT task_id FROM assign_concern where status='Close' or userid='$emp_id' and  emp_id='$emp_id'";
 $close_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $close_concern = mysqli_num_rows($result);
 }
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='Cancel' and  emp_id='$emp_id'";
+$retailer_account = "SELECT task_id FROM assign_concern where status='Cancel' or userid='$emp_id' and  emp_id='$emp_id'";
 $cancel_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $cancel_task = mysqli_num_rows($result);

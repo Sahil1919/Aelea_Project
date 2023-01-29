@@ -123,7 +123,7 @@ else{
 <div class="scrollmenu">
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
     <li class="breadcrumb-item"><a id='donext' href="Dashboard.php" ><span>Dashboard</span></a></li>
-    <li class="breadcrumb-item"><a id='donext'><span>Do Next</span></a></li>
+    <li class="breadcrumb-item"><a id='donext' href="admin_donext_dash.php"><span>Do Next</span></a></li>
     <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
     <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concern</span></a></li>
 </ul>
@@ -143,7 +143,7 @@ END - Breadcrumbs
 
                     
                     </div>
-                    <h6 class="element-header">Do Next</h6>
+                    <h6 class="element-header">Concern</h6>
                     <div class="element-content">
                         <div class="row">
                             <div class="col-sm-4 col-xxxl-3">

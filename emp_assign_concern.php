@@ -5,7 +5,8 @@ include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
-    $assign_by = ucfirst($_SESSION['User_type']);
+    $assign_by = ucfirst($_SESSION['emp_name']);
+    $userid = $_SESSION['user'];
 $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
     
 if ($total>0){
@@ -22,8 +23,8 @@ $docs =  implode(",",$collector);
            $task  = $_POST['Concern'];
     // $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
-    $query = "INSERT INTO `assign_concern`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','$assign_by','$docs',now(),'','Open')";
+    $query = "INSERT INTO `assign_concern`( `emp_id`, `userid`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
+     $query .= " VALUES ('$employee_id','$userid','$task','$assign_by','$docs',now(),'','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));

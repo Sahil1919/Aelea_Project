@@ -66,12 +66,14 @@ END - Breadcrumbs
                              <th>Status</th>
                              <th>Remark</th>
                    <!-- <th>Change Status/Transfer Concern/Share Concern</th> -->
+                   <th>Delete</th>
                     </tr>
         </thead>
         <tbody>
                                                                <?php
-                                                            $emp_id=  $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_concern where emp_id='$emp_id' and status='Cancel' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                                                            $assignby=  ucfirst($_SESSION['emp_name']);
+                                                            $emp_id = $_SESSION['user'];
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Cancel'  or userid='$emp_id' and  emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -132,7 +134,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
                         <!-- <td>
-                                 <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
+                                 <a style="width: 100%;" class="btn btn-info" href="change_concern_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
                                   <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
@@ -141,6 +143,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
                               
                                 </td> -->
+                                <td><a class="btn btn-danger" href="assign_concern_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
                     </tr>
 <?php }?>
              </tbody>   </table>
