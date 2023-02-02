@@ -9,10 +9,14 @@ if (isset($_POST['submit'])) {
         $assign_by = ucfirst($_SESSION['User_type']);
         $task_id = $_GET['task_id'];
         $status = $_POST['status'];
-        $remark = $_POST['remark'];
-        $achievement = $_POST['other_remark'];
-        $benefit = $_POST['other_remark1'];
-        $concern = $_POST['Concern'];
+        $test_remark  = $_POST['remark'];
+        $remark = str_replace("'","''",$test_remark);
+        $test_achievement  = $_POST['other_remark'];
+        $achievement = str_replace("'","''",$test_achievement);
+        $test_benefit  = $_POST['other_remark1'];
+        $benefit = str_replace("'","''",$test_benefit);
+        $test_concern  = $_POST['Concern'];
+        $concern = str_replace("'","''",$test_concern);
         $due_date = $_POST['duedate'];
         // $work_assign_date = date( 'd-m-y g:i:s A' );
         $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
@@ -76,9 +80,12 @@ if (isset($_POST['submit'])) {
     $emp_id = $_SESSION['user'];
     $task_id = $_GET['task_id'];
     $status = $_POST['status'];
-    $remark = $_POST['remark'];
-    $achievement = $_POST['other_remark'];
-    $benefit = $_POST['other_remark1'];
+    $test_remark  = $_POST['remark'];
+    $remark = str_replace("'","''",$test_remark);
+    $test_achievement  = $_POST['other_remark'];
+    $achievement = str_replace("'","''",$test_achievement);
+    $test_benefit  = $_POST['other_remark1'];
+    $benefit = str_replace("'","''",$test_benefit);
     $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
     if ($total>0){
     for ($i=0; $i<$total; $i++) {

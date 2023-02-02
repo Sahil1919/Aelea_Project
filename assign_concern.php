@@ -20,7 +20,8 @@ for ($i=0; $i<$total; $i++) {
 $docs =  implode(",",$collector);
     
     $employee_id = $_POST['empid'];
-           $task  = $_POST['Concern'];
+    $test_task  = $_POST['Concern'];
+    $task = str_replace("'","''",$test_task);
     // $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_concern`( `emp_id`, `userid`,`task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";

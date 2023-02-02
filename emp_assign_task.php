@@ -13,7 +13,8 @@ if (isset($_POST['submit'])) {
     move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
        $emp_id=  $_SESSION['user'];
     $employee_id =$emp_id; //$_POST['empid'];
-           $task  = $_POST['task'];
+    $test_task  = $_POST['Concern'];
+    $task = str_replace("'","''",$test_task);
            $duedate = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`,`work_due_date`, `status`)";
