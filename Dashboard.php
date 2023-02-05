@@ -34,7 +34,18 @@ if (isset($_GET['UserID']) && isset($_GET['Status'])) {
     //  header("location:./admin/retailer_account_list.php");
     
 }
+if ($_SESSION['User_type'] == 'reporting manager'){
+                                    
+    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to = '$sess_report_to' ") or die("select query fail" . mysqli_error());
+    $count = mysqli_num_rows($qry);
+}
+elseif ($_SESSION['User_type'] == 'reporting manager'){
 
+}
+else{
+$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+$count = mysqli_num_rows($qry);
+}
 ?>
 <!--------------------
 START - Breadcrumbs
@@ -113,10 +124,22 @@ END - Breadcrumbs
 <?php include './includes/admin_footer.php'; ?>
         
        
-<!-- <script>
-
-var user_type = <?php echo(json_encode($_SESSION['User_type'])); ?>;
-$('#donext').on('click', function() {
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+ $(function() {
+  function newPost() {
+        var count = "<?= $count ?>"
+        if (count!=0){
+      $("#refresh_div").empty().load("test.php");
+        }
+        else {
+            $('#pos').addClass('messages-left').removeClass('messages-notifications os-dropdown-position-left');
+            $('#refresh_div').remove()
+            // $('#icon').append('<div class="messages-left"><i class="os-icon os-icon-mail-14"></i><div class="new-messages-count"></div></div>')
+            // $("#i").remove()
+        }
+   }
+    var res = setInterval(newPost, 500);
     
-    })
-</script>    -->
+ });
+</script> -->

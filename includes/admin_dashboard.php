@@ -25,6 +25,18 @@ $Deactive_emp = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $Deactive_emp = mysqli_num_rows($result);
 }
+if ($_SESSION['User_type'] == 'reporting manager'){
+                                    
+    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to = '$sess_report_to' ") or die("select query fail" . mysqli_error());
+    $count = mysqli_num_rows($qry);
+}
+elseif ($_SESSION['User_type'] == 'reporting manager'){
+
+}
+else{
+$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+$count = mysqli_num_rows($qry);
+}
 ?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>
@@ -53,3 +65,22 @@ if ($result = mysqli_query($connection, $retailer_account)) {
                             </div>                      
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+ $(function() {
+  function newPost() {
+        var count = "<?= $count ?>"
+        if (count!=0){
+      $("#refresh_div").empty().load("test.php");
+        }
+        else {
+            $('#pos').addClass('messages-left').removeClass('messages-notifications os-dropdown-position-left');
+            $('#refresh_div').remove()
+            // $('#icon').append('<div class="messages-left"><i class="os-icon os-icon-mail-14"></i><div class="new-messages-count"></div></div>')
+            // $("#i").remove()
+        }
+   }
+    var res = setInterval(newPost, 500);
+    
+ });
+</script>

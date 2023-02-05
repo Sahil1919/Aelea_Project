@@ -114,7 +114,9 @@ START - Chat Popup Box
 END - Chat Popup Box
 -------------------->
                     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script>
+    
     let toggleSwitch = document.querySelector('#theme');
 
     let theme = JSON.parse(localStorage.getItem('theme')); 
@@ -125,11 +127,17 @@ END - Chat Popup Box
         if (theme[1] == 'dark'){
             toggleSwitch.className = theme[0]
             document.querySelector("body").classList.add('color-scheme-dark')
+            // document.querySelector('.menu-w').classList.add('color-scheme-dark').add('color-style-transparent').remove('selected-menu-color-light').add('selected-menu-color-bright');
+            // document.querySelector('.top-bar').classList.add('color-scheme-transparent');
+            ele = document.querySelector('body')
+            ele.querySelectorAll('div')[2].classList = "menu-w menu-position-side menu-side-left menu-layout-compact sub-menu-style-over sub-menu-color-bright menu-activated-on-hover menu-has-selected-link color-scheme-dark color-style-transparent selected-menu-color-bright"
+            
         }
-        // else{
-        //     document.querySelector("body").classList.remove('color-scheme-dark')
-        // }
     }
+    else{
+        localStorage.setItem('theme', JSON.stringify(["os-toggler-w",'light']));
+    }
+    
 
     toggleSwitch.addEventListener('click', function(){
         let newTheme = toggleSwitch.className
