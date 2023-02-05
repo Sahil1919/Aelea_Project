@@ -113,10 +113,10 @@ END - Breadcrumbs
 <?php include './includes/admin_footer.php'; ?>
         
        
-<script>
+<!-- <script>
 
 var user_type = <?php echo(json_encode($_SESSION['User_type'])); ?>;
 $('#donext').on('click', function() {
     
     })
-</script>   
+</script>    -->

@@ -2,19 +2,24 @@
                         <!--------------------
 START - Color Scheme Toggler
 -------------------->
-<!--                        <div class="floated-colors-btn second-floated-btn">
-                            <div class="os-toggler-w">
+                       <div class="floated-colors-btn third-floated-btn">
+                            <div class="os-toggler-w" id="theme">
                                 <div class="os-toggler-i">
-                                    <div class="os-toggler-pill"></div>
+                                    <div class="os-toggler-pill">
+
+                                    </div>
                                 </div>
-                            </div><span>Dark </span><span>Colors</span></div>-->
+                            </div>
+                            <span>Dark </span>
+                            <span>Mode</span>
+                        </div>
                         <!--------------------
 END - Color Scheme Toggler
 -------------------->
                         <!--------------------
 START - Demo Customizer
 -------------------->
-                        <div class="floated-customizer-btn third-floated-btn">
+                        <!-- <div class="floated-customizer-btn third-floated-btn">
                             <div class="icon-w"><i class="os-icon os-icon-ui-46"></i></div><span>Customizer</span></div>
                         <div class="floated-customizer-panel">
                             <div class="fcp-content">
@@ -28,7 +33,7 @@ START - Demo Customizer
                                         <div class="fcp-field"><label for="">Menu Color</label>
                                             <div class="fcp-colors menu-color-selector">
                                                 <div class="color-selector menu-color-selector color-bright selected"></div>
-                                                <!-- <div class="color-selector menu-color-selector color-green "></div> -->
+                                                <div class="color-selector menu-color-selector color-green "></div>
                                                 <div class="color-selector menu-color-selector color-dark"></div>
                                                 <div class="color-selector menu-color-selector color-light"></div>
                                                 <div class="color-selector menu-color-selector color-transparent"></div>
@@ -66,7 +71,7 @@ START - Demo Customizer
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <!--------------------
 END - Demo Customizer
 -------------------->
@@ -109,3 +114,97 @@ START - Chat Popup Box
 END - Chat Popup Box
 -------------------->
                     </div>
+<script>
+    let toggleSwitch = document.querySelector('#theme');
+
+    let theme = JSON.parse(localStorage.getItem('theme')); 
+    console.log("OLD",theme);
+
+    if (theme){
+
+        if (theme[1] == 'dark'){
+            toggleSwitch.className = theme[0]
+            document.querySelector("body").classList.add('color-scheme-dark')
+        }
+        // else{
+        //     document.querySelector("body").classList.remove('color-scheme-dark')
+        // }
+    }
+
+    toggleSwitch.addEventListener('click', function(){
+        let newTheme = toggleSwitch.className
+        // console.log("NEW",newTheme);
+        let theme_check = JSON.parse(localStorage.getItem('theme')); 
+
+        if (theme_check[1] != 'dark'){
+            localStorage.setItem('theme', JSON.stringify([newTheme+" "+"on",'dark']));
+
+            // console.log('theme change hua bhai');
+            // console.log(localStorage.getItem('theme'));
+        }
+        else{
+            // let exist_theme = theme[0].replace('on','')
+            localStorage.setItem('theme', JSON.stringify([newTheme.replace('on',''),"light"]));
+            // console.log('theme nahi change hua bhai');
+            // console.log(localStorage.getItem('theme'));
+        }
+    })
+
+
+
+   
+
+// if (currentTheme) {
+//     document.documentElement.setAttribute('data-theme', currentTheme);
+  
+//     if (currentTheme === 'dark') {
+//         toggleSwitch.checked = true;
+//     }
+// }
+
+// function switchTheme(e) {
+//     if (e.target.checked) {
+//         document.documentElement.setAttribute('data-theme', 'dark');
+//         localStorage.setItem('theme', 'dark');
+//     }
+//     else {        document.documentElement.setAttribute('data-theme', 'light');
+//           localStorage.setItem('theme', 'light');
+//     }    
+// }
+
+// toggleSwitch.addEventListener('change', switchTheme, false);
+        
+// const toggleSwitch = document.querySelector('#theme');
+// const currentTheme = localStorage.getItem('lightmode');
+
+
+// if (toggleSwitch.className == currentTheme){
+//     toggleSwitch.className = currenTheme
+//     console.log(toggleSwitch.className);
+// }
+// else{
+//     menuposbody.className = newmenupos[0]
+//     menupos.value = newmenupos[1]
+//     console.log(menupos.value);
+// }
+
+
+// // var menuoptions = menupos.querySelectorAll("option")
+// menupos.addEventListener('change', function(){
+//     if (menupos.value == "right"){
+//         newmenupos = ['full-screen with-content-panel menu-position-side menu-side-right','right']
+//         localStorage.setItem('newmenupos',JSON.stringify(newmenupos))
+//         console.log(localStorage.getItem('newmenupos'))
+//         console.log("Hogaya Bhai")
+//     }
+//     else{
+//         newmenupos = ['menu-position-side menu-side-left full-screen with-content-panel','left']
+//         localStorage.setItem('newmenupos',JSON.stringify(newmenupos))
+//         console.log(localStorage.getItem('newmenupos'))
+//         console.log("Hogaya Bhai")
+//     }
+    
+// })
+
+
+        </script>
