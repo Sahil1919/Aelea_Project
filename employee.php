@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     $pswd = $_POST['pswd'];
     $user_role = strtolower($_POST['usertype']);
     $report_to = strtolower($_POST['report_to']);
-    // print($report_to);
+    print($report_to);
     $qry = mysqli_query($connection, "SELECT emp_code FROM emp_login ") or die("select query fail" . mysqli_error());
     $flag = 0;
     while( $row = mysqli_fetch_assoc($qry)){
@@ -86,7 +86,7 @@ if (isset($_POST['update'])) {
     // $userid = $_POST['userid'];
     // $pswd = $_POST['pswd'];
     $emp_role = strtolower($_POST['usertype']);
-    $emp_report_to = $_POST['report_to'];
+    $emp_report_to = strtolower($_POST['report_to']);
        $query1 = "select * from emp_login where id=" . $emp_id . "";
         $select_userprofile_image1 = mysqli_query($connection, $query1);
         while ($row1 = mysqli_fetch_array($select_userprofile_image1)) {

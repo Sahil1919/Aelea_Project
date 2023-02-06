@@ -75,7 +75,7 @@
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Reporting To</label>
                                         <select id="rm_id" name="report_to" class="form-control select2">
-                                            <option>--Repoting Manager--</option>
+                                            <option></option>
                                             <?php
                                                           
                  $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error());

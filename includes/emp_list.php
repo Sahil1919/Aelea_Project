@@ -77,7 +77,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $emp_code;?></td>
   <td><?php echo $emp_name;?></td>
   <td><?php echo $user_role;?></td> 
-  <td><?php if (strlen($report_id) != 0) echo $report_code."/".$report_name; else echo $report_code.$report_name;?></td> 
+  <td><?php if (strlen($report_id) != 0) echo $report_code."/".$report_name; else echo ""?></td> 
   <td><?php echo $emp_mob;?></td> 
   <td><?php echo $email_id;?></td> 
   
