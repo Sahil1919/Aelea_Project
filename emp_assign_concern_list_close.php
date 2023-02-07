@@ -65,6 +65,7 @@ END - Breadcrumbs
                             <th>Work Complete Date</th>
                              <th>Status</th>
                              <th>Remark</th>
+                             <th>Attachments</th>
                    <!-- <th>Change Status/Transfer Concern/Share Concern</th> -->
                    <th>Delete</th>
                     </tr>
@@ -73,7 +74,7 @@ END - Breadcrumbs
                                                                <?php
                                                            $assignby=  ucfirst($_SESSION['emp_name']);
                                                            $emp_id = $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Close' and assignby='$assignby' or userid='$emp_id' and  emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Close'  or userid='$emp_id' and  emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error());
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -108,7 +109,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
                 $work_com_date = date( 'd-m-y g:i:s A', $work_com_date);
             }
            $status  = $row['status'];
-               $remark  = $row['remark'];
+           $remark  = $row['remark'];
+           $attachments = $row['attachments'];
     ?>
                     <tr>
   <td><?php echo $count;?></td>
@@ -127,6 +129,20 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $work_com_date;?></td> 
   <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> </td>
   <td><?php echo $remark;?></td> 
+  <td>
+  <?php if($attachments !='')
+                        {?>
+                        <?php $docs = explode(",",$attachments);?>
+                        <?php foreach($docs as $value) 
+                            {?>
+                            <?php  $value =  ltrim($value);?>                            
+                            <div>
+                                <br>
+                                <?php echo $value;?>
+                                <div>  <a href="attachment/<?php echo $value;?>" class="btn btn-primary">Download</a>                
+                        <?php }?>
+                        <?php }?>
+  </td>
 
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 

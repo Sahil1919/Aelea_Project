@@ -7,21 +7,21 @@ $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
     $assign_by = ucfirst($_SESSION['emp_name']);
     $userid = $_SESSION['user'];
-$total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
-    
-if ($total>0){
-for ($i=0; $i<$total; $i++) {
-    $source = $_FILES["file_attachment"]["tmp_name"][$i];
-    $destination = $_FILES["file_attachment"]["name"][$i];
-    $collector[] = $destination;
-    move_uploaded_file($source, "task_doc/$destination");
-  }
-}
-$docs =  implode(",",$collector);
     
     $employee_id = $_POST['empid'];
     $test_task  = $_POST['Concern'];
     $task = str_replace("'","''",$test_task);
+    $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
+    
+    if ($total>0){
+    for ($i=0; $i<$total; $i++) {
+        $source = $_FILES["file_attachment"]["tmp_name"][$i];
+        $destination = $_FILES["file_attachment"]["name"][$i];
+        $collector[] = $destination;
+        move_uploaded_file($source, "task_doc/$destination");
+    }
+    }
+    $docs =  implode(",",$collector);
     // $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_concern`( `emp_id`, `userid`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
@@ -93,7 +93,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Concern</label>
-                                        <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Do Next" ></textarea>
+                                        <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Concern" ></textarea>
                                     </div>
                                 </div>
 

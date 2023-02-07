@@ -12,6 +12,17 @@ if (isset($_POST['submit'])) {
     $status = $_POST['status'];
     $test_remark = $_POST['remark'];
     $remark = str_replace("'","''",$test_remark);
+
+    $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
+    if ($total>0){
+    for ($i=0; $i<$total; $i++) {
+        $source = $_FILES["file_attachment"]["tmp_name"][$i];
+        $destination = $_FILES["file_attachment"]["name"][$i];
+        $collector[] = $destination;
+        move_uploaded_file($source, "attachment/$destination");
+      }
+    }
+    $docs =  implode(",",$collector);
     //$status  = $_POST['status'];
 //    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
 //     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'Open')";
@@ -27,6 +38,7 @@ if (isset($_POST['submit'])) {
     }
 
     $query .= "`status`='$status',";
+    $query .= "`attachments`='$docs',";
     $query .= "`remark`='$remark' WHERE `task_id`='$task_id' and `emp_id`='$emp_id'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -79,6 +91,12 @@ END - Breadcrumbs
                                 <input type="text" name="remark" class="form-control" placeholder="Remark">
                             </div>
                         </div>
+                        <div class="col-sm-3" name='file_attachment'>
+                                    <div class="form-group" name='file_attachment'><label for=""name ='file_attachment'>File Attachment</label>
+                                        <input name="file_attachment[]" type="file" multiple>
+                                    </div>
+                        </div>
+
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <br>

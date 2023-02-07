@@ -56,7 +56,7 @@ END - Breadcrumbs
                     <tr>
                         <th>S No.</th>
                         <th>Employee Name</th>
-                        <th>Do Next</th>
+                        <th>Concerns</th>
                          <th>Assigned By</th>
                          <th>Report To</th>
                           <th>Download File</th>
@@ -65,6 +65,7 @@ END - Breadcrumbs
                             <th>Work Complete Date</th>
                              <th>Status</th>
                              <th>Remark</th>
+                             <th>Attachments</th>
                    <th>Change Status/Transfer Concern/Share Concern</th>
                    <th>Delete</th>
                     </tr>
@@ -110,6 +111,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
             }
            $status  = $row['status'];
                $remark  = $row['remark'];
+            $attachments = $row['attachments']
     ?>
                     <tr>
   <td><?php echo $count;?></td>
@@ -128,7 +130,20 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $work_com_date;?></td> 
   <td><a href="#" class="btn btn-success"> <?php echo $status;?></a> </td>
   <td><?php echo $remark;?></td> 
-
+  <td>
+  <?php if($attachments !='')
+                        {?>
+                        <?php $docs = explode(",",$attachments);?>
+                        <?php foreach($docs as $value) 
+                            {?>
+                            <?php  $value =  ltrim($value);?>                            
+                            <div>
+                                <br>
+                                <?php echo $value;?>
+                                <div>  <a href="attachment/<?php echo $value;?>" class="btn btn-primary">Download</a>                
+                        <?php }?>
+                        <?php }?>
+  </td>
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 

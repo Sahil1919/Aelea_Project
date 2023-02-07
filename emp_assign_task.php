@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
     move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
        $emp_id=  $_SESSION['user'];
     $employee_id =$emp_id; //$_POST['empid'];
-    $test_task  = $_POST['Concern'];
+    $test_task  = $_POST['task'];
     $task = str_replace("'","''",$test_task);
            $duedate = $_POST['duedate'];
            //  = $_POST['file_attachment'];

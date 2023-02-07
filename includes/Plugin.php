@@ -148,71 +148,15 @@ END - Chat Popup Box
             localStorage.setItem('theme', JSON.stringify([newTheme+" "+"on",'dark']));
 
             // console.log('theme change hua bhai');
-            // console.log(localStorage.getItem('theme'));
+            console.log(localStorage.getItem('theme'));
         }
         else{
             // let exist_theme = theme[0].replace('on','')
             localStorage.setItem('theme', JSON.stringify([newTheme.replace('on',''),"light"]));
             // console.log('theme nahi change hua bhai');
-            // console.log(localStorage.getItem('theme'));
+            console.log(localStorage.getItem('theme'));
         }
     })
-
-
-
-   
-
-// if (currentTheme) {
-//     document.documentElement.setAttribute('data-theme', currentTheme);
-  
-//     if (currentTheme === 'dark') {
-//         toggleSwitch.checked = true;
-//     }
-// }
-
-// function switchTheme(e) {
-//     if (e.target.checked) {
-//         document.documentElement.setAttribute('data-theme', 'dark');
-//         localStorage.setItem('theme', 'dark');
-//     }
-//     else {        document.documentElement.setAttribute('data-theme', 'light');
-//           localStorage.setItem('theme', 'light');
-//     }    
-// }
-
-// toggleSwitch.addEventListener('change', switchTheme, false);
-        
-// const toggleSwitch = document.querySelector('#theme');
-// const currentTheme = localStorage.getItem('lightmode');
-
-
-// if (toggleSwitch.className == currentTheme){
-//     toggleSwitch.className = currenTheme
-//     console.log(toggleSwitch.className);
-// }
-// else{
-//     menuposbody.className = newmenupos[0]
-//     menupos.value = newmenupos[1]
-//     console.log(menupos.value);
-// }
-
-
-// // var menuoptions = menupos.querySelectorAll("option")
-// menupos.addEventListener('change', function(){
-//     if (menupos.value == "right"){
-//         newmenupos = ['full-screen with-content-panel menu-position-side menu-side-right','right']
-//         localStorage.setItem('newmenupos',JSON.stringify(newmenupos))
-//         console.log(localStorage.getItem('newmenupos'))
-//         console.log("Hogaya Bhai")
-//     }
-//     else{
-//         newmenupos = ['menu-position-side menu-side-left full-screen with-content-panel','left']
-//         localStorage.setItem('newmenupos',JSON.stringify(newmenupos))
-//         console.log(localStorage.getItem('newmenupos'))
-//         console.log("Hogaya Bhai")
-//     }
-    
-// })
 
 
         </script>
