@@ -1,6 +1,6 @@
 
 <?php
-include './includes/admin_header.php';
+// include './includes/admin_header.php';
 
 ?>
 <?php 
@@ -13,29 +13,45 @@ if ($result = mysqli_query($connection, $retailer_account)) {
     $Total_task = mysqli_num_rows($result);
 }
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='Open' or userid='$emp_id' and  emp_id='$emp_id' ";
+$retailer_account = "SELECT * from assign_concern where assignby='$assignby'  and status = 'Open';";
 $open_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $open_concern = mysqli_num_rows($result);
 }
+$retailer_account = "SELECT * from assign_concern where emp_id='$emp_id'  and status = 'Open';";
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $open_concern += mysqli_num_rows($result);
+}
 
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='WIP' or userid='$emp_id' and  emp_id='$emp_id'";
+$retailer_account = "SELECT * from assign_concern where assignby='$assignby'  and status = 'WIP'";
 $wip_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $wip_concern = mysqli_num_rows($result);
 }
+$retailer_account = "SELECT * from assign_concern where emp_id='$emp_id'  and status = 'WIP'";
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $wip_concern += mysqli_num_rows($result);
+}
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='Close' or userid='$emp_id' and  emp_id='$emp_id'";
+$retailer_account = "SELECT * from assign_concern where assignby='$assignby'  and status = 'Close'";
 $close_concern = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $close_concern = mysqli_num_rows($result);
 }
+$retailer_account = "SELECT * from assign_concern where emp_id='$emp_id'  and status = 'Close'";
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $close_concern += mysqli_num_rows($result);
+}
 
-$retailer_account = "SELECT task_id FROM assign_concern where status='Cancel' or userid='$emp_id' and  emp_id='$emp_id'";
+$retailer_account = "SELECT * from assign_concern where assignby='$assignby'  and status = 'Cancel'";
 $cancel_task = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $cancel_task = mysqli_num_rows($result);
+}
+$retailer_account = "SELECT * from assign_concern where emp_id='$emp_id'  and status = 'Cancel'";
+if ($result = mysqli_query($connection, $retailer_account)) {
+    $cancel_task += mysqli_num_rows($result);
 }
 ?>
 
@@ -44,8 +60,8 @@ if ($result = mysqli_query($connection, $retailer_account)) {
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
     <li class="breadcrumb-item"><a href="Dashboard.php" ><span>Dashboard</span></a></li>
     <!-- <li class="breadcrumb-item"><a id='donext' href="#" ><span>Do Next</span></a></li> -->
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievements & Benefits</a></span></li>
-    <li class="breadcrumb-item"><a href="emp_concern_dash.php"><span>Concern</span></a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_a&b_dash"><span>Achievements & Benefits</a></span></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=emp_concern_dash"><span>Concern</span></a></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -106,7 +122,7 @@ END - Breadcrumbs
 </div>
 
 
-<?php include './includes/Plugin.php'; ?>
+
   
 </div>
 

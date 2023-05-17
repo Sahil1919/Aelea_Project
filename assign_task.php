@@ -1,11 +1,17 @@
 <?php
-
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
     $assign_by = ucfirst($_SESSION['User_type']);
+    $minutes_to_add = 330;
+    $time = new DateTime();
+    $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+    $stamp = $time->format('Y-m-d H:i');  
+    // echo $stamp;
+    // $stamp = $time->format('Y-m-d H:i');     
 $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
     
 if ($total>0){
@@ -22,10 +28,11 @@ $docs =  implode(",",$collector);
            $test_task  = $_POST['Concern'];
            $task = str_replace("'","''",$test_task);
     $due_date = $_POST['duedate'];
+    // echo $due_date;
     
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','$assign_by','$docs',now(),'$due_date','Open')";
+     $query .= " VALUES ('$employee_id','$task','$assign_by','$docs','$stamp','$due_date','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -34,6 +41,15 @@ $docs =  implode(",",$collector);
         echo "<script>alert('Record Save Successfully');</script>";
        // return 'pass';
     }
+    // $query = " SELECT work_assign_date, CONVERT(datetime, SWITCHOFFSET(CONVERT(DATETIMEOFFSET, work_assign_date), DATENAME(TZOFFSET, SYSDATETIMEOFFSET())))  AS LOCAL_IST FROM assign_task;"
+    // $update_password = mysqli_query($connection, $query);
+    // if (!$update_password) {
+    //     die('QUERY FAILD change pashword' . mysqli_error($connection));
+    // } else {
+
+    //     echo "<script>alert('Record Save Successfully');</script>";
+    //    // return 'pass';
+    // }
 }
 ?>
 <!--------------------
@@ -75,10 +91,10 @@ END - Breadcrumbs
     <?php
     if ($_SESSION['User_type']=='reporting manager'){    
         $sess_report_id = $_SESSION['user'];                                                      
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . $connection->mysqli_error());
     }
     else{
-        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . $connection->mysqli_error());
     }
 
     $count = 0;

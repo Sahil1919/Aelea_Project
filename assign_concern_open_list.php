@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -43,7 +44,7 @@ if(isset($_GET['delete_task']))
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_concern_dash.php">Back</a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_concern_dash">Back</a></li>
     <li class="breadcrumb-item"><span>Assign Concern Open</span></li>
 </ul>
 <!--------------------
@@ -95,7 +96,7 @@ END - Breadcrumbs
         <tbody>
       <?php
       if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-        $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Open' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM assign_concern where status='Open' order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -132,18 +133,18 @@ $task_id = $row['task_id'];
 <td><?php echo $task;?></td>
 <td><?php echo $assignby;?></td> 
 <td>
-<?php if($task_doc !='' && $task_doc !=0)
-{?>
-<?php $docs = explode(",",$task_doc);?>
-<?php foreach($docs as $value) 
-{?>
-<?php  $value =  ltrim($value);?>
-<a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
-<br>
-<br>
-<?php }?>
-<?php }?>
-</td> 
+      <?php if($task_doc !='')
+      {?>
+        <?php $docs = explode(",",$task_doc);?>
+      <?php foreach($docs as $value) 
+        {?>
+        <?php  $value =  ltrim($value);?>
+      <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
+      <br>
+      <br>
+      <?php }?>
+       <?php } else { echo $task_doc;}?>
+  </td> 
 
 <td><?php echo $work_assign_date;?></td> 
 <!-- <td><?php echo $work_due_date;?></td>  -->
@@ -195,9 +196,8 @@ $task_id = $row['task_id'];
 <?php
 if ($_SESSION['User_type'] == 'reporting manager'){
 $sess_report_id = $_SESSION['user'];
-        $qry = mysqli_query($connection, "SELECT assign_concern.`task_id`, assign_concern.emp_id,assign_concern.task,assign_concern.status,assign_concern.`assignby`,
-        assign_concern.task_doc,assign_concern.work_assign_date,assign_concern.work_due_date,assign_concern.work_com_date,assign_concern.remark,assign_concern.attachments FROM assign_concern,emp_login where user_role IN ('employee','reporting manager') and assign_concern.status='Open' and emp_id=id and report_to='$sess_report_id' ")
-         or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern where assign_concern.emp_id='$sess_report_id' and assign_concern.status='Open'  ")
+         or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -294,7 +294,7 @@ $task_id = $row['task_id'];
            </tr>
 <?php }
 // ANother While loop for Manager
-$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern where status='Open' and  assign_concern.emp_id='$sess_report_id'") or die("select query fail" . mysqli_error());
+$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern where assign_concern.userid='$sess_report_id' and assign_concern.status='Open' ") or die("select query fail" . mysqli_error($connection));
 // $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');

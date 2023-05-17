@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -43,7 +44,7 @@ if(isset($_GET['delete_task']))
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_concern_dash.php">Back</a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_concern_dash">Back</a></li>
     <li class="breadcrumb-item"><span>Assign Concern List</span></li>
 </ul>
 <!--------------------
@@ -95,10 +96,10 @@ END - Breadcrumbs
         <tbody>
       <?php
       if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-        $qry = mysqli_query($connection, "SELECT * FROM assign_concern order by work_assign_date desc") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
-$date = date('d-m-y g:i:s A');
+// $date = date('d-m-y g:i:s A');
 while ($row = mysqli_fetch_assoc($qry)) {
 $count = $count + 1;
 
@@ -108,9 +109,9 @@ $task_id = $row['task_id'];
    $task = $row['task'];
    $assignby = $row['assignby'];
    $task_doc = $row['task_doc'];
-   // var_dump($task_doc);
-   $work_assign_date = strtotime($row['work_assign_date']);
-   $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
+//    var_dump($row['work_assign_date']);
+    $work_assign_date = strtotime($row['work_assign_date']);
+    $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
 
    $work_due_date = strtotime($row['work_due_date']);
    $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
@@ -132,18 +133,18 @@ $task_id = $row['task_id'];
 <td><?php echo $task;?></td>
 <td><?php echo $assignby;?></td> 
 <td>
-<?php if($task_doc !='' && $task_doc !=0)
-{?>
-<?php $docs = explode(",",$task_doc);?>
-<?php foreach($docs as $value) 
-{?>
-<?php  $value =  ltrim($value);?>
-<a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
-<br>
-<br>
-<?php }?>
-<?php }?>
-</td> 
+      <?php if($task_doc !='')
+      {?>
+        <?php $docs = explode(",",$task_doc);?>
+      <?php foreach($docs as $value) 
+        {?>
+        <?php  $value =  ltrim($value);?>
+      <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
+      <br>
+      <br>
+      <?php }?>
+       <?php } else { echo $task_doc;}?>
+  </td> 
 
 <td><?php echo $work_assign_date;?></td> 
 <!-- <td><?php echo $work_due_date;?></td>  -->
@@ -195,9 +196,9 @@ $task_id = $row['task_id'];
 <?php
 if ($_SESSION['User_type'] == 'reporting manager'){
 $sess_report_id = $_SESSION['user'];
-        $qry = mysqli_query($connection, "SELECT assign_concern.`task_id`, assign_concern.emp_id,assign_concern.task,assign_concern.status,assign_concern.`assignby`,
-        assign_concern.task_doc,assign_concern.work_assign_date,assign_concern.work_due_date,assign_concern.work_com_date,assign_concern.remark,assign_concern.attachments FROM assign_concern,emp_login where user_role IN ('employee','reporting manager') and emp_id=id and report_to='$sess_report_id' ")
-         or die("select query fail" . mysqli_error());
+// var_dump($sess_report_id);
+        $qry = mysqli_query($connection, "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.emp_id='$sess_report_id' or  assign_concern.userid='$sess_report_id' ")
+         or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -293,103 +294,7 @@ $task_id = $row['task_id'];
 <td><a class="btn btn-danger" href="assign_concern_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
            </tr>
 <?php }
-// ANother While loop for Manager
-$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_concern where assign_concern.emp_id='$sess_report_id'") or die("select query fail" . mysqli_error());
-// $count = 0;
-date_default_timezone_set('Asia/Kolkata');
-$date = date('d-m-y g:i:s A');
-while ($row = mysqli_fetch_assoc($qry)) {
-$count = $count + 1;
-
-$task_id = $row['task_id'];
-   $emp_id = $row['emp_id']; 
-   // $user_role = $row['user_role'];
-   $task = $row['task'];
-   $assignby = $row['assignby'];
-   $task_doc = $row['task_doc'];
-   // var_dump($task_doc);
-   $work_assign_date = strtotime($row['work_assign_date']);
-   $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
-
-   $work_due_date = strtotime($row['work_due_date']);
-   $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
-
-   $work_com_date = strtotime($row['work_com_date']);
-   if ($work_com_date){
-       
-       $work_com_date = date( 'd-m-y g:i:s A', $work_com_date);
-   }
-   
-
-  $status  = $row['status'];
-       $remark  = $row['remark'];
-?>
-           <tr>
-<td><?php echo $count;?></td>
-<td> <?php echo $app_code_obj->getName($emp_id);?></td>
-<!-- <td><?php echo $app_code_obj->get_User_role($emp_id);?></td>  -->
-<td><?php echo $task;?></td>
-<td><?php echo $assignby;?></td> 
-<td>
-<?php if($task_doc !='' && $task_doc !=0)
-{?>
-<?php $docs = explode(",",$task_doc);?>
-<?php foreach($docs as $value) 
-{?>
-<?php  $value =  ltrim($value);?>
-<a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
-<br>
-<br>
-<?php }?>
-<?php }?>
-</td> 
-
-<td><?php echo $work_assign_date;?></td> 
-<!-- <td><?php echo $work_due_date;?></td>  -->
-<td><?php echo $work_com_date;?></td> 
-<td>
-<a href="#" class="btn btn-success"> <?php echo" $status";?></a>
-</td> 
-<td>
-<?php echo $remark; ?></td>
-
-<!-- <?php if($work_com_date && $status!='WIP'): ?>
-
-<?php if($work_due_date >= $date): ?>
-   <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-
-<?php elseif($work_com_date <= $work_due_date): ?>
-<td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   <?php else: ?>    
-   <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-<?php endif; ?>
-
-<?php elseif($work_due_date >= $date): ?>
-<td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-<?php else: ?>    
-<td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-
-<?php endif; ?> -->
-
-
-
-<!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
-<td><?php echo $created;?></td> 
-<td><a href="employee.php?id=<?php echo $row['task_id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
-<td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>-->
-<td>
-                         <a style="width: 100%;" class="btn btn-info" href="change_concern_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
-                         <br>
-                         <br>
-                         <a style="width: 100%;" class="btn btn-success" href="tran_concern_status.php?task_id=<?php echo $task_id;?>">Transfer Concern</a>
-                         <br>
-                         <br>
-                         <a style="width: 100%;" class="btn btn-warning" href="share_concern_status.php?task_id=<?php echo $task_id;?>">Share Concern</a>
-                     
-                       </td>
-<td><a class="btn btn-danger" href="assign_concern_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
-           </tr>
-<?php }}?>
+}?>
         </tbody>
        </table></form>
    </div>

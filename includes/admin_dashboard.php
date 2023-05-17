@@ -7,7 +7,7 @@
                 <div class="element-wrapper">
                     <div class="element-actions">
 <?php 
-
+session_start();
 $retailer_account = "SELECT id FROM emp_login where user_role IN ('employee','management','reporting manager','admin') ";
 $Total_emp = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
@@ -25,18 +25,7 @@ $Deactive_emp = 0;
 if ($result = mysqli_query($connection, $retailer_account)) {
     $Deactive_emp = mysqli_num_rows($result);
 }
-if ($_SESSION['User_type'] == 'reporting manager'){
-                                    
-    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to = '$sess_report_to' ") or die("select query fail" . mysqli_error());
-    $count = mysqli_num_rows($qry);
-}
-elseif ($_SESSION['User_type'] == 'reporting manager'){
 
-}
-else{
-$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
-$count = mysqli_num_rows($qry);
-}
 ?>
                     </div>
                     <h6 class="element-header">Dashboard</h6>
@@ -47,6 +36,7 @@ $count = mysqli_num_rows($qry);
                                 <a class="element-box el-tablo" href="employee.php">
                                     <div class="label">Total Employee</div>
                                     <div class="value"><?php echo $Total_emp; ?></div>
+                                    
  </a>
                             </div>
                             <div class="col-sm-4 col-xxxl-3">

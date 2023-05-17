@@ -1,13 +1,19 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
+
+$CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
+$url_components = parse_url($CurPageURL);
+parse_str($url_components['query'], $params);
+
 if (isset($_POST['submit'])) {
-    //  $msg = $AppCodeObj->Insert_pan_data("pan_mst");
-//    $temp = explode(".", $_FILES["profile"]["name"]);
-//    $user_pro = round(gen_image_code_unique()) . '.' . end($temp);
-//    move_uploaded_file($_FILES["profile"]["tmp_name"], "user_profile/" . $user_pro);
+    $minutes_to_add = 330;
+    $time = new DateTime();
+    $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+    $stamp = $time->format('Y-m-d H:i');  
 
       $post_image = $_FILES['profile']['name'];
     $post_image_temp = $_FILES['profile']['tmp_name'];
@@ -22,7 +28,7 @@ if (isset($_POST['submit'])) {
     $user_role = strtolower($_POST['usertype']);
     $report_to = strtolower($_POST['report_to']);
     // print($report_to);
-    $qry = mysqli_query($connection, "SELECT emp_code FROM emp_login ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT emp_code FROM emp_login ") or die("select query fail" . $connection->mysqli_error());
     $flag = 0;
     while( $row = mysqli_fetch_assoc($qry)){
         if ($row['emp_code'] == $emp_code){
@@ -32,7 +38,7 @@ if (isset($_POST['submit'])) {
         }
     }
     if ($flag !=1){
-        $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`,`report_to`) VALUES ('$emp_code','$Name','$userid','$pswd','1',now(),'$user_role','$post_image','$emailid','$mobile','$report_to')";
+        $query = "INSERT INTO `emp_login`(`emp_code`, `emp_name`, `user_id`, `pswd`, `status`, `created`, `user_role`, `emp_pro`, `email_id`, `emp_mob`,`report_to`) VALUES ('$emp_code','$Name','$userid','$pswd','1','$stamp','$user_role','$post_image','$emailid','$mobile','$report_to')";
         //  $update_psqd = "UPDATE `user_details` SET Pswd='$NewPSWD' where  `User_ID`='$userID' and Pswd='$oldPSWD'  ";
             $update_password = mysqli_query($connection, $query);
             if (!$update_password) {
@@ -156,7 +162,7 @@ function gen_image_code_unique() {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
+    <li class="breadcrumb-item"><a href=<?php echo "Dashboard.php?user=".$_SESSION['user']?>>Home</a></li>
     <li class="breadcrumb-item"><span>Employee</span></li>
 </ul>
 <!--------------------
@@ -167,9 +173,15 @@ END - Breadcrumbs
     <div class="content-box">
         <div class="element-wrapper">
             <?php
-            if (isset($_GET['source'])) {
+            $CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
 
-                $source = $_GET['source'];
+            $url_components = parse_url($CurPageURL);
+            
+            parse_str($url_components['query'], $params);
+
+            if ($params['source']!='') {
+
+                $source = $params['source'];
             } else {
 
                 $source = '';
@@ -178,82 +190,23 @@ END - Breadcrumbs
             switch ($source) {
 
                 case 'add_emp';
-                    include "includes/add_emp.php";
+                    
+                    include "./includes/add_emp.php";
                     break;
 
                 case 'update_emp';
-                    include "includes/edit_emp.php";
+                    include "./includes/edit_emp.php";
+                    break;
+
+                case "view_emp";
+                    include "./includes/emp_dashboard_view.php";
                     break;
 
                 default:
-                    include "includes/emp_list.php";
+                    include "./includes/emp_list.php";
                     break;
             }
             ?>
-            <!--            <div class="element-box">
-            
-                                        <div class="row">
-                                             <div class="col-md-12">
-                                                <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Add New Employee</h5>                                   
-                                            </div>  
-                                        </div>
-                                              <form class="container" action="#" method="post" enctype="multipart/form-data">
-            
-            
-                                        <div class="row">
-            
-                                      
-                                            <fieldset class="col-md-12">
-                                                <legend>Company Details
-                                                    <hr></legend>
-                                            </fieldset>
-            
-                                            <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Employee Code</label>
-                                                    <input class="form-control" name="emp_code" placeholder="Employee Code" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Name</label>
-                                                    <input class="form-control" name="Name" placeholder="Name" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Email ID</label>
-                                                    <input class="form-control" name="emailid" placeholder="Email ID" type="email">
-                                                </div>
-                                            </div>
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Mobile No.</label>
-                                                    <input class="form-control" name="mobile" placeholder="Mobile No." type="text">
-                                                </div>
-                                            </div>
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Profile</label>
-                                                    <input name="profile" type="file">
-                                                </div>
-                                            </div>
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">User ID</label>
-                                                    <input class="form-control" name="userid" placeholder="User ID" type="text">
-                                                </div>
-                                            </div>
-            
-             <div class="col-sm-3">
-                                                <div class="form-group"><label for="">Password</label>
-                                                    <input class="form-control" name="pswd" placeholder="password" type="password">
-                                                </div>
-                                            </div>
-            
-            
-            
-            
-                                            <div class="form-buttons-w text-right">
-                                                <input class="btn btn-primary" type="submit" value="Add Employee" name="submit">
-                                            </div>
-                                        </div>
-                                    </form>
-                                        </div>-->
 
         </div>
     </div>

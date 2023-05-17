@@ -1,5 +1,6 @@
 <?php
 //require 'db.php';
+session_start();
 require_once('TCPDF-main/tcpdf.php');
 include './includes/db.php';
 include './includes/App_Code.php';
@@ -126,14 +127,14 @@ parse_str($url_components['query'], $params);
 if ($params['search'] != null)
 {
 
-    $qry = mysqli_query($connection, "SELECT emp_code FROM pdf_views1 ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT emp_code FROM pdf_views1 ") or die("select query fail" . mysqli_error($connection));
 
     while($row= mysqli_fetch_assoc($qry)){
 
         if (strtolower($row['emp_code']) == strtolower($params['search'])){
             $data = $row['emp_code'];
             echo $data;
-            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views1 WHERE emp_code='$data' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views1 WHERE emp_code='$data' ") or die("select query fail" . mysqli_error($connection));
             while($row= mysqli_fetch_assoc($qry1)){
                 $pdf->Ln(15);
 
@@ -262,14 +263,14 @@ if ($params['search'] != null)
         }
     }
 
-    $qry = mysqli_query($connection, "SELECT emp_name FROM pdf_views1 ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT emp_name FROM pdf_views1 ") or die("select query fail" . mysqli_error($connection));
     while($row= mysqli_fetch_assoc($qry)){
         // $name = strtolower($row['emp_name']);
         if (str_starts_with(strtolower($row['emp_name']),strtolower($params['search']))){
 
             $data = $row['emp_name'];
             echo $data;
-            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views1 WHERE emp_name='$data' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views1 WHERE emp_name='$data' ") or die("select query fail" . mysqli_error($connection));
             while($row= mysqli_fetch_assoc($qry1)){
                 $pdf->Ln(15);
 
@@ -398,14 +399,14 @@ if ($params['search'] != null)
         }
     }
 
-    $qry = mysqli_query($connection, "SELECT task FROM pdf_views1 ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT task FROM pdf_views1 ") or die("select query fail" . mysqli_error($connection));
     while($row= mysqli_fetch_assoc($qry)){
         $task = strtolower($row['task']);
         if (str_starts_with($task,strtolower($params['search']))){
 
             $data = $row['task'];
             echo $data;
-            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views1 WHERE task='$data' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views1 WHERE task='$data' ") or die("select query fail" . mysqli_error($connection));
             while($row= mysqli_fetch_assoc($qry1)){
                 $pdf->Ln(15);
 
@@ -538,7 +539,7 @@ if ($params['search'] != null)
 else
 {
 
-    $qry = mysqli_query($connection, "SELECT * FROM pdf_views1 ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM pdf_views1 ") or die("select query fail" . mysqli_error($connection));
     while ($row = mysqli_fetch_assoc($qry)) 
     {        
 		$pdf->Ln(18);

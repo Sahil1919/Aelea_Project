@@ -1,8 +1,4 @@
 
-<?php
-include './includes/admin_header.php';
-
-?>
 <?php 
 $emp_id=  $_SESSION['user'];
   
@@ -27,8 +23,8 @@ if ($result = mysqli_query($connection, $retailer_account)) {
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
     <li class="breadcrumb-item"><a href="Dashboard.php" ><span>Dashboard</span></a></li>
     <!-- <li class="breadcrumb-item"><a id='donext' href="#" ><span>Do Next</span></a></li> -->
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievements & Benefits</a></span></li>
-    <li class="breadcrumb-item"><a href="emp_concern_dash.php"><span>Concern</span></a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=emp_a&b_dash"><span>Achievements & Benefits</a></span></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=emp_concern_dash"><span>Concern</span></a></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -66,7 +62,7 @@ END - Breadcrumbs
 </div>
 
 
-<?php include './includes/Plugin.php'; ?>
+
   
 </div>
 

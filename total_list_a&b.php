@@ -1,49 +1,18 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
 $app_code_obj=new App_Code();
 $msg = '';
-$AppCodeObj = new databaseSave();
-if (isset($_POST['submit'])) {
-    $task_doc = $_FILES['file_attachment']['name'];
-    $task_doc_temp = $_FILES['file_attachment']['tmp_name'];
-    move_uploaded_file($task_doc_temp, "task_doc/$task_doc");
-    
-    $employee_id = $_POST['empid'];
-           $task  = $_POST['task'];
-           //  = $_POST['file_attachment'];
-    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','$assign_by','$task_doc',now(),'Open')";
-    $update_password = mysqli_query($connection, $query);
-    if (!$update_password) {
-        die('QUERY FAILD change pashword' . mysqli_error($connection));
-    } else {
 
-        echo "<script>alert('Record Save Successfully');</script>";
-       // return 'pass';
-    }
-}
-if(isset($_GET['delete_task']))
-{
-    $task_id=$_GET['delete_task'];
-    // echo $task_id;
-    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
-    $query="DELETE FROM `assign_task` WHERE task_id=$task_id";
-    $delete_task = mysqli_query($connection, $query);
-      if (!$delete_task) {
-        die('QUERY FAILD change password' . mysqli_error($connection));
-    } else {
-    }
-    
-}
 ?>
 
 <!--------------------
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php">Back</a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_a&b_dash">Back</a></li>
     <li class="breadcrumb-item"><span>Assign Do Next List</span></li>
 </ul>
 <!--------------------
@@ -95,7 +64,7 @@ END - Breadcrumbs
         <tbody>
  <?php
  if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_task order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -187,10 +156,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Concern</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Do Next</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
+                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Do Next</a>
                               
                                 </td>
     <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
@@ -202,8 +171,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
     $sess_report_id = $_SESSION['user'];
                  $qry = mysqli_query($connection, "SELECT DISTINCT assign_task.`task_id`, assign_task.emp_id,assign_task.task,assign_task.status,assign_task.`assignby`,
                  assign_task.task_doc,assign_task.work_assign_date,assign_task.work_due_date,assign_task.work_com_date,assign_task.remark,assign_task.Achievements,
-                 assign_task.Benefits,assign_task.attachments FROM assign_task,emp_login where user_role IN ('employee','reporting manager') and emp_id=id and report_to='36' ")
-                  or die("select query fail" . mysqli_error());
+                 assign_task.Benefits,assign_task.attachments FROM assign_task,emp_login where user_role IN ('employee','reporting manager') and emp_id=id and report_to='$sess_report_id' ")
+                  or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -295,17 +264,17 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Concern</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Do Next</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
+                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Do Next</a>
                               
                                 </td>
     <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
                     </tr>
 <?php }
 // ANother While loop for Manager
-$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_task where assign_task.emp_id='$sess_report_id'") or die("select query fail" . mysqli_error());
+$qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_task where assign_task.emp_id='$sess_report_id'") or die("select query fail" . mysqli_error($connection));
 // $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -397,10 +366,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Concern</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Do Next</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
+                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Do Next</a>
                               
                                 </td>
     <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>

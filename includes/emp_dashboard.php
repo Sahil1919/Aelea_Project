@@ -6,6 +6,7 @@
                 <div class="element-wrapper">
                     <div class="element-actions">
 <?php 
+// session_start();
 $emp_id=  $_SESSION['user'];
 $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
 $Total_task = 0;

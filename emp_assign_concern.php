@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -12,6 +12,11 @@ if (isset($_POST['submit'])) {
     $test_task  = $_POST['Concern'];
     $task = str_replace("'","''",$test_task);
     $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
+    $minutes_to_add = 330;
+    $time = new DateTime();
+    $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+    $stamp = $time->format('Y-m-d H:i');  
+    $stamp = "'".$stamp."'";
     
     if ($total>0){
     for ($i=0; $i<$total; $i++) {
@@ -25,7 +30,7 @@ if (isset($_POST['submit'])) {
     // $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_concern`( `emp_id`, `userid`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$userid','$task','$assign_by','$docs',now(),'','Open')";
+     $query .= " VALUES ('$employee_id','$userid','$task','$assign_by','$docs',$stamp,'','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -74,7 +79,7 @@ END - Breadcrumbs
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;

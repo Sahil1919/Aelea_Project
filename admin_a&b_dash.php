@@ -1,9 +1,8 @@
 
 <?php
-include './includes/admin_header.php';
-?>
-<?php 
-$connection = mysqli_connect("localhost","root","","task_management");
+// session_start();
+// include './includes/admin_header.php';
+
 if ($_SESSION['User_type'] =='management' || $_SESSION['User_type'] =='admin'){
     $retailer_account = "SELECT task_id FROM assign_task";
     $Total_task = 0;
@@ -62,10 +61,10 @@ else{
 <ul class="breadcrumb">
 <div class="scrollmenu">
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-    <li class="breadcrumb-item"><a id='donext' href="Dashboard.php" ><span>Dashboard</span></a></li>
-    <li class="breadcrumb-item"><a id='donext' href="admin_donext_dash.php"><span>Do Next</span></a></li>
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
-    <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concern</span></a></li>
+    <li class="breadcrumb-item"><a id='donext' href="Dashboard.php"><span>Dashboard</span></a></li>
+    <li class="breadcrumb-item"><a id='donext' href="work_dash.php?source=admin_donext_dash"><span>Do Next</span></a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_a&b_dash"><span>Achievement & benefits</a></span></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_concern_dash"><span>Concern</span></a></li>
 </ul>
 <!--------------------
 END - Breadcrumbs

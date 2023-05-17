@@ -1,9 +1,7 @@
 
-<?php
-include './includes/admin_header.php';
-?>
 <?php 
-$connection = mysqli_connect("localhost","root","","task_management");
+
+// $connection = mysqli_connect("localhost","root","","task_management");
 if ($_SESSION['User_type'] =='management' || $_SESSION['User_type'] =='admin'){
     $retailer_account = "SELECT task_id FROM assign_concern";
     $Total_task = 0;
@@ -35,28 +33,21 @@ else{
     $sess_report_id = $_SESSION['user'];
     // ________________________________________________
     $Total_emp_task=0;
-    $qry = "SELECT id,task_id FROM emp_login,assign_concern where user_role IN ('employee','reporting manager') and emp_id=id and report_to='$sess_report_id' ";
+    $qry = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.emp_id='$sess_report_id' or assign_concern.userid = '$sess_report_id' ";
     if ($result = mysqli_query($connection, $qry)) {
-        $Total_emp_task = mysqli_num_rows($result);
+        $Total_task = mysqli_num_rows($result);
     }
-    
-    $retailer_account = "SELECT DISTINCT task_id FROM emp_login,assign_concern where user_role IN ('reporting manager') and emp_id='$sess_report_id' ";
-    $Total_rm_task = 0;
-    if ($result = mysqli_query($connection, $retailer_account)) {
-        $Total_rm_task = mysqli_num_rows($result);
-    }
-
-    $Total_task = $Total_rm_task+$Total_emp_task;
+  
     // ________________________________________________
     
     $Total_emp_task_open = 0;
-    $qry = "SELECT id,task_id FROM emp_login,assign_concern where user_role IN ('employee','reporting manager') and assign_concern.status='Open' and emp_id=id and report_to='$sess_report_id'";
+    $qry = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.emp_id='$sess_report_id' and assign_concern.status='Open' ";
     // $open_task = 0;
     if ($result = mysqli_query($connection, $qry)) {
         $Total_emp_task_open = mysqli_num_rows($result);
     }
 
-    $retailer_account = "SELECT DISTINCT task_id FROM emp_login,assign_concern where user_role IN ('reporting manager') and assign_concern.status='Open' and emp_id='$sess_report_id'";
+    $retailer_account = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.userid='$sess_report_id' and assign_concern.status='Open' ";
     $Total_rm_task_open = 0;
     if ($result = mysqli_query($connection, $retailer_account)) {
         $Total_rm_task_open = mysqli_num_rows($result);
@@ -67,13 +58,13 @@ else{
     //________________________________________________________________
 
     $Total_emp_task_close = 0;
-    $qry = "SELECT id,task_id FROM emp_login,assign_concern where user_role IN ('employee','reporting manager') and assign_concern.status='Close' and emp_id=id and report_to='$sess_report_id'";
+    $qry = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.emp_id='$sess_report_id' and assign_concern.status='Close'";
     // $open_task = 0;
     if ($result = mysqli_query($connection, $qry)) {
         $Total_emp_task_close = mysqli_num_rows($result);
     }
 
-    $retailer_account = "SELECT DISTINCT task_id FROM emp_login,assign_concern where user_role IN ('reporting manager') and assign_concern.status= 'Close' and emp_id='$sess_report_id'";
+    $retailer_account = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.userid='$sess_report_id' and assign_concern.status='Close'";
     $Total_rm_task_close = 0;
     if ($result = mysqli_query($connection, $retailer_account)) {
         $Total_rm_task_close = mysqli_num_rows($result);
@@ -84,13 +75,13 @@ else{
     //________________________________________________________________
 
     $Total_emp_task_wip = 0;
-    $qry = "SELECT id,task_id FROM emp_login,assign_concern where user_role IN ('employee','reporting manager') and assign_concern.status='WIP' and emp_id=id and report_to='$sess_report_id'";
+    $qry = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.emp_id='$sess_report_id' and assign_concern.status='WIP'";
     // $open_task = 0;
     if ($result = mysqli_query($connection, $qry)) {
         $Total_emp_task_wip = mysqli_num_rows($result);
     }
 
-    $retailer_account = "SELECT DISTINCT task_id FROM emp_login,assign_concern where user_role IN ('reporting manager') and assign_concern.status= 'WIP' and emp_id='$sess_report_id'";
+    $retailer_account = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.userid='$sess_report_id' and assign_concern.status='WIP'";
     $Total_rm_task_wip = 0;
     if ($result = mysqli_query($connection, $retailer_account)) {
         $Total_rm_task_wip = mysqli_num_rows($result);
@@ -101,13 +92,13 @@ else{
     //________________________________________________________________
 
     $Total_emp_task_cancel = 0;
-    $qry = "SELECT id,task_id FROM emp_login,assign_concern where user_role IN ('employee','reporting manager') and assign_concern.status='Cancel' and emp_id=id and report_to='$sess_report_id'";
+    $qry = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.emp_id='$sess_report_id' and assign_concern.status='Cancel'";
     // $open_task = 0;
     if ($result = mysqli_query($connection, $qry)) {
         $Total_emp_task_cancel = mysqli_num_rows($result);
     }
 
-    $retailer_account = "SELECT DISTINCT task_id FROM emp_login,assign_concern where user_role IN ('reporting manager') and assign_concern.status= 'Cancel' and emp_id='$sess_report_id'";
+    $retailer_account = "SELECT DISTINCT * FROM aeleacommodities_tasksM.assign_concern where assign_concern.userid='$sess_report_id' and assign_concern.status='Cancel'";
     $Total_rm_task_cancel = 0;
     if ($result = mysqli_query($connection, $retailer_account)) {
         $Total_rm_task_cancel = mysqli_num_rows($result);
@@ -122,10 +113,10 @@ else{
 <ul class="breadcrumb">
 <div class="scrollmenu">
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
-    <li class="breadcrumb-item"><a id='donext' href="Dashboard.php" ><span>Dashboard</span></a></li>
-    <li class="breadcrumb-item"><a id='donext' href="admin_donext_dash.php"><span>Do Next</span></a></li>
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
-    <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concern</span></a></li>
+    <li class="breadcrumb-item"><a id='donext' href="Dashboard.php"><span>Dashboard</span></a></li>
+    <li class="breadcrumb-item"><a id='donext' href="work_dash.php?source=admin_donext_dash"><span>Do Next</span></a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_a&b_dash"><span>Achievement & benefits</a></span></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_concern_dash"><span>Concern</span></a></li>
 </ul>
 <!--------------------
 END - Breadcrumbs

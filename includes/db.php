@@ -3,6 +3,10 @@ $db['db_host']="localhost";
 $db['db_user']="root";
 $db['db_pass']="";
 $db['db_name']="task_management";
+// $db['db_host']="localhost";
+// $db['db_user']="aeleacommodities_rahilm";
+// $db['db_pass']="i8DyK^JLR_gG";
+// $db['db_name']="aeleacommodities_tasksM";
 foreach($db as $key => $value)
 {
     define(strtoupper($key),$value);

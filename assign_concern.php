@@ -1,11 +1,18 @@
 <?php
-
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
     $assign_by = ucfirst($_SESSION['emp_name']);
+
+    $minutes_to_add = 330;
+    $time = new DateTime();
+    $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+    $stamp = $time->format('Y-m-d H:i:s');  
+    $stamp = "'".$stamp."'";
+    
     $userid = $_SESSION['user'];
 $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
     
@@ -25,7 +32,7 @@ $docs =  implode(",",$collector);
     // $due_date = $_POST['duedate'];
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_concern`( `emp_id`, `userid`,`task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$userid','$task','$assign_by','$docs',now(),'','Open')";
+     $query .= " VALUES ('$employee_id','$userid','$task','$assign_by','$docs',$stamp,'','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -74,7 +81,7 @@ END - Breadcrumbs
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager') and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager') and status='1'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -93,7 +100,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group"><label for="">Concern</label>
-                                        <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Do Next" ></textarea>
+                                        <textarea class="form-control " rows="1" name="Concern" placeholder="Enter Concern" ></textarea>
                                     </div>
                                 </div>
 

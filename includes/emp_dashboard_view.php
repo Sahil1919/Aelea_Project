@@ -7,11 +7,12 @@
                     <div class="element-actions">
 <?php 
 
-if (isset($_GET['id'])) 
-{ 
-    $emp_id = $_GET['id'];
+$CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
+$url_components = parse_url($CurPageURL);
+parse_str($url_components['query'], $params);
+if ($params['id']!=''){
+    $emp_id = $params['id'];
 }
-
                
 $retailer_account = "SELECT task_id FROM assign_task where emp_id='$emp_id'";
 $Total_task = 0;

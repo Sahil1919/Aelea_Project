@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -59,7 +60,7 @@ START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
-    <li class="breadcrumb-item"><span>Assigned Do Next</span></li>
+    <li class="breadcrumb-item"><span>Transfer Do Next</span></li>
 </ul>
 <!--------------------
 END - Breadcrumbs
@@ -72,7 +73,7 @@ END - Breadcrumbs
 
                             <div class="row">
                                  <div class="col-md-12">
-                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Assigned Do Next</h5>                                   
+                                    <h5 style="color: blue;border-bottom: 1px solid blue;padding: 10px;">Transfer Do Next</h5>                                   
                                 </div>  
                             </div>
                                   <form class="container" action="#" method="post" enctype="multipart/form-data">
@@ -94,21 +95,21 @@ END - Breadcrumbs
     $sess_report_id = $_SESSION['user'];
     if ($_SESSION['User_type']=='reporting manager'){    
                                                              
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error($connection));
     }
     elseif ($_SESSION['User_type']=='management' || $_SESSION['User_type']=='admin'){
-        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error($connection));
     }
     else{
-        $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+        $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id='$sess_report_id' ") or die("select query fail" . mysqli_error($connection));
         $row = mysqli_fetch_assoc($qry1);
         
         $report_to_id = $row['report_to'];
         
-        $qry = mysqli_query($connection, "SELECT * FROM emp_login where report_to = '$report_to_id' ") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where report_to = '$report_to_id' ") or die("select query fail" . mysqli_error($connection));
     }
                                                           
-// $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','repoting manager') and status='1'") or die("select query fail" . mysqli_error());
+// $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','repoting manager') and status='1'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -128,7 +129,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <br>
-                                         <input class="btn btn-primary" type="submit" value="Assign Task" name="submit">
+                                         <input class="btn btn-primary" type="submit" value="Transfer Do Next" name="submit">
                                         <!--<label for="">Conform Password</label>-->
                                         <!--<input class="form-control" name="CPSWD" placeholder="Conform Password" type="password">-->
                                     </div>

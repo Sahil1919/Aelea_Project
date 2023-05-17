@@ -1,20 +1,19 @@
 <?php
+
+
                                 // include 'db.php';
                                 $sess_report_to = $_SESSION['user'];
                                 if ($_SESSION['User_type'] == 'reporting manager'){
                                     
-                                    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to = '$sess_report_to' ") or die("select query fail" . mysqli_error());
+                                    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to = '$sess_report_to' ") or die("select query fail" . mysqli_error($connection));
                                     $count = mysqli_num_rows($qry);
                                 }
-                                elseif ($_SESSION['User_type'] == 'reporting manager'){
-
-                                }
                                 else{
-                                $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+                                $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error($connection));
                                 $count = mysqli_num_rows($qry);
+                                // var_dump($count);
                                 }
                                 // $count = $row['total'];
-                                // echo $count;
                                 ?>
                 <!--------------------
                 START - Main Menu
@@ -119,7 +118,7 @@
                         </li>
                          <!-- A & B management  Start-->
                          <li class=" has-sub-menu">
-                            <a href="admin_a&b_dash.php">
+                            <a href="work_dash.php?source=admin_a&b_dash">
                                 <div class="icon-w">                                    
                                     <div class="os-icon os-icon-check-circle"></div>                                    
                                 </div><span>A & B </span></a>
@@ -226,7 +225,7 @@
                     </li>
                      <!-- A & B management  Start-->
                      <li class=" has-sub-menu">
-                        <a href="admin_a&b_dash.php">
+                        <a href="work_dash.php?source=admin_a&b_dash">
                             <div class="icon-w">                                    
                                 <div class="os-icon os-icon-check-circle"></div>                                    
                             </div><span>A & B </span></a>
@@ -308,7 +307,7 @@
                         </li>
                          <!-- A & B management  Start-->
                          <li class=" has-sub-menu">
-                            <a href="emp_a&b_dash.php">
+                            <a href="work_dash.php?source=emp_a&b_dash.php">
                                 <div class="icon-w">                                    
                                     <div class="os-icon os-icon-check-circle"></div>                                    
                                 </div><span>A & B </span></a>
@@ -356,7 +355,7 @@
                     <?php     
  }
 ?>
-             
+
 
                 </div>
                 <!--------------------
@@ -372,12 +371,15 @@
         var count = "<?= $count ?>"
         if (count!=0){
       $("#refresh_div").empty().load("test.php");
+      
         }
         else {
             $('#pos').addClass('messages-left').removeClass('messages-notifications os-dropdown-position-left');
+            
         }
    }
     var res = setInterval(newPost, 500);
+    
     
  });
 </script>

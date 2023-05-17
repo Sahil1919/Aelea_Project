@@ -1,13 +1,13 @@
-
 <?php
+session_start();
+
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 //include 'includes/App_Code.php';
-include 'includes/App_Code.php';
+include './includes/App_Code.php';
 $AppCodeObj=new App_Code();
 
 // found work
-
 $msg = '';
 $Genrate = new App_Code();
 $appC0de = new databaseSave();
@@ -34,18 +34,6 @@ if (isset($_GET['UserID']) && isset($_GET['Status'])) {
     //  header("location:./admin/retailer_account_list.php");
     
 }
-if ($_SESSION['User_type'] == 'reporting manager'){
-                                    
-    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to = '$sess_report_to' ") or die("select query fail" . mysqli_error());
-    $count = mysqli_num_rows($qry);
-}
-elseif ($_SESSION['User_type'] == 'reporting manager'){
-
-}
-else{
-$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
-$count = mysqli_num_rows($qry);
-}
 ?>
 <!--------------------
 START - Breadcrumbs
@@ -56,18 +44,22 @@ START - Breadcrumbs
     <!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
     <td>
     
-    <?php if (strtolower($_SESSION['User_type'])=='employee')
-    {?>
-        <li class="breadcrumb-item"><span>Dashboard</span></li>
-        <li class="breadcrumb-item"><a href="emp_a&b_dash.php"><span>Achievement & benefits</a></span></li>
-        <li class="breadcrumb-item"><a href="emp_concern_dash.php"><span>Concerns</span></a></li>
+    <?php 
+    
+     if (strtolower($_SESSION['User_type'])=='employee')
+    { ?>
 
-     <?php } else { ;?>
+        <li class="breadcrumb-item"><span>Dashboard</span></li>
+        <li class="breadcrumb-item"><a href="work_dash.php?source=emp_a&b_dash"><span>Achievement & benefits</a></span></li>
+        <li class="breadcrumb-item"><a href="work_dash.php?source=emp_concern_dash"><span>Concerns</span></a></li>
+
+     <?php } else  
+     {?>
         
         <li class="breadcrumb-item"><span>Dashboard</span></li>
-        <li class="breadcrumb-item"><a id='donext' href="admin_donext_dash.php" ><span>Do Next</span></a></li>
-        <li class="breadcrumb-item"><a href="admin_a&b_dash.php"><span>Achievement & benefits</a></span></li>
-        <li class="breadcrumb-item"><a href="admin_concern_dash.php"><span>Concerns</span></a></li>
+        <li class="breadcrumb-item"><a id='donext' href="work_dash.php?source=admin_donext_dash"><span>Do Next</span></a></li>
+        <li class="breadcrumb-item"><a href="work_dash.php?source=admin_a&b_dash"><span>Achievement & benefits</a></span></li>
+        <li class="breadcrumb-item"><a href="work_dash.php?source=admin_concern_dash"><span>Concerns</span></a></li>
      <?php } ?>
     
 </ul>
@@ -77,25 +69,12 @@ END - Breadcrumbs
 <div class="content-panel-toggler"><i class="os-icon os-icon-grid-squares-22"></i><span>Sidebar</span></div>
 <div class="content-i">
     <div class="content-box">
-                          <!-- <marquee direction="left" style="background: #0a7cf8;" onmouseover="this.stop();" onmouseout="this.start();">
-<span class="breadcrumb-item">
-       <?php
-                                            $qry = mysqli_query($connection, "SELECT * FROM news_and_update where news_type='alert' order by created desc") or die("select query fail" . mysqli_error());
-                                            //  $stateData = $AppCodeObj->select_state();
-                                            while ($row = mysqli_fetch_assoc($qry)) {
-                                                $news_title = $row['news_title'];
-                                                ?>
-    
-    <a href="#" style="color:#fff;font-size: 18px;"><?php echo $news_title;?>&nbsp; <strong>|</strong> </a>
-                                            <?php }?>
-</span>
         
-         
-                  </marquee> -->
-        <?php
+        <?php 
         // echo $_SESSION['User_type'];         
         if($_SESSION['User_type']=='admin')
-        {
+        {       
+                // echo $_SERVER['DOCUMENT_ROOT'];
                include './includes/admin_dashboard.php';  
                //include './includes/admin_dashboard_donext_dash.php';  
         } 
@@ -116,12 +95,12 @@ END - Breadcrumbs
     </div>
 
 
-<?php include './includes/Plugin.php'; ?>
+<?php  include './includes/Plugin.php'; ?>
   
 </div>
 
 
-<?php include './includes/admin_footer.php'; ?>
+<?php include 'includes/admin_footer.php'; ?>
         
        
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

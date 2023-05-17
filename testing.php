@@ -1,10 +1,7 @@
-<div id="newpost"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
- $(function() {
-  function newPost() {
-      $("#newpost").empty().load("test.php");
-   }
-    var res = setInterval(newPost, 5000);
- });
-</script>
+<?php
+session_start();
+// session_destroy();
+?>
+<p>
+Hello visitor, you have seen this page <?php echo $_SESSION['user']; echo $_SESSION['emp_name']; echo $_SESSION['emp_profile_']; echo $_SESSION['emp_User_type']; ?> times.
+</p>

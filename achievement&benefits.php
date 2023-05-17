@@ -1,11 +1,12 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
 $AppCodeObj = new databaseSave();
 if (isset($_POST['submit'])) {
     
-    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' ){
+    if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager'){
         // $emp_id = $_SESSION['user'];
     $task_id = $_GET['task_id'];
     $achievement = $_POST['Achievements'];
@@ -100,7 +101,7 @@ END - Breadcrumbs
                 <table class="table table-bordered" >
                     <thead>
                     <tr>
-                    <th><img src="achieve1.JPG" alt="" width="500"  height="110"></th>
+                    <th><img src="achieve1.jpg" alt="" width="500"  height="110"></th>
                     <th><img src="ben.jpg" alt="" width="500"  height="110"></th>
                     </tr>
                     </thead>

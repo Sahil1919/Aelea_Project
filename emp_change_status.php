@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -18,6 +19,12 @@ if (isset($_POST['submit'])) {
         $test_concern  = $_POST['Concern'];
         $concern = str_replace("'","''",$test_concern);
         $due_date = $_POST['duedate'];
+
+        $minutes_to_add = 330;
+        $time = new DateTime();
+        $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+        $stamp = $time->format('Y-m-d H:i');  
+        // echo $stamp;
         // $work_assign_date = date( 'd-m-y g:i:s A' );
         $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
         
@@ -43,7 +50,8 @@ if (isset($_POST['submit'])) {
         $query = "UPDATE `assign_task` SET ";
     
         if ($status=='Close') {
-            $query .= "`work_com_date`=now(),";
+            
+            $query .= "`work_com_date`="."'".$stamp."'".",";
             $query .= "`status`='$status',";
             $query .= "`Achievements`='$achievement',";
             $query .= "`Benefits`='$benefit',";
@@ -60,7 +68,7 @@ if (isset($_POST['submit'])) {
             $query .= "`Benefits`='$benefit',";
             $query .= "`task`='$concern',";
             $query .= "`work_due_date`='$due_date',";
-            $query .= "`work_assign_date`=now(),";
+            $query .= "`work_assign_date`="."'".$stamp."'".",";
             $query .= "`assignby`='$assign_by',";
         }
         else{
@@ -77,6 +85,12 @@ if (isset($_POST['submit'])) {
         } 
     }
     
+    $minutes_to_add = 330;
+    $time = new DateTime();
+    $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+    $stamp = $time->format('Y-m-d H:i');  
+    // echo $stamp;
+
     $emp_id = $_SESSION['user'];
     $task_id = $_GET['task_id'];
     $status = $_POST['status'];
@@ -100,7 +114,7 @@ if (isset($_POST['submit'])) {
     $query = "UPDATE `assign_task` SET ";
 
     if ($status=='Close') {
-        $query .= "`work_com_date`=now(),";
+        $query .= "`work_com_date`="."'".$stamp."'".",";
     }
 
     $query .= "`status`='$status',";

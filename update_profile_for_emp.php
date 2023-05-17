@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -36,7 +37,8 @@ if (isset($_POST['update'])) {
       //  $query .= "`created`='',";
        //$query .= "`user_role`='',";
         $query .= "`emp_pro`='$post_image',";
-        // $query .= "`email_id`='$emailid',";
+        $query .= "`email_id`='$emailid',";
+        $query .= "`emp_name`='$Name',";        
         $query .= "`emp_mob`='$mobile' WHERE `id`='$emp_id'";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
@@ -72,7 +74,7 @@ function gen_image_code_unique() {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
     <li class="breadcrumb-item"><span>Employee</span></li>
 </ul>
 <!--------------------
@@ -85,7 +87,7 @@ END - Breadcrumbs
                                                                       <?php
                                                              $id=  $userID = $_SESSION['user'];//$_GET['emp_id'];
                                                                       
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where id='$id'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where id='$id'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;

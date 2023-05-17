@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -78,7 +79,7 @@ END - Breadcrumbs
         <tbody>
                                      <?php
                                                             $emp_id=  $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -89,7 +90,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $emp_id1 = $row['emp_id']; 
             $task = $row['task'];
             $assignby = $row['assignby'];
-            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
         
             while ($report_row = mysqli_fetch_assoc($qry1))
             {
@@ -149,23 +150,26 @@ while ($row = mysqli_fetch_assoc($qry)) {
 
      <?php } else { echo" $remark";}?>
    </td>
-  <?php if($work_com_date && $status!='WIP'): ?>
-
-<?php if($work_due_date >= $date): ?>
-        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-
-<?php elseif($work_com_date <= $work_due_date): ?>
+   <?php 
+   $originalTime = new DateTimeImmutable($date);
+   $targedTime = new DateTimeImmutable($work_due_date);
+   $interval = $originalTime->diff($targedTime);
+   $interval = $interval->format("%a");
+   ?>
+    
+   <?php if ($work_com_date=='') { if ($interval>0){?>
     <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-        <?php else: ?>    
-        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-    <?php endif; ?>
-
-<?php elseif($work_due_date >= $date): ?>
-<td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-<?php else: ?>    
-<td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-
-<?php endif; ?>
+    <?php } else { if (strtotime($work_due_date) >= strtotime($date)) 
+        {?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php } } } else {?>
+    <?php if (strtotime($work_com_date) <= strtotime($work_due_date)) { ?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php }}?>
     
 <!--    <td> <img src="user_profile/<?php echo $emp_pro;?>" height="80px" width="80px"></td> 
       <td><?php echo $created;?></td> 
@@ -175,10 +179,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                   <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Do Next</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
+                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Do Next</a>
                               
                                 </td>
 

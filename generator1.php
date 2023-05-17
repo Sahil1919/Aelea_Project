@@ -129,14 +129,15 @@ if ($params['search'] != null)
 {
 
     
-    $qry = mysqli_query($connection, "SELECT task FROM pdf_views ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT task FROM pdf_views ") or die("select query fail" . mysqli_error($connection));
     while($row= mysqli_fetch_assoc($qry)){
         $task = strtolower($row['task']);
-        if (str_starts_with($task,strtolower($params['search'])))
-		{
+		$len = strlen($params['search']);
+    	if (substr($task, 0, $len) == strtolower($params['search']))
+		{	
 
             $data = $row['task'];
-            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views WHERE task='$data' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT * FROM pdf_views WHERE task='$data' ") or die("select query fail" . mysqli_error($connection));
             $count = 0;
 			$result=mysqli_query($connection,"SELECT count(*) as total from pdf_views WHERE task='$data' ");
 			$data=mysqli_fetch_assoc($result);
@@ -175,7 +176,7 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
-					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
 				
 					$report_row = mysqli_fetch_assoc($qry2);
 					$report_to = $report_row['report_to'];
@@ -208,28 +209,25 @@ if ($params['search'] != null)
 
 					$status = $row['status'];
 					date_default_timezone_set('Asia/Kolkata');
-					$date = date('d-m-y g:i:s A');
-					if($work_com_date && $status!='WIP')
-					{
-
-							if($work_due_date >= $date){
-								$due_status = "DUE";
-							}
-
-							elseif($work_com_date <= $work_due_date){
-								$due_status = "DUE";
-							}
-
-							else{
-								$due_status = "OVERDUE";
-							}
-					}
-					elseif($work_due_date >= $date){
-						$due_status = "DUE";
-					}
-					else{
-						$due_status = "OVERDUE";
-					}
+			$date = date('d-m-y g:i:s A');
+			$originalTime = new DateTimeImmutable($date);
+			$targedTime = new DateTimeImmutable($work_due_date);
+			$interval = $originalTime->diff($targedTime);
+			$interval = $interval->format("%a");
+						 
+			if ($work_com_date=='') { if ($interval>0){
+			 	$due_status = "Due";
+			 } else { if (strtotime($work_due_date) >= strtotime($date)) 
+				 {
+					$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 } } } else {
+			 if (strtotime($work_com_date) <= strtotime($work_due_date)) { 
+				$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 }}	
 					///
 					
 					if ($row['remark'] != '' && $row['remark'] != null ){
@@ -376,7 +374,7 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
-					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
 				
 					$report_row = mysqli_fetch_assoc($qry2);
 					$report_to = $report_row['report_to'];
@@ -409,28 +407,25 @@ if ($params['search'] != null)
 
 					$status = $row['status'];
 					date_default_timezone_set('Asia/Kolkata');
-					$date = date('d-m-y g:i:s A');
-					if($work_com_date && $status!='WIP')
-					{
-
-							if($work_due_date >= $date){
-								$due_status = "DUE";
-							}
-
-							elseif($work_com_date <= $work_due_date){
-								$due_status = "DUE";
-							}
-
-							else{
-								$due_status = "OVERDUE";
-							}
-					}
-					elseif($work_due_date >= $date){
-						$due_status = "DUE";
-					}
-					else{
-						$due_status = "OVERDUE";
-					}
+			$date = date('d-m-y g:i:s A');
+			$originalTime = new DateTimeImmutable($date);
+			$targedTime = new DateTimeImmutable($work_due_date);
+			$interval = $originalTime->diff($targedTime);
+			$interval = $interval->format("%a");
+						 
+			if ($work_com_date=='') { if ($interval>0){
+			 	$due_status = "Due";
+			 } else { if (strtotime($work_due_date) >= strtotime($date)) 
+				 {
+					$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 } } } else {
+			 if (strtotime($work_com_date) <= strtotime($work_due_date)) { 
+				$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 }}	
 					///
 					
 					if ($row['remark'] != '' && $row['remark'] != null ){
@@ -573,7 +568,7 @@ if ($params['search'] != null)
 					$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 					$pdf->Ln(3);
-					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+					$qry2 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
 				
 					$report_row = mysqli_fetch_assoc($qry2);
 					$report_to = $report_row['report_to'];
@@ -606,28 +601,25 @@ if ($params['search'] != null)
 
 					$status = $row['status'];
 					date_default_timezone_set('Asia/Kolkata');
-					$date = date('d-m-y g:i:s A');
-					if($work_com_date && $status!='WIP')
-					{
-
-							if($work_due_date >= $date){
-								$due_status = "DUE";
-							}
-
-							elseif($work_com_date <= $work_due_date){
-								$due_status = "DUE";
-							}
-
-							else{
-								$due_status = "OVERDUE";
-							}
-					}
-					elseif($work_due_date >= $date){
-						$due_status = "DUE";
-					}
-					else{
-						$due_status = "OVERDUE";
-					}
+			$date = date('d-m-y g:i:s A');
+			$originalTime = new DateTimeImmutable($date);
+			$targedTime = new DateTimeImmutable($work_due_date);
+			$interval = $originalTime->diff($targedTime);
+			$interval = $interval->format("%a");
+						 
+			if ($work_com_date=='') { if ($interval>0){
+			 	$due_status = "Due";
+			 } else { if (strtotime($work_due_date) >= strtotime($date)) 
+				 {
+					$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 } } } else {
+			 if (strtotime($work_com_date) <= strtotime($work_due_date)) { 
+				$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 }}	
 					///
 					
 					if ($row['remark'] != '' && $row['remark'] != null ){
@@ -729,8 +721,8 @@ if ($params['search'] != null)
 else
 {
 	$id = $params['id'];
-	echo $id;
-    $qry = mysqli_query($connection, "SELECT * FROM pdf_views where emp_id='$id' ") or die("select query fail" . mysqli_error());
+	// echo $id;
+    $qry = mysqli_query($connection, "SELECT * FROM pdf_views where emp_id='$id' ") or die("select query fail" . mysqli_error($connection));
 	$count = 0;
 	$result=mysqli_query($connection,"SELECT count(*) as total from pdf_views where emp_id='$id' ");
 	$data=mysqli_fetch_assoc($result);
@@ -769,7 +761,7 @@ else
 			$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 			$pdf->Ln(3);
-			$qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+			$qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
         
 			$report_row = mysqli_fetch_assoc($qry1);
 			$report_to = $report_row['report_to'];
@@ -804,27 +796,24 @@ else
 			$status = $row['status'];
 			date_default_timezone_set('Asia/Kolkata');
 			$date = date('d-m-y g:i:s A');
-			if($work_com_date && $status!='WIP')
-			{
-
-					if($work_due_date >= $date){
-						$due_status = "DUE";
-					}
-
-					elseif($work_com_date <= $work_due_date){
-						$due_status = "DUE";
-					}
-
-					else{
-						$due_status = "OVERDUE";
-					}
-			}
-			elseif($work_due_date >= $date){
-				$due_status = "DUE";
-			}
-			else{
-				$due_status = "OVERDUE";
-			}
+			$originalTime = new DateTimeImmutable($date);
+			$targedTime = new DateTimeImmutable($work_due_date);
+			$interval = $originalTime->diff($targedTime);
+			$interval = $interval->format("%a");
+						 
+			if ($work_com_date=='') { if ($interval>0){
+			 	$due_status = "Due";
+			 } else { if (strtotime($work_due_date) >= strtotime($date)) 
+				 {
+					$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 } } } else {
+			 if (strtotime($work_com_date) <= strtotime($work_due_date)) { 
+				$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 }}	
 			///
 			
 			if ($row['remark'] != '' && $row['remark'] != null ){
@@ -971,7 +960,7 @@ else
 			$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 			$pdf->Ln(3);
-			$qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+			$qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
         
 			$report_row = mysqli_fetch_assoc($qry1);
 			$report_to = $report_row['report_to'];
@@ -1005,27 +994,24 @@ else
 			$status = $row['status'];
 			date_default_timezone_set('Asia/Kolkata');
 			$date = date('d-m-y g:i:s A');
-			if($work_com_date && $status!='WIP')
-			{
-
-					if($work_due_date >= $date){
-						$due_status = "DUE";
-					}
-
-					elseif($work_com_date <= $work_due_date){
-						$due_status = "DUE";
-					}
-
-					else{
-						$due_status = "OVERDUE";
-					}
-			}
-			elseif($work_due_date >= $date){
-				$due_status = "DUE";
-			}
-			else{
-				$due_status = "OVERDUE";
-			}
+			$originalTime = new DateTimeImmutable($date);
+			$targedTime = new DateTimeImmutable($work_due_date);
+			$interval = $originalTime->diff($targedTime);
+			$interval = $interval->format("%a");
+						 
+			if ($work_com_date=='') { if ($interval>0){
+			 	$due_status = "Due";
+			 } else { if (strtotime($work_due_date) >= strtotime($date)) 
+				 {
+					$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 } } } else {
+			 if (strtotime($work_com_date) <= strtotime($work_due_date)) { 
+				$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 }}	
 			///
 			
 			if ($row['remark'] != '' && $row['remark'] != null ){
@@ -1168,7 +1154,7 @@ else
 			$pdf->Cell(59, 5, 'Mobile No - '.$emp_mob, 0, 1);
 
 			$pdf->Ln(3);
-			$qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error());
+			$qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where emp_code = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
         
 			$report_row = mysqli_fetch_assoc($qry1);
 			$report_to = $report_row['report_to'];
@@ -1202,27 +1188,24 @@ else
 			$status = $row['status'];
 			date_default_timezone_set('Asia/Kolkata');
 			$date = date('d-m-y g:i:s A');
-			if($work_com_date && $status!='WIP')
-			{
-
-					if($work_due_date >= $date){
-						$due_status = "DUE";
-					}
-
-					elseif($work_com_date <= $work_due_date){
-						$due_status = "DUE";
-					}
-
-					else{
-						$due_status = "OVERDUE";
-					}
-			}
-			elseif($work_due_date >= $date){
-				$due_status = "DUE";
-			}
-			else{
-				$due_status = "OVERDUE";
-			}
+			$originalTime = new DateTimeImmutable($date);
+			$targedTime = new DateTimeImmutable($work_due_date);
+			$interval = $originalTime->diff($targedTime);
+			$interval = $interval->format("%a");
+						 
+			if ($work_com_date=='') { if ($interval>0){
+			 	$due_status = "Due";
+			 } else { if (strtotime($work_due_date) >= strtotime($date)) 
+				 {
+					$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 } } } else {
+			 if (strtotime($work_com_date) <= strtotime($work_due_date)) { 
+				$due_status = "Due";
+			 } else {
+				$due_status = "Overdue";
+			 }}	
 			///
 			
 			if ($row['remark'] != '' && $row['remark'] != null ){
@@ -1346,7 +1329,6 @@ $pdf->Output($report_name, 'I');
 
 
 ?>
-
 
 
 

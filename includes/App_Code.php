@@ -48,12 +48,13 @@ class App_Code {
     }
      
        function getName($ID) {
+        include 'db.php';
         //    echo '<script>alert("Hello");</script>';
-       $con = mysqli_connect("localhost", "root", "", "task_management") or die(mysqli_connect_error());
+    //    $con = mysqli_connect("localhost", "aeleacommodities_rahilm", "i8DyK^JLR_gG", "aeleacommodities_tasksM") or die(mysqli_connect_error());
         $UserRGID = $ID;
 
         $client = "select * from emp_login where id='$UserRGID'";
-        $getNameQuery = mysqli_query($con, $client) or die(mysqli_error());
+        $getNameQuery = mysqli_query($connection, $client) or die(mysqli_connect_error());
 
         while ($row = mysqli_fetch_assoc($getNameQuery)) {
             $emp_name = $row['emp_name'];
@@ -66,12 +67,13 @@ class App_Code {
         
     }
     function get_User_role($ID) {
+        include 'db.php';
         //    echo '<script>alert("Hello");</script>';
-       $con = mysqli_connect("localhost", "root", "", "task_management") or die(mysqli_connect_error());
+    //    $con = mysqli_connect("localhost", "aeleacommodities_rahilm", "i8DyK^JLR_gG", "aeleacommodities_tasksM") or die(mysqli_connect_error());
         $UserRGID = $ID;
 
         $client = "select * from emp_login where id='$UserRGID'";
-        $getNameQuery = mysqli_query($con, $client) or die(mysqli_error());
+        $getNameQuery = mysqli_query($connection, $client) or die(mysqli_connect_error());
 
         while ($row = mysqli_fetch_assoc($getNameQuery)) {
             $user_role = ucfirst($row['user_role']);

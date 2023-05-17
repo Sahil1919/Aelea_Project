@@ -21,12 +21,13 @@
                     </tr>
         </thead>   <tbody>
   <?php
+  session_start();
   if ($_SESSION['User_type']=='reporting manager'){
     $sess_report_id = $_SESSION['user'];
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and report_to= '$sess_report_id' or id='$sess_report_id'") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and report_to= '$sess_report_id' or id='$sess_report_id'") or die("select query fail" . $connection->mysqli_error());
   }
   else{
-  $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager')") or die("select query fail" . mysqli_error());
+  $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','admin','reporting manager')") or die("select query fail" . $connection->mysqli_error());
   }
   $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
@@ -43,10 +44,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $user_role = ucfirst($row['user_role']);
             $report_id = $row['report_to'];
             // var_dump($report_id);
-            if (strlen($report_id) != 0) 
+            if (strlen($report_id) != 0 &&  $report_id !=null && $report_id !=' ') 
             {
               
-              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where id = '$report_id' ") or die("select query fail" . mysqli_error());
+              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where id = '$report_id' ") or die("select query fail" . $connection->mysqli_error());
               while ($report_row = mysqli_fetch_assoc($qry1))
               {
                 $report_code = $report_row['emp_code'];
@@ -77,7 +78,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td><?php echo $emp_code;?></td>
   <td><?php echo $emp_name;?></td>
   <td><?php echo $user_role;?></td> 
-  <td><?php if (strlen($report_id) != 0) echo $report_code."/".$report_name; else echo ""?></td> 
+  <td><?php if (strlen($report_id) != 0 && $report_id!=null  && $report_id !=' ') echo $report_code."/".$report_name; else echo ""?></td> 
   <td><?php echo $emp_mob;?></td> 
   <td><?php echo $email_id;?></td> 
   
@@ -89,7 +90,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
       <td><a href="employee.php?id=<?php echo $row['id']; ?>&Status=<?php echo $row['status']; ?>" class="<?php echo $btnClass; ?> " ><?php echo $status; ?></a></td>
     <td><a class="btn btn-primary" href="employee.php?source=update_emp&emp_id=<?php echo $id;?>">Edit</a></td>
                               <td><a class="btn btn-danger" href="employee.php?delete=<?php echo $id;?>">Delete</a></td>
-                              <td><a class="btn btn-info" href="view_task.php?id=<?php echo $id;?>">View</a></td>
+                              <td><a class="btn btn-info" href="employee.php?source=view_emp&id=<?php echo $id;?>">View</a></td>
                     </tr>
 <?php }?>
         </tbody>     </table>

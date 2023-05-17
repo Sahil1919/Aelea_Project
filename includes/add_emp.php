@@ -1,5 +1,5 @@
    <?php
-   // add the sql fetching query
+   session_start();
    
    ?>
 
@@ -78,7 +78,7 @@
                                             <option></option>
                                             <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;

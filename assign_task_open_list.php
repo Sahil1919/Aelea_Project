@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -46,7 +47,7 @@ if(isset($_GET['delete_task']))
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_donext_dash.php">Back</a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_donext_dash">Back</a></li>
     <li class="breadcrumb-item"><span>Assign Do Next Open</span></li>
 </ul>
 <!--------------------
@@ -72,7 +73,7 @@ END - Breadcrumbs
                         <!-- <th>Role Type</th> -->
                         <th>Concern</th>
                          <th>Assigned By</th>
-                         <th>Report To</th>
+                         <th>Reporting To</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
                            <th>Work Due Date</th>
@@ -90,10 +91,11 @@ END - Breadcrumbs
         <tbody>
                                  <?php
                  if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-                    $qry = mysqli_query($connection, "SELECT * FROM assign_task where status='Open' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                    $qry = mysqli_query($connection, "SELECT * FROM assign_task where status='Open' order by work_assign_date desc") or die("select query fail" . $connection->mysqli_error());
    $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');
+   
    while ($row = mysqli_fetch_assoc($qry)) {
        $count = $count + 1;
      
@@ -102,7 +104,7 @@ END - Breadcrumbs
                // $user_role = $row['user_role'];
                $task = $row['task'];
                $assignby = $row['assignby'];
-               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . $connection->mysqli_error());
         
             while ($report_row = mysqli_fetch_assoc($qry1))
             {
@@ -117,9 +119,10 @@ END - Breadcrumbs
             
             }
                $task_doc = $row['task_doc'];
-               // var_dump($task_doc);
-               $work_assign_date = strtotime($row['work_assign_date']);
-               $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
+             
+               
+              $work_assign_date = strtotime($row['work_assign_date']);
+              $work_assign_date = date( 'd-m-y g:i:s A', $work_assign_date );
    
                $work_due_date = strtotime($row['work_due_date']);
                $work_due_date = date( 'd-m-y g:i:s A', $work_due_date );
@@ -142,18 +145,18 @@ END - Breadcrumbs
      <td><?php echo $assignby;?></td>
      <td><?php echo $app_code_obj->getName($report_to);?></td> 
      <td>
-         <?php if($task_doc !='' && $task_doc !=0)
-         {?>
-         <?php $docs = explode(",",$task_doc);?>
-         <?php foreach($docs as $value) 
-           {?>
-           <?php  $value =  ltrim($value);?>
-         <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
-         <br>
-         <br>
-         <?php }?>
-         <?php }?>
-     </td> 
+      <?php if($task_doc !='')
+      {?>
+        <?php $docs = explode(",",$task_doc);?>
+      <?php foreach($docs as $value) 
+        {?>
+        <?php  $value =  ltrim($value);?>
+      <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
+      <br>
+      <br>
+      <?php }?>
+       <?php } else { echo $task_doc;}?>
+  </td> 
      
        <td><?php echo $work_assign_date;?></td> 
        <td><?php echo $work_due_date;?></td> 
@@ -164,23 +167,26 @@ END - Breadcrumbs
       <td>
        <?php echo $remark; ?></td>
        
-      <?php if($work_com_date && $status!='WIP'): ?>
-   
-       <?php if($work_due_date >= $date): ?>
-               <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   
-       <?php elseif($work_com_date <= $work_due_date): ?>
-           <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-               <?php else: ?>    
-               <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-           <?php endif; ?>
-   
-       <?php elseif($work_due_date >= $date): ?>
-       <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   <?php else: ?>    
-   <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-   
-   <?php endif; ?>
+       <?php 
+   $originalTime = new DateTimeImmutable($date);
+   $targedTime = new DateTimeImmutable($work_due_date);
+   $interval = $originalTime->diff($targedTime);
+   $interval = $interval->format("%a");
+   ?>
+    
+   <?php if ($work_com_date=='') { if ($interval>0){?>
+    <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else { if (strtotime($work_due_date) >= strtotime($date)) 
+        {?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php } } } else {?>
+    <?php if (strtotime($work_com_date) <= strtotime($work_due_date)) { ?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php }}?>
    
       
        
@@ -208,7 +214,7 @@ END - Breadcrumbs
                     $qry = mysqli_query($connection, "SELECT assign_task.`task_id`, assign_task.emp_id,assign_task.task,assign_task.status,assign_task.`assignby`,
                     assign_task.task_doc,assign_task.work_assign_date,assign_task.work_due_date,assign_task.work_com_date,assign_task.remark,assign_task.Achievements,
                     assign_task.Benefits,assign_task.attachments FROM assign_task,emp_login where user_role IN ('employee','reporting manager') and assign_task.status= 'Open' and emp_id=id and report_to='$sess_report_id' ")
-                     or die("select query fail" . mysqli_error());
+                     or die("select query fail" . $connection->mysqli_error());
    $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');
@@ -220,7 +226,7 @@ END - Breadcrumbs
                // $user_role = $row['user_role'];
                $task = $row['task'];
                $assignby = $row['assignby'];
-               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . $connection->mysqli_error());
         
             while ($report_row = mysqli_fetch_assoc($qry1))
             {
@@ -282,23 +288,26 @@ END - Breadcrumbs
       <td>
        <?php echo $remark; ?></td>
        
-      <?php if($work_com_date && $status!='WIP'): ?>
-   
-       <?php if($work_due_date >= $date): ?>
-               <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   
-       <?php elseif($work_com_date <= $work_due_date): ?>
-           <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-               <?php else: ?>    
-               <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-           <?php endif; ?>
-   
-       <?php elseif($work_due_date >= $date): ?>
-       <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   <?php else: ?>    
-   <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-   
-   <?php endif; ?>
+      <?php 
+   $originalTime = new DateTimeImmutable($date);
+   $targedTime = new DateTimeImmutable($work_due_date);
+   $interval = $originalTime->diff($targedTime);
+   $interval = $interval->format("%a");
+   ?>
+    
+   <?php if ($work_com_date=='') { if ($interval>0){?>
+    <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else { if (strtotime($work_due_date) >= strtotime($date)) 
+        {?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php } } } else {?>
+    <?php if (strtotime($work_com_date) <= strtotime($work_due_date)) { ?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php }}?>
    
       
        
@@ -320,7 +329,7 @@ END - Breadcrumbs
                        </tr>
    <?php }
    // ANother While loop for Manager
-   $qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_task where assign_task.emp_id='$sess_report_id' and status= 'Open' ") or die("select query fail" . mysqli_error());
+   $qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_task where assign_task.emp_id='$sess_report_id' and status= 'Open' ") or die("select query fail" . $connection->mysqli_error());
    // $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');
@@ -332,7 +341,7 @@ END - Breadcrumbs
                // $user_role = $row['user_role'];
                $task = $row['task'];
                $assignby = $row['assignby'];
-               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+               $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . $connection->mysqli_error());
         
             while ($report_row = mysqli_fetch_assoc($qry1))
             {
@@ -394,23 +403,26 @@ END - Breadcrumbs
       <td>
        <?php echo $remark; ?></td>
        
-      <?php if($work_com_date && $status!='WIP'): ?>
-   
-       <?php if($work_due_date >= $date): ?>
-               <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   
-       <?php elseif($work_com_date <= $work_due_date): ?>
-           <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-               <?php else: ?>    
-               <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-           <?php endif; ?>
-   
-       <?php elseif($work_due_date >= $date): ?>
-       <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
-   <?php else: ?>    
-   <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td> 
-   
-   <?php endif; ?>
+      <?php 
+   $originalTime = new DateTimeImmutable($date);
+   $targedTime = new DateTimeImmutable($work_due_date);
+   $interval = $originalTime->diff($targedTime);
+   $interval = $interval->format("%a");
+   ?>
+    
+   <?php if ($work_com_date=='') { if ($interval>0){?>
+    <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else { if (strtotime($work_due_date) >= strtotime($date)) 
+        {?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php } } } else {?>
+    <?php if (strtotime($work_com_date) <= strtotime($work_due_date)) { ?>
+        <td><a href="#" class="btn btn-warning"> <?php echo "Due";?></a> <br></td>
+    <?php } else {?>
+        <td><a href="#" class="btn btn-danger"> <?php echo "Overdue";?></a> <br></td>
+    <?php }}?>
    
       
        

@@ -1,5 +1,22 @@
-<?php include 'includes/checkauthenticator.php';
-include 'includes/db.php';
+<?php 
+include './includes/checkauthenticator.php';
+include './includes/db.php';
+
+// $CurPageURL = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];  
+// $url_components = parse_url($CurPageURL);
+// parse_str($url_components['query'], $params);
+// $id = $params['user'];
+// $sql = "select * from emp_login where id = '$id'";
+// $q = mysqli_query($connection, $sql);
+// $row = mysqli_fetch_array($q);
+// // var_dump($row);
+// $count = mysqli_num_rows($q);
+
+// $_SESSION['user'] = $row['id'];
+// $_SESSION['emp_name'] = $row['emp_name'];
+// $_SESSION['emp_pro'] = $row['emp_pro'];
+// $_SESSION['User_type'] = $row['user_role'];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,7 +47,8 @@ include 'includes/db.php';
     <body class="menu-position-side menu-side-left full-screen with-content-panel">
         <div class="all-wrapper with-side-panel solid-bg-all">   
             <div class="layout-w">
-          <?php include './includes/sidemenu.php';?>
+          <?php 
+          include './includes/sidemenu.php';?>
                 <div class="content-w">
                   
     <?php //include './includes/topmenubar.php';?>

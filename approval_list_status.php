@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -78,6 +79,20 @@ if(isset($_GET['reject']) && isset($_GET['user_id']) && isset($_GET['emp_id']) )
     $update_password = mysqli_query($connection, $query);
     // header("Refresh:0; url=./includes/sidemenu.php");
 }
+
+if(isset($_GET['delete_task']))
+{
+    $task_id=$_GET['delete_task'];
+    // echo $task_id;
+    // $update="UPDATE  job1 SET name='$name',email='$email',phn='$number',sub='$sub' WHERE id='$id";
+    $query="DELETE FROM `approval_list` WHERE task_id=$task_id";
+    $delete_task = mysqli_query($connection, $query);
+      if (!$delete_task) {
+        die('QUERY FAILD change password' . mysqli_error($connection));
+    } else {
+    }
+    
+}
 ?>
 
 <!--------------------
@@ -131,6 +146,7 @@ END - Breadcrumbs
                         <th>Reporting To</th>
                         <th>Approval For</th>
                           <th>Approval Status</th>
+                          <th>Delete</th>
                           <!-- <th>Approve Request</th> -->
                     </tr>
         </thead>
@@ -256,16 +272,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
         <?php } else{?>
             <td><a href="#" class="btn btn-danger"> <?php echo $approval_status;?></a> <br></td>
             <?php }?>
-    <!-- <td> 
-    <?php if ($approval_for=='Transfer Do Next')
-    {?>
-    <a class="btn btn-success" href="approval_list.php?approve_req=<?php echo $row['task_id']; ?>&user_id=<?php echo $row['user_id']; ?>&emp_id=<?php echo $row['emp_id']; ?>">Approve</a>
-    <?php } else {?>  
-        <a class="btn btn-success" href="approval_list.php?share=<?php echo $row['task_id'];?>&user_id=<?php echo $row['user_id'];?>&emp_id=<?php echo  $row['emp_id']; ?>">Approve</a>
-    <?php } ?> 
-    <br><br>
-    <a class="btn btn-danger" href="approval_list.php?reject=<?php echo $row['task_id'];?>&user_id=<?php echo $row['user_id'];?>&emp_id=<?php echo  $row['emp_id']; ?>"> Reject </a>
-    </td> -->
+            <td><a class="btn btn-danger" href="approval_list_status.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
 </tr>
 
 <?php }?>

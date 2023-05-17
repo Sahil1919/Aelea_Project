@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -12,6 +13,11 @@ if (isset($_POST['submit'])) {
     $status = $_POST['status'];
     $test_remark = $_POST['remark'];
     $remark = str_replace("'","''",$test_remark);
+    $minutes_to_add = 330;
+    $time = new DateTime();
+    $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+    $stamp = $time->format('Y-m-d H:i');  
+    
 
     $total = isset($_FILES["file_attachment"]) ? count($_FILES["file_attachment"]["name"]) : 0 ;
     if ($total>0){
@@ -34,7 +40,7 @@ if (isset($_POST['submit'])) {
     //   $query .=  "`task_doc`='',";
     //    $query .=  "`work_assign_date`='',";
     if ($status=='Close') {
-        $query .= "`work_com_date`=now(),";
+        $query .= "`work_com_date`="."'".$stamp."'".",";
     }
 
     $query .= "`status`='$status',";

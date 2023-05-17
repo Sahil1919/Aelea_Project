@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -46,7 +47,7 @@ if(isset($_GET['delete_task']))
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="admin_a&b_dash.php">Back</a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=admin_a&b_dash">Back</a></li>
     <li class="breadcrumb-item"><span>Assign Do Next Close</span></li>
 </ul>
 <!--------------------
@@ -88,7 +89,7 @@ END - Breadcrumbs
         <tbody>
                                  <?php
                  if ($_SESSION['User_type'] == 'management' || $_SESSION['User_type'] == 'admin'){
-                    $qry = mysqli_query($connection, "SELECT * FROM assign_task where status = 'Close' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                    $qry = mysqli_query($connection, "SELECT * FROM assign_task where status = 'Close' order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
    $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');
@@ -195,8 +196,8 @@ END - Breadcrumbs
        $sess_report_id = $_SESSION['user'];
                     $qry = mysqli_query($connection, "SELECT assign_task.`task_id`, assign_task.emp_id,assign_task.task,assign_task.status,assign_task.`assignby`,
                     assign_task.task_doc,assign_task.work_assign_date,assign_task.work_due_date,assign_task.work_com_date,assign_task.remark,assign_task.Achievements,
-                    assign_task.Benefits,assign_task.attachments FROM assign_task,emp_login where user_role IN ('employee','reporting manager') and assign_task.status='Close' and emp_id=id and report_to='36' ")
-                     or die("select query fail" . mysqli_error());
+                    assign_task.Benefits,assign_task.attachments FROM assign_task,emp_login where user_role IN ('employee','reporting manager') and assign_task.status='Close' and emp_id=id and report_to='$sess_report_id' ")
+                     or die("select query fail" . mysqli_error($connection));
    $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');
@@ -288,17 +289,17 @@ END - Breadcrumbs
                                      <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                      <br>
                                      <br>
-                                     <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Concern</a>
+                                     <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Do Next</a>
                                      <br>
                                      <br>
-                                     <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
+                                     <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Do Next</a>
                                  
                                    </td>
        <td><a class="btn btn-danger" href="assign_task_list.php?delete_task=<?php echo $row['task_id'];?>">Delete</a></td>
                        </tr>
    <?php }
    // ANother While loop for Manager
-   $qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_task where assign_task.emp_id='$sess_report_id' and status='Close' ") or die("select query fail" . mysqli_error());
+   $qry = mysqli_query($connection, "SELECT DISTINCT * FROM assign_task where assign_task.emp_id='$sess_report_id' and status='Close' ") or die("select query fail" . mysqli_error($connection));
    // $count = 0;
    date_default_timezone_set('Asia/Kolkata');
    $date = date('d-m-y g:i:s A');

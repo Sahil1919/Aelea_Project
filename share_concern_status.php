@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -8,7 +9,7 @@ if (isset($_POST['submit'])) {
 //     if ($_SESSION['User_type']=='admin' || $_SESSION['User_type']=='management' || $_SESSION['User_type']=='reporting manager' ){
 //         $userID = $_SESSION['user'];
 //    $task_id=$_GET['task_id'];
-//    $qry = mysqli_query($connection, "SELECT `emp_id` FROM assign_concern where task_id=$task_id ") or die("select query fail" . mysqli_error());
+//    $qry = mysqli_query($connection, "SELECT `emp_id` FROM assign_concern where task_id=$task_id ") or die("select query fail" . mysqli_error($connection));
 //     $row = mysqli_fetch_assoc($qry);
 //     $empid=$row['emp_id'];
 //    $task_id = $task_id+1;
@@ -93,18 +94,18 @@ END - Breadcrumbs
     $sess_report_id = $_SESSION['user'];
     if ($_SESSION['User_type']=='reporting manager'){    
                                                             
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','reporting manager') and status='1' and report_to='$sess_report_id' or id='$sess_report_id' ") or die("select query fail" . mysqli_error($connection));
     }
     elseif ($_SESSION['User_type']=='management' || $_SESSION['User_type']=='admin'){
-        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee','management','reporting manager','admin') and status='1'") or die("select query fail" . mysqli_error($connection));
     }
     else{
-        $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id='$sess_report_id' ") or die("select query fail" . mysqli_error());
+        $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id='$sess_report_id' ") or die("select query fail" . mysqli_error($connection));
         $row = mysqli_fetch_assoc($qry1);
         
         $report_to_id = $row['report_to'];
         
-        $qry = mysqli_query($connection, "SELECT * FROM emp_login where report_to = '$report_to_id' ") or die("select query fail" . mysqli_error());
+        $qry = mysqli_query($connection, "SELECT * FROM emp_login where report_to = '$report_to_id' ") or die("select query fail" . mysqli_error($connection));
     }
     $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {

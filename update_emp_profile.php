@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -8,9 +9,10 @@ $msg = '';
 $app_code_obj=new App_Code();
 
 if (isset($_POST['update'])) {
-    var_dump($_POST['update']);
-    $emp_id=$_GET['emp_id'];
+    $emp_id= $_SESSION['user'];
+    
       $post_image = $_FILES['profile']['name'];
+      $_SESSION['emp_pro'] = $post_image;
     $post_image_temp = $_FILES['profile']['tmp_name'];
     move_uploaded_file($post_image_temp, "user_profile/$post_image");
     $emp_code = $_POST['emp_code'];
@@ -91,7 +93,7 @@ END - Breadcrumbs
                                                              $id = $_SESSION['user'];//$_GET['emp_id'];
                                                             //  echo $id;
                                                                       
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where id='$id'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where id='$id'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -175,7 +177,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                             <option><?php echo $app_code_obj->getName($report_to);?></option>
                                             <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('reporting manager','management') and status='1'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -190,20 +192,6 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                         </select> 
                                     </div>
                                 </div>
-<!-- <div class="col-sm-3">
-                                    <div class="form-group"><label for="">User ID</label>
-                                        <input class="form-control" value="<?php echo $user_id;?>" name="userid" placeholder="User ID" type="text">
-                                    </div>
-                                </div>
-
- <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Password</label>
-                                        <input class="form-control" value="<?php echo $pswd;?>" name="pswd" placeholder="password" type="text">
-                                    </div>
-                                </div>-->
-
-
-
 
                                 <div class="form-buttons-w text-right">
                                     <input class="btn btn-primary" type="submit" value="Update Profile" name="update">

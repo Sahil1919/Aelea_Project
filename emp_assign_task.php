@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -16,9 +17,15 @@ if (isset($_POST['submit'])) {
     $test_task  = $_POST['task'];
     $task = str_replace("'","''",$test_task);
            $duedate = $_POST['duedate'];
+           $minutes_to_add = 330;
+           $time = new DateTime();
+           $time->add(new DateInterval('PT' . $minutes_to_add . 'M'));
+           $stamp = $time->format('Y-m-d H:i');  
+           $stamp = "'".$stamp."'";
+        //    echo $stamp;
            //  = $_POST['file_attachment'];
     $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`,`work_due_date`, `status`)";
-     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',now(),'$duedate','Open')";
+     $query .= " VALUES ('$employee_id','$task','Employee','$task_doc',$stamp,'$duedate','Open')";
     $update_password = mysqli_query($connection, $query);
     if (!$update_password) {
         die('QUERY FAILD change pashword' . mysqli_error($connection));
@@ -67,7 +74,7 @@ END - Breadcrumbs
                                             <option>--select Employee--</option>
                                                                                                        <?php
                                                           
-                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role='employee' and status='1'") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role='employee' and status='1'") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -84,8 +91,8 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                     </div>
                                 </div>-->
                                 <div class="col-sm-3">
-                                    <div class="form-group"><label for="">Concern</label>
-                                        <input class="form-control" name="task" placeholder="Enter Concern" type="text">
+                                    <div class="form-group"><label for="">Do Next</label>
+                                        <input class="form-control" name="task" placeholder="Enter Do Next" type="text">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -101,7 +108,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <br>
-                                         <input class="btn btn-primary" type="submit" value="Assign Concern" name="submit">
+                                         <input class="btn btn-primary" type="submit" value="Assign Do Next" name="submit">
                                         <!--<label for="">Conform Password</label>-->
                                         <!--<input class="form-control" name="CPSWD" placeholder="Conform Password" type="password">-->
                                     </div>

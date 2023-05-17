@@ -1,9 +1,8 @@
 <?php
-session_start();
-if(isset($_SESSION['user']) && ($_SESSION['user'] != '') ){
+if ($_SESSION['user'] && $_SESSION['user']!= ''){
 
 }
 else{
-header('location:index.php');
+    echo "<script> window.location.href= 'index.php' </script>";
 }
 ?>

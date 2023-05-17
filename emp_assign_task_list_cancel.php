@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -58,7 +59,7 @@ END - Breadcrumbs
                         <th>Employee Name</th>
                         <th>Do Next</th>
                          <th>Assigned By</th>
-                         <th>Report To</th>
+                         <th>Reporting To</th>
                           <th>Download File</th>
                            <th>Assign Work Date</th>
                             <th>Work Due Date</th>
@@ -70,7 +71,7 @@ END - Breadcrumbs
         <tbody>
                                                                <?php
                                                             $emp_id=  $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' and status='Cancel' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' and status='Cancel' order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
     $count = $count + 1;
@@ -78,7 +79,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $emp_id1 = $row['emp_id']; 
             $task = $row['task'];
             $assignby = $row['assignby'];
-            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
         
             while ($report_row = mysqli_fetch_assoc($qry1))
             {
@@ -116,8 +117,15 @@ while ($row = mysqli_fetch_assoc($qry)) {
   <td>
       <?php if($task_doc !='')
       {?>
-      <a href="task_doc/<?php echo $task_doc;?>" class="btn btn-primary">Download</a>  
+        <?php $docs = explode(",",$task_doc);?>
+      <?php foreach($docs as $value) 
+        {?>
+        <?php  $value =  ltrim($value);?>
+      <a href="task_doc/<?php echo $value;?>" class="btn btn-primary">Download</a> 
+      <br>
+      <br>
       <?php }?>
+       <?php } else { echo $task_doc;}?>
   </td> 
     <td><?php echo $work_assign_date;?></td> 
     <td><?php echo $work_due_date;?></td> 
@@ -133,10 +141,10 @@ while ($row = mysqli_fetch_assoc($qry)) {
                                  <a style="width: 100%;" class="btn btn-info" href="emp_change_status.php?task_id=<?php echo $task_id;?>">Change Status</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Task</a>
+                                  <a style="width: 100%;" class="btn btn-success" href="tran_assign_task.php?task_id=<?php echo $task_id;?>">Transfer Do Next</a>
                                   <br>
                                   <br>
-                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Concern</a>
+                                  <a style="width: 100%;" class="btn btn-warning" href="share_assign_task.php?task_id=<?php echo $task_id;?>">Share Do Next</a>
                               
                                 </td>
                     </tr>

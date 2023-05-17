@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -12,7 +13,7 @@ if (isset($_POST['submit'])) {
     // var_dump($oldPSWD);
     $CPSWD = $_POST['CPSWD'];
     
-    $qry = mysqli_query($connection, "SELECT pswd FROM emp_login where id='$userID' ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT pswd FROM emp_login where id='$userID' ") or die("select query fail" .$connection->mysqli_error());
     $old_password = mysqli_fetch_assoc($qry);
     // echo $old_password['pswd'];
     if ($old_password['pswd'] != $oldPSWD){
@@ -33,7 +34,7 @@ if (isset($_POST['submit'])) {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
     <li class="breadcrumb-item"><span>Change Password</span></li>
 </ul>
 <!--------------------

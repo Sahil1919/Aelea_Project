@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -31,7 +32,7 @@ if (isset($_POST['submit'])) {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
+    <li class="breadcrumb-item"><a href="work_dash.php?source=emp_a&b_dash">BACK</a></li>
     <li class="breadcrumb-item"><span>Assign Do Next List</span></li>
 </ul>
 <!--------------------
@@ -78,7 +79,7 @@ END - Breadcrumbs
         <tbody>
                                      <?php
                                                             $emp_id=  $_SESSION['user'];
-                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error());
+                 $qry = mysqli_query($connection, "SELECT * FROM assign_task where emp_id='$emp_id' order by work_assign_date desc") or die("select query fail" . mysqli_error($connection));
 $count = 0;
 date_default_timezone_set('Asia/Kolkata');
 $date = date('d-m-y g:i:s A');
@@ -89,7 +90,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
             $emp_id1 = $row['emp_id']; 
             $task = $row['task'];
             $assignby = $row['assignby'];
-            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error());
+            $qry1 = mysqli_query($connection, "SELECT report_to FROM emp_login where id = '$emp_id' ") or die("select query fail" . mysqli_error($connection));
         
             while ($report_row = mysqli_fetch_assoc($qry1))
             {

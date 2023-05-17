@@ -1,7 +1,18 @@
-  <?php include 'includes/db.php';
+<?php
+$currentCookieParams = session_get_cookie_params();
 
+include("./includes/db.php");
+$domain = 'aeleacommodities.com';
+session_set_cookie_params(
+   $currentCookieParams["lifetime"],
+   $currentCookieParams["path"],
+   $domain,
+   $currentCookieParams["secure"],
+   $currentCookieParams["httponly"]
+);
 
 session_start();
+
 $chck_Active_User = '';
 if (isset($_POST['login'])) {
     $uemail = mysqli_real_escape_string($connection, $_POST['User_nm']);
@@ -17,16 +28,23 @@ if (isset($_POST['login'])) {
         $_SESSION['emp_pro'] = $row['emp_pro'];
         $_SESSION['User_type'] = $row['user_role'];
         //$_SESSION['User_type']=$row['user_role'];
-        //$_SESSION['User_type']=$row['user_role'];
 
 
         $chck_Active_User = $row['status'];
         if ($chck_Active_User == '0') {
             echo "<script>alert('your account is currently deactivated. please contact customer care PHONE- +91 022 66340989                                                                     EMAIL -  marketing@aeleacommodities.com');  window.location.href='../login.php';</script>";
         } else {
-            echo "<script>alert ('Login Successfull');
-       window.location.href='Dashboard.php';
-       </script>";
+            // $redirect = "<script>alert('Login Successful";
+            // $redirect.= $_SESSION['user']."') </script>";
+            // // // $redirect.="window.location.href='Dashboard.php?user=";
+            // // // $redirect.= $_SESSION['user']."'; </script>";
+            // echo $redirect;
+            // header("Location: https://aeleacommodities.com/task-management/Dashboard.php");
+            // exit();
+            echo "<script>
+            window.location.href= 'Dashboard.php';
+            </script>";
+
         }
     } else { ?>
         <script>
@@ -36,13 +54,17 @@ if (isset($_POST['login'])) {
 <?php
     }
 }
-?>
+
+ ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Login & Signup Form | CodingNepal</title>
+    <title>Login & Signup Form </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="Login and Signup Form Design\style.css">
   </head>
@@ -50,7 +72,7 @@ if (isset($_POST['login'])) {
     <div class="wrapper">
       <center><img src="Login and Signup Form Design\logo.jpg" alt="" width="90" height="80"></center>
       <div class="title-text">
-        <div class="title login">Aelea Commodities</div>
+        <div class="title login">Aelea Commodities <span>(ABCD)</span></div>
         <div class="title signup">Aelea Commodities </div>
       </div>
       <div class="form-container">
@@ -62,7 +84,7 @@ if (isset($_POST['login'])) {
           <div class="slider-tab"></div>
         </div> -->
         <div class="form-inner">
-          <form action="#" class="login" method="post">
+          <form action="<?php echo $_SERVER["PHP_SELF"];?>" class="login" method="post">
             <div class="field">
               <input name = "User_nm" type="text" placeholder="User ID" type="text" required>
             </div>

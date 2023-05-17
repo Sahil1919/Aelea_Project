@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 $msg = '';
@@ -119,7 +120,7 @@ function gen_image_code_unique() {
 START - Breadcrumbs
 -------------------->
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="Dashboard.php">Home</a></li>
+    <li class="breadcrumb-item"><a href=<?php echo "Dashboard.php?user=".$_SESSION['user']?>>Home</a></li>
     <li class="breadcrumb-item"><span>Employee</span></li>
 </ul>
 <!--------------------
@@ -154,10 +155,10 @@ END - Breadcrumbs
 
 if ($_SESSION['User_type']=='reporting manager'){
     $sess_report_id = $_SESSION['user'];
-$qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and status = '0' and report_to= '$sess_report_id'  ") or die("select query fail" . mysqli_error());
+$qry = mysqli_query($connection, "SELECT * FROM emp_login where user_role IN ('employee') and status = '0' and report_to= '$sess_report_id'  ") or die("select query fail" .$connection->mysqli_error());
 }
 else{
-    $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='0' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM emp_login where status='0' and  `user_role` IN ('employee', 'management','reporting manager','admin')") or die("select query fail" .$connection->mysqli_error());
 }
 $count = 0;
 while ($row = mysqli_fetch_assoc($qry)) {
@@ -175,7 +176,7 @@ while ($row = mysqli_fetch_assoc($qry)) {
              
             if (strlen($report_id) != 0) 
             {
-              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where id = '$report_id' ") or die("select query fail" . mysqli_error());
+              $qry1 = mysqli_query($connection, "SELECT emp_code,emp_name FROM emp_login where id = '$report_id' ") or die("select query fail" .$connection->mysqli_error());
               while ($report_row = mysqli_fetch_assoc($qry1))
               {
                 $report_code = $report_row['emp_code'];

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include './includes/admin_header.php';
 include './includes/data_base_save_update.php';
 include './includes/App_Code.php';
@@ -28,22 +29,30 @@ if (isset($_POST['submit'])) {
 if(isset($_GET['share']) && isset($_GET['user_id']) && isset($_GET['emp_id']) )
 {
     $task_id=$_GET['share'];
-    $task_id = $task_id+1;
     $userID=$_GET['user_id'];
     $emp_id=$_GET['emp_id'];
-    $query = "INSERT INTO `assign_task`( `emp_id`, `task`, `assignby`, `task_doc`, `work_assign_date`, `work_due_date`, `status`)";
-     $query .= " VALUES ('$emp_id','','Admin','',now(),'','')";
+    $query = "INSERT INTO `assign_task`( `emp_id`)";
+     $query .= " VALUES ('$emp_id')";
     $update_password = mysqli_query($connection, $query);
     
-    $query="UPDATE assign_task AS tab1 , assign_task AS tab2 SET tab2.`task`= tab1.`task`, tab2.work_due_date=tab1.work_due_date , tab2.assignby=tab1.assignby, tab2.task_doc=tab1.task_doc, tab2.work_due_date=tab1.work_due_date,tab2.work_com_date=tab1.work_com_date ,tab2.status=tab1.status,tab2.remark=tab1.remark   
-    WHERE tab1.emp_id=$userID AND  tab2.`emp_id` =$emp_id";
+    $query = 'SET SQL_SAFE_UPDATES = 0;';
+    $update_password = mysqli_query($connection, $query);
+
+    $query="UPDATE assign_task as tab1, assign_task as tab2
+    SET tab2.task = tab1.task,  tab2.assignby = tab1.assignby,  tab2.task_doc = tab1.task_doc, tab2.work_assign_date= tab1.work_assign_date,
+    tab2.work_due_date= tab1.work_due_date, tab2.work_com_date= tab1.work_com_date,
+    tab2.status= tab1.status, tab2.remark= tab1.remark, tab2.Achievements= tab1.Achievements,
+    tab2.Benefits= tab1.Benefits, tab2.attachments= tab1.attachments
+    where tab1.task_id = $task_id and tab2.emp_id = $emp_id;";
+    $update_password = mysqli_query($connection, $query);
+    if (!$update_password) {
+        die('QUERY FAILED change password' . mysqli_error($connection));
+    }
     
     $update_password = mysqli_query($connection, $query);
-    $task_id = $task_id-1;
     $query1="UPDATE `approval_list` SET `approval_status`='Approved', `approve_req`='1' WHERE `task_id`='$task_id' ";
     $update_password1 = mysqli_query($connection, $query1);
     if (!$update_password1) {
-        echo "uiu";
         die('QUERY FAILD change pashword' . mysqli_error($connection));
     }
    
@@ -138,10 +147,10 @@ END - Breadcrumbs
      <?php
     if ($_SESSION['User_type'] == 'reporting manager'){
         $sess_report_id = $_SESSION['user'];
-$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to='$sess_report_id' ") or die("select query fail" . mysqli_error());
+$qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' and report_to='$sess_report_id' ") or die("select query fail" . mysqli_error($connection));
     }
     else{
-    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error());
+    $qry = mysqli_query($connection, "SELECT * FROM approval_list where approval_status = 'Pending' ") or die("select query fail" . mysqli_error($connection));
     }
 
 $count = 0;
